@@ -1,4 +1,5 @@
 import os
+import uuid
 from functools import partial
 from typing import Any, Sequence, Optional, Dict
 
@@ -15,9 +16,12 @@ class Context:
     which exposes a gRPC server and proxies communications with the actual
     resource plugin processes (my understandning).
     """
-    def __init__(self, name: str, cwd: Optional[str] = None) -> None:
+    def __init__(self, name: Optional[str] = None, cwd: Optional[str] = None) -> None:
         if cwd is None:
             cwd = os.getcwd()
+        if name is None:
+            name = uuid.uuid4().hex
+
         self.name = name
         self.cwd = cwd
 
@@ -30,7 +34,7 @@ class Context:
         return Provider(self, name, config)
 
     def __enter__(self) -> Any:
-        self.setup(self.cwd.encode())
+        self.setup(self.cwd)
         return self
 
     def __exit__(self, exc_type, exc_value, tb) -> None:
@@ -41,7 +45,7 @@ class Context:
 
         if ctx_attr in CONTEXT_METHODS:
             method = getattr(_pylumi, ctx_attr)
-            return partial(method, self.name.encode())
+            return partial(method, self.name)
 
         return object.__getattribute__(self, attr)
 

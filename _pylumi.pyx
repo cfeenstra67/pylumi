@@ -3,14 +3,6 @@ from cpython.string cimport PyString_AsString
 from libc.stdlib cimport malloc, free
 
 
-cdef char ** to_cstring_array(list_str):
-	cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
-	for i in xrange(len(list_str)):
-		as_bytes = list_str[i].encode()
-		ret[i] = as_bytes
-	return ret
-
-
 cdef extern from "libpylumigo.h":
 
 	ctypedef signed char GoInt8
@@ -124,135 +116,217 @@ cdef extern from "libpylumigo.h":
 	ProviderDelete_return ProviderDelete(char* ctx, char* provider, char* urn, char* id, char* news, GoFloat64 timeout)
 
 
-def context_setup(bytes ctxName, bytes cwd):
-	res = ContextSetup(ctxName, cwd)
+# Helper functions
+cdef bytes _bytes(s):
+	"""
+	Coerce text input to bytes
+	"""
+	if type(s) is bytes:
+		return s
+	if isinstance(s, str):
+		return s.encode()
+	raise TypeError(f'Invalid bytes value: {s}.')
+
+
+cdef str _str(s):
+	"""
+	Coerce text input to bytes
+	"""
+	if isinstance(s, str):
+		return s
+	if isinstance(s, bytes):
+		return s.decode()
+	raise TypeError(f'Invalid str value: {s}.')
+
+
+cdef char ** to_cstring_array(list_str):
+	cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
+	for i in xrange(len(list_str)):
+		as_bytes = list_str[i].encode()
+		ret[i] = as_bytes
+	return ret
+
+
+# Context methods
+
+def context_setup(str ctxName, str cwd):
+	res = ContextSetup(_bytes(ctxName), _bytes(cwd))
 	if res.r0 == 0:
 		return None
-	raise Exception('Error: %s' % res.r1)
+	raise ContextError(res.r0, _str(res.r1))
 
 
-def context_teardown(bytes ctxName):
-	res = ContextTeardown(ctxName)
+def context_teardown(str ctxName):
+	res = ContextTeardown(_bytes(ctxName))
 	if res.r0 == 0:
 		return None
-	raise Exception('Error: %s' % res.r1)
+	raise ContextError(res.r0, _str(res.r1))
 
 
-def context_list_plugins(bytes ctxName):
-	res = ContextListPlugins(ctxName)
+def context_list_plugins(str ctxName):
+	res = ContextListPlugins(_bytes(ctxName))
 	if res.r0 == 0:
 		return [x.decode() for x in res.r1[:res.r2]]
-	raise Exception('Error: %s' % res.r3)
+	raise ContextError(res.r0, _str(res.r3))
 
 
-def provider_teardown(bytes ctx, bytes provider):
-	res = ProviderTeardown(ctx, provider)
+# Provider methods
+
+def provider_teardown(str ctx, str provider):
+	res = ProviderTeardown(_bytes(ctx), _bytes(provider))
 	if res.r0 == 0:
 		return None
-	raise Exception('Error: %s' % res.r1)
+	raise ProviderError(res.r0, _str(res.r1))
 
 
-def provider_get_schema(bytes ctxName, bytes name, int version):
-	res = ProviderGetSchema(ctxName, name, version)
+def provider_get_schema(str ctxName, str name, int version):
+	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
 	if res.r0 == 0:
 		return res.r1
-	raise Exception('Error: %s' % res.r2)
+	raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_check_config(ctx, provider, urn, olds, news, allowUnknowns):
+def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False):
 	olds_encoded = json.dumps(olds).encode()
 	news_encoded = json.dumps(news).encode()
-	res = ProviderCheckConfig(ctx, provider, urn, olds_encoded, news_encoded, allowUnknowns)
+	res = ProviderCheckConfig(
+		_bytes(ctx), _bytes(provider), _bytes(urn),
+		olds_encoded, news_encoded, allow_unknowns
+	)
 	if res.r0 == 0:
-		props_decoded = json.loads(res.r1)
-		failures_decoded = json.loads(res.r2)
+		props_decoded = json.loads(_bytes(res.r1))
+		failures_decoded = json.loads(_bytes(res.r2))
 		return props_decoded, failures_decoded
-	raise Exception('Error: %s' % res.r3)
+	raise ProviderError(res.r0, _str(res.r3))
 
 
-def provider_diff_config(ctx, provider, urn, olds, news, allow_unknowns, ignore_changes):
+def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False, ignore_changes=()):
 	olds_encoded = json.dumps(olds).encode()
 	news_encoded = json.dumps(news).encode()
 	res = ProviderDiffConfig(
-		ctx, provider, urn,
+		_bytes(ctx), _bytes(provider), _bytes(urn),
 		olds_encoded, news_encoded,
 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
 	)
 	if res.r0 == 0:
-		out_decoded = json.loads(res.r1)
+		out_decoded = json.loads(_bytes(res.r1))
 		return out_decoded
-	raise Exception('Error: %s' % res.r2)
+	raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_configure(ctx, provider, inputs):
+def provider_configure(str ctx, str provider, inputs):
 	inputs_encoded = json.dumps(inputs).encode()
-	res = ProviderConfigure(ctx, provider, inputs_encoded)
+	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
 	if res.r0 == 0:
 		return None
-	raise Exception('Error: %s' % res.r1)
+	raise ProviderError(res.r0, _str(res.r1))
 
 
-def provider_check(ctx, provider, urn, olds, news, allow_unknowns):
+def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=False):
 	olds_encoded = json.dumps(olds).encode()
 	news_encoded = json.dumps(news).encode()
-	res = ProviderCheck(ctx, provider, urn, olds_encoded, news_encoded, allow_unknowns)
+	res = ProviderCheck(
+		_bytes(ctx), _bytes(provider), _bytes(urn),
+		olds_encoded, news_encoded, allow_unknowns
+	)
 	if res.r0 == 0:
-		props = json.loads(res.r1)
-		failures = json.loads(res.r2)
+		props = json.loads(_bytes(res.r1))
+		failures = json.loads(_bytes(res.r2))
 		return props, failures
-	raise Exception('Error: %s' % res.r3)
+	raise ProviderError(res.r0, _str(res.r3))
 
 
-def provider_diff(ctx, provider, urn, id, olds, news, allow_unknowns, ignore_changes):
+def provider_diff(str ctx, str provider, str urn, str id, olds, news, allow_unknowns=False, ignore_changes=()):
 	olds_encoded = json.dumps(olds).encode()
 	news_encoded = json.dumps(news).encode()
 	res = ProviderDiff(
-		ctx, provider, urn, id,
+		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
 		olds_encoded, news_encoded,
 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
 	)
 	if res.r0 == 0:
-		out_decoded = json.loads(res.r1)
+		out_decoded = json.loads(_bytes(res.r1))
 		return out_decoded
-	raise Exception('Error: %s' % res.r2)
+	raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_create(ctx, provider, urn, news, timeout, preview):
+def provider_create(str ctx, str provider, str urn, news, int timeout=60, preview=False):
 	news_encoded = json.dumps(news).encode()
-	res = ProviderCreate(ctx, provider, urn, news_encoded, timeout, preview)
+	res = ProviderCreate(
+		_bytes(ctx), _bytes(provider), _bytes(urn),
+		news_encoded, timeout, preview
+	)
 	if res.r0 == 0:
-		out_decoded = json.loads(res.r1)
+		out_decoded = json.loads(_bytes(res.r1))
 		return out_decoded
-	raise Exception('Error: %s' % res.r2)
+	raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_read(ctx, provider, urn, id, inputs, state):
+def provider_read(str ctx, str provider, str urn, str id, inputs, state):
 	input_encoded = json.dumps(inputs).encode()
 	state_encoded = json.dumps(state).encode()
-	res = ProviderRead(ctx, provider, urn, id, input_encoded, state_encoded)
+	res = ProviderRead(
+		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+		input_encoded, state_encoded
+	)
 	if res.r0 == 0:
-		out_decoded = json.loads(res.r1)
+		out_decoded = json.loads(_bytes(res.r1))
 		return out_decoded
-	raise Exception('Error: %s' % res.r2)
+	raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_update(ctx, provider, urn, id, olds, news, timeout, ignore_changes, preview):
+def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), preview=False):
 	olds_encoded = json.dumps(olds).encode()
 	news_encoded = json.dumps(news).encode()
 	res = ProviderUpdate(
-		ctx, provider, urn, id,
+		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
 		olds_encoded, news_encoded,
 		timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
 	)
 	if res.r0 == 0:
-		out_decoded = json.loads(res.r1)
+		out_decoded = json.loads(_bytes(res.r1))
 		return out_decoded
-	raise Exception('Error: %s' % res.r2)
+	raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_delete(ctx, provider, urn, id, news, timeout):
+def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):
 	news_encoded = json.dumps(news).encode()
-	res = ProviderDelete(ctx, provider, urn, id, news_encoded, timeout)
+	res = ProviderDelete(
+		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+		news_encoded, timeout
+	)
 	if res.r0 == 0:
 		return res.r1
-	raise Exception('Error: %s', res.r2)
+	raise ProviderError(res.r0, _str(res.r2))
+
+
+class PylumiGoError(Exception):
+	"""
+	Errors originating from go within Pylumi
+	"""
+
+
+class ContextError(PylumiGoError):
+	"""
+	Errors from context_ methods
+	"""
+	def __init__(self, int status_code, str message):
+		self.status_code = status_code
+		self.message = message
+		super().__init__(
+			'Error from pulumi context: %s (status code: %d)'
+			% (message, status_code)
+		)
+
+
+class ProviderError(PylumiGoError):
+	"""
+	Errors from provider_ methods
+	"""
+	def __init__(self, int status_code, str message):
+		self.status_code = status_code
+		self.message = message
+		super().__init__(
+			'Error from pulumi provider: %s (status code: %d)'
+			% (message, status_code)
+		)

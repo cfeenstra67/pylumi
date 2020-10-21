@@ -23,8 +23,16 @@ class Provider:
         self.ctx = ctx
         self.config = config
 
+    def configure(self, inputs: Optional[Dict[str, Any]] = None) -> None:
+        """
+        Configure this provider with the given configuration
+        """
+        if inputs is None:
+            inputs = self.config
+        _pylumi.provider_configure(self.ctx.name, self.name, inputs)
+
     def __enter__(self) -> Any:
-        self.configure(self.config)
+        self.configure()
         return self
 
     def __exit__(self, exc_type, exc_value, tb) -> None:
@@ -38,7 +46,7 @@ class Provider:
 
         if ctx_attr in PROVIDER_METHODS:
             method = getattr(_pylumi, ctx_attr)
-            return partial(method, self.ctx.name.encode(), self.name.encode())
+            return partial(method, self.ctx.name, self.name)
 
         return getattr(super(), attr)
 

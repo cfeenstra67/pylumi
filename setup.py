@@ -35,8 +35,8 @@ else:
 
 setup(
     name='pylumi',
-    version='1.0',
-    description='',
+    version='0.0.1',
+    description='Python API for interacting with Pulumi resource plugins',
     cmdclass={'build_ext': _get_build_ext_cls(_build_ext, 'github.com/cfeenstra67/pylumi')},
     packages=['pylumi'],
     ext_modules=extensions,
