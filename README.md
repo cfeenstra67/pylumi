@@ -9,7 +9,7 @@ import pylumi
 
 
 with pylumi.Context() as ctx, \
-	 ctx.Provider('aws', {'region': 'us-east-1'}) as aws:
+     ctx.Provider('aws', {'region': 'us-east-1'}) as aws:
 
     resp = provider.create(
         'urn:pulumi:_::_::aws:s3/bucketObject:BucketObject::_',
