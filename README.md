@@ -17,9 +17,7 @@ with pylumi.Context() as ctx, \
     )
 ```
 
-This repo is under dev
-
-### Installation
+## Installation
 
 Install this package by running
 ```bash
