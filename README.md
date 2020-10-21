@@ -11,7 +11,7 @@ import pylumi
 with pylumi.Context() as ctx, \
      ctx.Provider('aws', {'region': 'us-east-1'}) as aws:
 
-    resp = provider.create(
+    resp = aws.create(
         'urn:pulumi:_::_::aws:s3/bucketObject:BucketObject::_',
         {'bucket': 'some-bucket', 'key': 'some-key', 'content': 'Hello, world!'},
     )
