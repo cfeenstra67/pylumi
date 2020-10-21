@@ -4,6 +4,7 @@ import contextlib
 import copy
 import errno
 import os
+import platform
 import shlex
 import shutil
 import stat
@@ -168,7 +169,6 @@ def _get_build_extension_method(
                 'CGO_LDFLAGS': _get_ldflags(),
             })
 
-            # fpath = os.path.abspath(self.get_ext_fullpath(ext.name))
             fname = ext.name + '.so'
             fpath = os.path.abspath(os.path.join(self.build_lib, fname))
 
@@ -177,7 +177,8 @@ def _get_build_extension_method(
                 '-o', fpath,
             )
             _check_call(cmd_build, cwd=pkg_path, env=env)
-            _check_call(['install_name_tool', '-id', '@loader_path/' + fname, fpath], cwd=pkg_path, env=env)
+            if platform.system() == 'Darwin':
+                _check_call(['install_name_tool', '-id', '@loader_path/' + fname, fpath], cwd=pkg_path, env=env)
 
     return build_extension
 
@@ -197,55 +198,3 @@ def set_build_ext(
     # https://github.com/python/typeshed/pull/3742
     base = dist.cmdclass.get('build_ext', _build_ext)  # type: ignore
     dist.cmdclass['build_ext'] = _get_build_ext_cls(base, root)  # type: ignore
-
-
-GOLANG = 'https://storage.googleapis.com/golang/go{}.linux-amd64.tar.gz'
-SCRIPT = '''\
-cd /tmp
-curl {golang} --silent --location | tar -xz
-export PATH="/tmp/go/bin:$PATH" HOME=/tmp
-for py in {pythons}; do
-    "/opt/python/$py/bin/pip" wheel --no-deps --wheel-dir /tmp /dist/*.tar.gz
-done
-ls *.whl | xargs -n1 --verbose auditwheel repair --wheel-dir /dist
-ls -al /dist
-'''
-
-
-def build_manylinux_wheels(
-        argv: Optional[Sequence[str]] = None,
-) -> int:  # pragma: no cover
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--golang', default='1.14.8',
-        help='Override golang version (default %(default)s)',
-    )
-    parser.add_argument(
-        '--pythons', default='cp36-cp36m,cp37-cp37m,cp38-cp38,cp39-cp39',
-        help='Override pythons to build (default %(default)s)',
-    )
-    args = parser.parse_args(argv)
-
-    golang = GOLANG.format(args.golang)
-    pythons = ' '.join(args.pythons.split(','))
-
-    assert os.path.exists('setup.py')
-    if os.path.exists('dist'):
-        shutil.rmtree('dist')
-    os.makedirs('dist')
-    _check_call(('python', 'setup.py', 'sdist'), cwd='.', env={})
-    _check_call(
-        (
-            'docker', 'run', '--rm',
-            '--volume', f'{os.path.abspath("dist")}:/dist:rw',
-            '--user', f'{os.getuid()}:{os.getgid()}',
-            'quay.io/pypa/manylinux1_x86_64:latest',
-            'bash', '-o', 'pipefail', '-euxc',
-            SCRIPT.format(golang=golang, pythons=pythons),
-        ),
-        cwd='.', env={},
-    )
-    print('*' * 79)
-    print('Your wheels have been built into ./dist')
-    print('*' * 79)
-    return 0

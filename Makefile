@@ -7,12 +7,12 @@ build-go:
 	@install_name_tool -id @rpath/libpylumigo.so build/go/libpylumigo.so
 
 
-build:
-	python setup.py build_ext
+build: clean
+	python setup.py bdist_wheel
 
 install: clean
 	python setup.py install
 
 clean:
 	@pip uninstall -y pylumi
-	@rm -rf build/ dist/ _pylumi.c *.egg-info .eggs
+	@rm -rf build/ dist/ *.egg-info .eggs

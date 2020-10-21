@@ -2,5 +2,9 @@ module pylumiconnector
 
 go 1.15
 
-require "pylumi" v0.0.0
-replace "pylumi" => "./pylumi"
+require (
+	github.com/pulumi/pulumi/sdk/v2 v2.12.0
+	pylumi v0.0.0
+)
+
+replace pylumi => ./pylumi

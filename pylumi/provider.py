@@ -20,7 +20,6 @@ class Provider:
             config = {}
 
         self.name = name
-        self.encoded_name = name.encode()
         self.ctx = ctx
         self.config = config
 
@@ -39,7 +38,7 @@ class Provider:
 
         if ctx_attr in PROVIDER_METHODS:
             method = getattr(_pylumi, ctx_attr)
-            return partial(method, self.ctx.encoded_name, self.encoded_name)
+            return partial(method, self.ctx.name.encode(), self.name.encode())
 
         return getattr(super(), attr)
 

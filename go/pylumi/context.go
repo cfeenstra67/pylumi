@@ -2,11 +2,11 @@ package pylumi
 
 import (
 	"fmt"
-	"path/filepath"
+	// "path/filepath"
 
 	"github.com/blang/semver"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	// "github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -14,40 +14,42 @@ import (
 )
 
 type Context struct {
-	Info engine.Projinfo
+	// Info engine.Projinfo
 	PluginCtx *plugin.Context
 	WorkingDirectory string
-	Main string
+	// Main string
 	Sink diag.Sink
 	StatusSink diag.Sink
 	providers map[tokens.Package]*plugin.Provider
 }
 
-func NewContextFromPath(path string, sink, statusSink diag.Sink) (*Context, error) {
-	projectPath, err := workspace.DetectProjectPathFrom(path)
-	if err != nil {
-		return nil, fmt.Errorf("error detecting project: %v", err)
-	}
+func NewContextFromPath(cwd string, sink, statusSink diag.Sink) (*Context, error) {
+	// projectPath, err := workspace.DetectProjectPathFrom(path)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("error detecting project: %v", err)
+	// }
 
-	proj, err := workspace.LoadProject(projectPath)
-	if err != nil {
-		return nil, fmt.Errorf("error loading project: %v", err)
-	}
+	// proj, err := workspace.LoadProject(path)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("error loading project: %v", err)
+	// }
 
-	root := filepath.Dir(projectPath)
+	// root := filepath.Dir(path)
 
-	projInfo := engine.Projinfo{Proj: proj, Root: root}
+	// projInfo := engine.Projinfo{Proj: proj, Root: root}
 
-	pwd, main, ctx, err := engine.ProjectInfoContext(&projInfo, nil, nil, sink, statusSink, false, nil)
+	// pwd, main, ctx, err := engine.ProjectInfoContext(&projInfo, nil, nil, sink, statusSink, false, nil)
+
+	ctx, err := plugin.NewContext(sink, statusSink, nil, nil, cwd, nil, false, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error obtaining context: %v", err)
 	}
 
 	newCtx := Context{
-		Info: projInfo,
+		// Info: projInfo,
 		PluginCtx: ctx,
-		WorkingDirectory: pwd,
-		Main: main,
+		WorkingDirectory: cwd,
+		// Main: main,
 		Sink: sink,
 		StatusSink: statusSink,
 	}
@@ -59,11 +61,11 @@ func (c *Context) Close() {
 	c.PluginCtx.Close()
 }
 
-func (c *Context) InstallPlugins() error {
-	return engine.RunInstallPlugins(
-		c.Info.Proj, c.WorkingDirectory, c.Main, nil, c.PluginCtx,
-	)
-}
+// func (c *Context) InstallPlugins() error {
+// 	return engine.RunInstallPlugins(
+// 		c.Info.Proj, c.WorkingDirectory, c.Main, nil, c.PluginCtx,
+// 	)
+// }
 
 func (c *Context) Provider(name tokens.Package, version *semver.Version) (*plugin.Provider, error) {
 	if c.providers == nil {
@@ -78,11 +80,6 @@ func (c *Context) Provider(name tokens.Package, version *semver.Version) (*plugi
 		}
 		c.providers[name] = &providerValue
 		provider = &providerValue
-
-		// config := GetConfig(name)
-		// if err := providerValue.Configure(*config); err != nil {
-		// 	return nil, fmt.Errorf("error configuring provider: %v", err)
-		// }
 	}
 	return provider, nil
 }
