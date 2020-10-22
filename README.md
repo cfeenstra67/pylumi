@@ -24,3 +24,11 @@ Install this package by running
 $ pip install git+https://github.com/cfeenstra67/pylumi
 ```
 Note: since the build for this package requires compiling a go extension and a c extension that depends on it, the script is slightly fragile and may not work properly with all platforms. It has been tested on OS X and Ubuntu, but not exhaustively on either.
+
+## Documentation
+
+Documentation for Pylumi is hosted on Read the Docs: https://pylumi.readthedocs.io/.
+
+## Contact
+
+If you have issues using this repository please open a issue or reach out to me at cameron.l.feenstra@gmail.com.
