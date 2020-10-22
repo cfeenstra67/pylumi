@@ -3,8 +3,7 @@ import uuid
 from functools import partial, wraps
 from typing import Any, Sequence, Optional, Dict
 
-import _pylumi
-
+from pylumi.ext import _pylumi
 from pylumi.provider import Provider
 from pylumi.utils import CONTEXT_METHODS
 

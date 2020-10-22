@@ -1,8 +1,7 @@
 from functools import partial
 from typing import Any, Sequence, Dict, Optional
 
-import _pylumi
-
+from pylumi.ext import _pylumi
 from pylumi.utils import PROVIDER_METHODS
 
 
