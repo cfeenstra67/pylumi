@@ -1,5 +1,5 @@
 site_name: Pylumi Documentation
-theme: readthedocs
+theme: material
 markdown_extensions:
   - admonition
   - codehilite
