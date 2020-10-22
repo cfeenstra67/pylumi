@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Pylumi Reference - Pylumi Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../css/custom_autodoc.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Pylumi Reference";
+    var mkdocs_page_input_path = "reference.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Pylumi Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Getting Started</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Pylumi Reference</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#context-reference">Context Reference</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#provider-reference">Provider Reference</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Pylumi Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Pylumi Reference</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="pylumi-reference">Pylumi Reference</h1>
+<p>This page contains all of the methods for the <code>Provider</code> and <code>Context</code> classes, the two interfaces exposed by pylumi to interact with Pulumi.</p>
+<h3 id="context-reference">Context Reference</h3>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>pylumi.<strong>Context</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">name=None</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">cwd=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>A context is a Python representation of a statey plugin context, which
+manages resource plugins. Basically this acts as an orchestration server
+which exposes a gRPC server and proxies communications with the actual
+resource plugin processes (my understandning).</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>name</strong> - (optional) Assign a name to the context; this name is unique,
+so if two contexts are created with the same name then they will point to
+the same Provider object in the go runtime.</li>
+<li><strong>cwd</strong> - (optional) Pass a current working directory to use for the context.</li>
+</ul></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>Provider</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">name</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">config=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get a Provider object with the given name. This just creates the provider object,
+no interaction is done with the Pulumi engine until configure() if called (or
+the provider is used as a context manager).</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>name</strong> - The name of the provider, e.g. 'aws'.</li>
+<li><strong>config</strong> - (optional) configuration parameters for the provider.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Provider loads a new copy of the provider for a given package.  If a provider for
+this package could not be found, or an error occurs while creating it, a non-nil
+error is returned.
+Reference: <a href="github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin/host.go">Host.Provider</a></p></div>
+<div class="autodoc-signature"><code><strong>list_plugins</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>List the currently loaded plugins in this context.</p>
+<p><strong>Pulumi docs</strong>:</p>
+<p>ListPlugins lists all plugins that have been loaded, with version information.
+Reference: <a href="github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin/host.go">Host.ListPlugins</a></p></div>
+<div class="autodoc-signature"><code><strong>setup</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Set up this Pulumi context. This creates an interface in the Go runtime
+that can create and communicate with resource provider proce</p></div>
+<div class="autodoc-signature"><code><strong>teardown</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Tear down this provider, removing associated OS resources such as plugin
+processes.</p></div>
+</div>
+</div>
+<h3 id="provider-reference">Provider Reference</h3>
+<div class="autodoc">
+<div class="autodoc-signature"><em>class </em><code>pylumi.<strong>Provider</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">ctx</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">name</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">config=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"></div>
+<div class="autodoc-members">
+<div class="autodoc-signature"><code><strong>check</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">urn</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">olds</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">news</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">allow_unknowns=False</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Validate the given resource configuration.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>urn</strong> - pulumi resource URN.</li>
+<li><strong>olds</strong> - old bag of properties</li>
+<li><strong>news</strong> - new bag of properties</li>
+<li><strong>allow_unknowns</strong> - (optional) allow unknown values in the output, default False.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Check validates that the given property bag is valid for a resource of the given type and returns
+the inputs that should be passed to successive calls to Diff, Create, or Update for this resource.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.Check</a></p></div>
+<div class="autodoc-signature"><code><strong>check_config</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">urn</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">olds</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">news</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">allow_unknowns=False</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Validate the given provider configuration.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>urn</strong> - pulumi resource URN.</li>
+<li><strong>olds</strong> - old bag of properties</li>
+<li><strong>news</strong> - new bag of properties</li>
+<li><strong>allow_unknowns</strong> - (optional) allow unknown values in the output, default False.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>CheckConfig validates the configuration for this resource provider.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.CheckConfig</a></p></div>
+<div class="autodoc-signature"><code><strong>configure</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">inputs=None</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Configure this provider with the given configuration.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>inputs</strong> - (optional) configure this provider with the given configuration
+instead of the one passed in the constructor.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Configure configures the resource provider with "globals" that control its behavior.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.Configure</a></p></div>
+<div class="autodoc-signature"><code><strong>create</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">urn</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">news</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">timeout=60</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">preview=False</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Create a pulumi resource.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>urn</strong> - pulumi resource URN.</li>
+<li><strong>id</strong> - pulumi resource ID.</li>
+<li><strong>news</strong> - new bag of properties</li>
+<li><strong>timeout</strong> - (optional) timeout for the operation, default 60</li>
+<li><strong>preview</strong> - (optional) predict the future state of the resource, default False.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Create allocates a new instance of the provided resource and returns its unique resource.ID.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.Create</a></p></div>
+<div class="autodoc-signature"><code><strong>delete</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">urn</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">id</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">news</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">timeout=60</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Delete a pulumi resource.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>urn</strong> - pulumi resource URN.</li>
+<li><strong>id</strong> - pulumi resource ID.</li>
+<li><strong>news</strong> - new bag of properties.</li>
+<li><strong>timeout</strong> - timeout for the operation, default 60.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Delete tears down an existing resource.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.Delete</a></p></div>
+<div class="autodoc-signature"><code><strong>diff</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">urn</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">id</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">olds</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">news</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">allow_unknowns=False</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ignore_changes=()</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Diff the given resource configurations.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>urn</strong> - pulumi resource URN.</li>
+<li><strong>id</strong> - pulumi resource ID.</li>
+<li><strong>olds</strong> - old bag of properties</li>
+<li><strong>news</strong> - new bag of properties</li>
+<li><strong>allow_unknowns</strong> - (optional) allow unknown values in the output, default False.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Diff checks what impacts a hypothetical update will have on the resource's properties.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.Diff</a></p></div>
+<div class="autodoc-signature"><code><strong>diff_config</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">urn</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">olds</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">news</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">allow_unknowns=False</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">ignore_changes=()</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Diff the given provider configurations.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>urn</strong> - pulumi resource URN.</li>
+<li><strong>olds</strong> - old bag of properties</li>
+<li><strong>news</strong> - new bag of properties</li>
+<li><strong>allow_unknowns</strong> - (optional) allow unknown values in the output, default False.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>DiffConfig checks what impacts a hypothetical change to this provider's configuration will have on the provider.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.DiffConfig</a></p></div>
+<div class="autodoc-signature"><code><strong>get_schema</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">version=0</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Get the schema information about this provider.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>version</strong> - (optional) specify a schema version for the provider. Default is 0.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.GetSchema</a></p></div>
+<div class="autodoc-signature"><code><strong>read</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">urn</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">id</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">inputs</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">state</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Read the state of a pulumi resource.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>urn</strong> - pulumi resource URN.</li>
+<li><strong>id</strong> - plumi resource ID.</li>
+<li><strong>inputs</strong> - input properties</li>
+<li><strong>state</strong> - properties from the current state of the resource</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Read the current live state associated with a resource.  Enough state must be include in the
+inputs to uniquely identify the resource; this is typically just the resource ID, but may also
+include some properties.  If the resource is missing (for instance, because it has been deleted),
+the resulting property map will be nil.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.Read</a></p></div>
+<div class="autodoc-signature"><code><strong>teardown</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Tear down resources associated with this provider.</p></div>
+<div class="autodoc-signature"><code><strong>update</strong></code><span class="autodoc-punctuation">(</span><em class="autodoc-param">self</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">urn</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">id</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">olds</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">news</em><span class="autodoc-punctuation">, </span><em class="autodoc-param">timeout=60</em><span class="autodoc-punctuation">)</span></div>
+<div class="autodoc-docstring"><p>Update the state of a pulumi resource.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong>urn</strong> - pulumi resource URN.</li>
+<li><strong>id</strong> - pulumi resource ID.</li>
+<li><strong>olds</strong> - old bag of properties.</li>
+<li><strong>news</strong> - new bag of properties.</li>
+<li><strong>timeout</strong> - timeout for the operation, default 60.</li>
+</ul>
+<p><strong>Pulumi Docs:</strong></p>
+<p>Update updates an existing resource with new values.</p>
+<p>Reference: <a href="https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go">Provider.Update</a></p></div>
+</div>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href=".." class="btn btn-neutral" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
