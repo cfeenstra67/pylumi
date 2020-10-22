@@ -2,7 +2,6 @@ from functools import partial
 from typing import Any, Sequence, Dict, Optional
 
 from pylumi.ext import _pylumi
-from pylumi.utils import PROVIDER_METHODS
 
 
 class Provider:

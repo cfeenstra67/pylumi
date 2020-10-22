@@ -5,7 +5,6 @@ from typing import Any, Sequence, Optional, Dict
 
 from pylumi.ext import _pylumi
 from pylumi.provider import Provider
-from pylumi.utils import CONTEXT_METHODS
 
 
 class Context:
