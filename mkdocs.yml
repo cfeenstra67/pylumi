@@ -1,2 +1,8 @@
 site_name: Pylumi Documentation
 theme: readthedocs
+markdown_extensions:
+  - admonition
+  - codehilite
+  - mkautodoc
+extra_css:
+    - css/custom_autodoc.css

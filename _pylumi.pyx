@@ -179,7 +179,7 @@ def provider_teardown(str ctx, str provider):
     raise ProviderError(res.r0, _str(res.r1))
 
 
-def provider_get_schema(str ctxName, str name, int version):
+def provider_get_schema(str ctxName, str name, int version=0):
     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
     if res.r0 == 0:
         return res.r1

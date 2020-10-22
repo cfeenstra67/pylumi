@@ -1442,9 +1442,9 @@ static const char __pyx_k_ProviderError___init[] = "ProviderError.__init__";
 static const char __pyx_k_context_list_plugins[] = "context_list_plugins";
 static const char __pyx_k_provider_diff_config[] = "provider_diff_config";
 static const char __pyx_k_provider_check_config[] = "provider_check_config";
-static const char __pyx_k_Errors_from_context__methods[] = "\n\tErrors from context_ methods\n\t";
-static const char __pyx_k_Errors_from_provider__methods[] = "\n\tErrors from provider_ methods\n\t";
-static const char __pyx_k_Errors_originating_from_go_with[] = "\n\tErrors originating from go within Pylumi\n\t";
+static const char __pyx_k_Errors_from_context__methods[] = "\n    Errors from context_ methods\n    ";
+static const char __pyx_k_Errors_from_provider__methods[] = "\n    Errors from provider_ methods\n    ";
+static const char __pyx_k_Errors_originating_from_go_with[] = "\n    Errors originating from go within Pylumi\n    ";
 static const char __pyx_k_Error_from_pulumi_context_s_stat[] = "Error from pulumi context: %s (status code: %d)";
 static const char __pyx_k_Error_from_pulumi_provider_s_sta[] = "Error from pulumi provider: %s (status code: %d)";
 static PyObject *__pyx_kp_u_;
@@ -1581,8 +1581,8 @@ static PyObject *__pyx_codeobj__33;
  * 
  * # Helper functions
  * cdef bytes _bytes(s):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Coerce text input to bytes
+ *     """
+ *     Coerce text input to bytes
  */
 
 static PyObject *__pyx_f_7_pylumi__bytes(PyObject *__pyx_v_s) {
@@ -1601,22 +1601,22 @@ static PyObject *__pyx_f_7_pylumi__bytes(PyObject *__pyx_v_s) {
   __Pyx_RefNannySetupContext("_bytes", 0);
 
   /* "_pylumi.pyx":124
- * 	Coerce text input to bytes
- * 	"""
- * 	if type(s) is bytes:             # <<<<<<<<<<<<<<
- * 		return s
- * 	if isinstance(s, str):
+ *     Coerce text input to bytes
+ *     """
+ *     if type(s) is bytes:             # <<<<<<<<<<<<<<
+ *         return s
+ *     if isinstance(s, str):
  */
   __pyx_t_1 = (((PyObject *)Py_TYPE(__pyx_v_s)) == ((PyObject *)(&PyBytes_Type)));
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
     /* "_pylumi.pyx":125
- * 	"""
- * 	if type(s) is bytes:
- * 		return s             # <<<<<<<<<<<<<<
- * 	if isinstance(s, str):
- * 		return s.encode()
+ *     """
+ *     if type(s) is bytes:
+ *         return s             # <<<<<<<<<<<<<<
+ *     if isinstance(s, str):
+ *         return s.encode()
  */
     __Pyx_XDECREF(__pyx_r);
     if (!(likely(PyBytes_CheckExact(__pyx_v_s))||((__pyx_v_s) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_v_s)->tp_name), 0))) __PYX_ERR(0, 125, __pyx_L1_error)
@@ -1625,30 +1625,30 @@ static PyObject *__pyx_f_7_pylumi__bytes(PyObject *__pyx_v_s) {
     goto __pyx_L0;
 
     /* "_pylumi.pyx":124
- * 	Coerce text input to bytes
- * 	"""
- * 	if type(s) is bytes:             # <<<<<<<<<<<<<<
- * 		return s
- * 	if isinstance(s, str):
+ *     Coerce text input to bytes
+ *     """
+ *     if type(s) is bytes:             # <<<<<<<<<<<<<<
+ *         return s
+ *     if isinstance(s, str):
  */
   }
 
   /* "_pylumi.pyx":126
- * 	if type(s) is bytes:
- * 		return s
- * 	if isinstance(s, str):             # <<<<<<<<<<<<<<
- * 		return s.encode()
- * 	raise TypeError(f'Invalid bytes value: {s}.')
+ *     if type(s) is bytes:
+ *         return s
+ *     if isinstance(s, str):             # <<<<<<<<<<<<<<
+ *         return s.encode()
+ *     raise TypeError(f'Invalid bytes value: {s}.')
  */
   __pyx_t_2 = PyString_Check(__pyx_v_s); 
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
     /* "_pylumi.pyx":127
- * 		return s
- * 	if isinstance(s, str):
- * 		return s.encode()             # <<<<<<<<<<<<<<
- * 	raise TypeError(f'Invalid bytes value: {s}.')
+ *         return s
+ *     if isinstance(s, str):
+ *         return s.encode()             # <<<<<<<<<<<<<<
+ *     raise TypeError(f'Invalid bytes value: {s}.')
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -1675,18 +1675,18 @@ static PyObject *__pyx_f_7_pylumi__bytes(PyObject *__pyx_v_s) {
     goto __pyx_L0;
 
     /* "_pylumi.pyx":126
- * 	if type(s) is bytes:
- * 		return s
- * 	if isinstance(s, str):             # <<<<<<<<<<<<<<
- * 		return s.encode()
- * 	raise TypeError(f'Invalid bytes value: {s}.')
+ *     if type(s) is bytes:
+ *         return s
+ *     if isinstance(s, str):             # <<<<<<<<<<<<<<
+ *         return s.encode()
+ *     raise TypeError(f'Invalid bytes value: {s}.')
  */
   }
 
   /* "_pylumi.pyx":128
- * 	if isinstance(s, str):
- * 		return s.encode()
- * 	raise TypeError(f'Invalid bytes value: {s}.')             # <<<<<<<<<<<<<<
+ *     if isinstance(s, str):
+ *         return s.encode()
+ *     raise TypeError(f'Invalid bytes value: {s}.')             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -1723,8 +1723,8 @@ static PyObject *__pyx_f_7_pylumi__bytes(PyObject *__pyx_v_s) {
  * 
  * # Helper functions
  * cdef bytes _bytes(s):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Coerce text input to bytes
+ *     """
+ *     Coerce text input to bytes
  */
 
   /* function exit code */
@@ -1744,8 +1744,8 @@ static PyObject *__pyx_f_7_pylumi__bytes(PyObject *__pyx_v_s) {
  * 
  * 
  * cdef str _str(s):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Coerce text input to bytes
+ *     """
+ *     Coerce text input to bytes
  */
 
 static PyObject *__pyx_f_7_pylumi__str(PyObject *__pyx_v_s) {
@@ -1764,22 +1764,22 @@ static PyObject *__pyx_f_7_pylumi__str(PyObject *__pyx_v_s) {
   __Pyx_RefNannySetupContext("_str", 0);
 
   /* "_pylumi.pyx":135
- * 	Coerce text input to bytes
- * 	"""
- * 	if isinstance(s, str):             # <<<<<<<<<<<<<<
- * 		return s
- * 	if isinstance(s, bytes):
+ *     Coerce text input to bytes
+ *     """
+ *     if isinstance(s, str):             # <<<<<<<<<<<<<<
+ *         return s
+ *     if isinstance(s, bytes):
  */
   __pyx_t_1 = PyString_Check(__pyx_v_s); 
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
     /* "_pylumi.pyx":136
- * 	"""
- * 	if isinstance(s, str):
- * 		return s             # <<<<<<<<<<<<<<
- * 	if isinstance(s, bytes):
- * 		return s.decode()
+ *     """
+ *     if isinstance(s, str):
+ *         return s             # <<<<<<<<<<<<<<
+ *     if isinstance(s, bytes):
+ *         return s.decode()
  */
     __Pyx_XDECREF(__pyx_r);
     if (!(likely(PyString_CheckExact(__pyx_v_s))||((__pyx_v_s) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_s)->tp_name), 0))) __PYX_ERR(0, 136, __pyx_L1_error)
@@ -1788,30 +1788,30 @@ static PyObject *__pyx_f_7_pylumi__str(PyObject *__pyx_v_s) {
     goto __pyx_L0;
 
     /* "_pylumi.pyx":135
- * 	Coerce text input to bytes
- * 	"""
- * 	if isinstance(s, str):             # <<<<<<<<<<<<<<
- * 		return s
- * 	if isinstance(s, bytes):
+ *     Coerce text input to bytes
+ *     """
+ *     if isinstance(s, str):             # <<<<<<<<<<<<<<
+ *         return s
+ *     if isinstance(s, bytes):
  */
   }
 
   /* "_pylumi.pyx":137
- * 	if isinstance(s, str):
- * 		return s
- * 	if isinstance(s, bytes):             # <<<<<<<<<<<<<<
- * 		return s.decode()
- * 	raise TypeError(f'Invalid str value: {s}.')
+ *     if isinstance(s, str):
+ *         return s
+ *     if isinstance(s, bytes):             # <<<<<<<<<<<<<<
+ *         return s.decode()
+ *     raise TypeError(f'Invalid str value: {s}.')
  */
   __pyx_t_2 = PyBytes_Check(__pyx_v_s); 
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
     /* "_pylumi.pyx":138
- * 		return s
- * 	if isinstance(s, bytes):
- * 		return s.decode()             # <<<<<<<<<<<<<<
- * 	raise TypeError(f'Invalid str value: {s}.')
+ *         return s
+ *     if isinstance(s, bytes):
+ *         return s.decode()             # <<<<<<<<<<<<<<
+ *     raise TypeError(f'Invalid str value: {s}.')
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -1838,18 +1838,18 @@ static PyObject *__pyx_f_7_pylumi__str(PyObject *__pyx_v_s) {
     goto __pyx_L0;
 
     /* "_pylumi.pyx":137
- * 	if isinstance(s, str):
- * 		return s
- * 	if isinstance(s, bytes):             # <<<<<<<<<<<<<<
- * 		return s.decode()
- * 	raise TypeError(f'Invalid str value: {s}.')
+ *     if isinstance(s, str):
+ *         return s
+ *     if isinstance(s, bytes):             # <<<<<<<<<<<<<<
+ *         return s.decode()
+ *     raise TypeError(f'Invalid str value: {s}.')
  */
   }
 
   /* "_pylumi.pyx":139
- * 	if isinstance(s, bytes):
- * 		return s.decode()
- * 	raise TypeError(f'Invalid str value: {s}.')             # <<<<<<<<<<<<<<
+ *     if isinstance(s, bytes):
+ *         return s.decode()
+ *     raise TypeError(f'Invalid str value: {s}.')             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -1886,8 +1886,8 @@ static PyObject *__pyx_f_7_pylumi__str(PyObject *__pyx_v_s) {
  * 
  * 
  * cdef str _str(s):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Coerce text input to bytes
+ *     """
+ *     Coerce text input to bytes
  */
 
   /* function exit code */
@@ -1907,8 +1907,8 @@ static PyObject *__pyx_f_7_pylumi__str(PyObject *__pyx_v_s) {
  * 
  * 
  * cdef char ** to_cstring_array(list_str):             # <<<<<<<<<<<<<<
- * 	cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
- * 	for i in xrange(len(list_str)):
+ *     cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
+ *     for i in xrange(len(list_str)):
  */
 
 static char **__pyx_f_7_pylumi_to_cstring_array(PyObject *__pyx_v_list_str) {
@@ -1932,19 +1932,19 @@ static char **__pyx_f_7_pylumi_to_cstring_array(PyObject *__pyx_v_list_str) {
   /* "_pylumi.pyx":143
  * 
  * cdef char ** to_cstring_array(list_str):
- * 	cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))             # <<<<<<<<<<<<<<
- * 	for i in xrange(len(list_str)):
- * 		as_bytes = list_str[i].encode()
+ *     cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))             # <<<<<<<<<<<<<<
+ *     for i in xrange(len(list_str)):
+ *         as_bytes = list_str[i].encode()
  */
   __pyx_t_1 = PyObject_Length(__pyx_v_list_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 143, __pyx_L1_error)
   __pyx_v_ret = ((char **)malloc((__pyx_t_1 * (sizeof(char *)))));
 
   /* "_pylumi.pyx":144
  * cdef char ** to_cstring_array(list_str):
- * 	cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
- * 	for i in xrange(len(list_str)):             # <<<<<<<<<<<<<<
- * 		as_bytes = list_str[i].encode()
- * 		ret[i] = as_bytes
+ *     cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
+ *     for i in xrange(len(list_str)):             # <<<<<<<<<<<<<<
+ *         as_bytes = list_str[i].encode()
+ *         ret[i] = as_bytes
  */
   __pyx_t_1 = PyObject_Length(__pyx_v_list_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 144, __pyx_L1_error)
   __pyx_t_2 = __pyx_t_1;
@@ -1952,11 +1952,11 @@ static char **__pyx_f_7_pylumi_to_cstring_array(PyObject *__pyx_v_list_str) {
     __pyx_v_i = __pyx_t_3;
 
     /* "_pylumi.pyx":145
- * 	cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
- * 	for i in xrange(len(list_str)):
- * 		as_bytes = list_str[i].encode()             # <<<<<<<<<<<<<<
- * 		ret[i] = as_bytes
- * 	return ret
+ *     cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
+ *     for i in xrange(len(list_str)):
+ *         as_bytes = list_str[i].encode()             # <<<<<<<<<<<<<<
+ *         ret[i] = as_bytes
+ *     return ret
  */
     __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_list_str, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
@@ -1982,10 +1982,10 @@ static char **__pyx_f_7_pylumi_to_cstring_array(PyObject *__pyx_v_list_str) {
     __pyx_t_4 = 0;
 
     /* "_pylumi.pyx":146
- * 	for i in xrange(len(list_str)):
- * 		as_bytes = list_str[i].encode()
- * 		ret[i] = as_bytes             # <<<<<<<<<<<<<<
- * 	return ret
+ *     for i in xrange(len(list_str)):
+ *         as_bytes = list_str[i].encode()
+ *         ret[i] = as_bytes             # <<<<<<<<<<<<<<
+ *     return ret
  * 
  */
     __pyx_t_7 = __Pyx_PyObject_AsWritableString(__pyx_v_as_bytes); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 146, __pyx_L1_error)
@@ -1993,9 +1993,9 @@ static char **__pyx_f_7_pylumi_to_cstring_array(PyObject *__pyx_v_list_str) {
   }
 
   /* "_pylumi.pyx":147
- * 		as_bytes = list_str[i].encode()
- * 		ret[i] = as_bytes
- * 	return ret             # <<<<<<<<<<<<<<
+ *         as_bytes = list_str[i].encode()
+ *         ret[i] = as_bytes
+ *     return ret             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -2006,8 +2006,8 @@ static char **__pyx_f_7_pylumi_to_cstring_array(PyObject *__pyx_v_list_str) {
  * 
  * 
  * cdef char ** to_cstring_array(list_str):             # <<<<<<<<<<<<<<
- * 	cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
- * 	for i in xrange(len(list_str)):
+ *     cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
+ *     for i in xrange(len(list_str)):
  */
 
   /* function exit code */
@@ -2027,8 +2027,8 @@ static char **__pyx_f_7_pylumi_to_cstring_array(PyObject *__pyx_v_list_str) {
  * # Context methods
  * 
  * def context_setup(str ctxName, str cwd):             # <<<<<<<<<<<<<<
- * 	res = ContextSetup(_bytes(ctxName), _bytes(cwd))
- * 	if res.r0 == 0:
+ *     res = ContextSetup(_bytes(ctxName), _bytes(cwd))
+ *     if res.r0 == 0:
  */
 
 /* Python wrapper */
@@ -2124,9 +2124,9 @@ static PyObject *__pyx_pf_7_pylumi_context_setup(CYTHON_UNUSED PyObject *__pyx_s
   /* "_pylumi.pyx":153
  * 
  * def context_setup(str ctxName, str cwd):
- * 	res = ContextSetup(_bytes(ctxName), _bytes(cwd))             # <<<<<<<<<<<<<<
- * 	if res.r0 == 0:
- * 		return None
+ *     res = ContextSetup(_bytes(ctxName), _bytes(cwd))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return None
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctxName); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2148,19 +2148,19 @@ static PyObject *__pyx_pf_7_pylumi_context_setup(CYTHON_UNUSED PyObject *__pyx_s
 
   /* "_pylumi.pyx":154
  * def context_setup(str ctxName, str cwd):
- * 	res = ContextSetup(_bytes(ctxName), _bytes(cwd))
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return None
- * 	raise ContextError(res.r0, _str(res.r1))
+ *     res = ContextSetup(_bytes(ctxName), _bytes(cwd))
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return None
+ *     raise ContextError(res.r0, _str(res.r1))
  */
   __pyx_t_5 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_5) {
 
     /* "_pylumi.pyx":155
- * 	res = ContextSetup(_bytes(ctxName), _bytes(cwd))
- * 	if res.r0 == 0:
- * 		return None             # <<<<<<<<<<<<<<
- * 	raise ContextError(res.r0, _str(res.r1))
+ *     res = ContextSetup(_bytes(ctxName), _bytes(cwd))
+ *     if res.r0 == 0:
+ *         return None             # <<<<<<<<<<<<<<
+ *     raise ContextError(res.r0, _str(res.r1))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -2169,17 +2169,17 @@ static PyObject *__pyx_pf_7_pylumi_context_setup(CYTHON_UNUSED PyObject *__pyx_s
 
     /* "_pylumi.pyx":154
  * def context_setup(str ctxName, str cwd):
- * 	res = ContextSetup(_bytes(ctxName), _bytes(cwd))
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return None
- * 	raise ContextError(res.r0, _str(res.r1))
+ *     res = ContextSetup(_bytes(ctxName), _bytes(cwd))
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return None
+ *     raise ContextError(res.r0, _str(res.r1))
  */
   }
 
   /* "_pylumi.pyx":156
- * 	if res.r0 == 0:
- * 		return None
- * 	raise ContextError(res.r0, _str(res.r1))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return None
+ *     raise ContextError(res.r0, _str(res.r1))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -2249,8 +2249,8 @@ static PyObject *__pyx_pf_7_pylumi_context_setup(CYTHON_UNUSED PyObject *__pyx_s
  * # Context methods
  * 
  * def context_setup(str ctxName, str cwd):             # <<<<<<<<<<<<<<
- * 	res = ContextSetup(_bytes(ctxName), _bytes(cwd))
- * 	if res.r0 == 0:
+ *     res = ContextSetup(_bytes(ctxName), _bytes(cwd))
+ *     if res.r0 == 0:
  */
 
   /* function exit code */
@@ -2273,8 +2273,8 @@ static PyObject *__pyx_pf_7_pylumi_context_setup(CYTHON_UNUSED PyObject *__pyx_s
  * 
  * 
  * def context_teardown(str ctxName):             # <<<<<<<<<<<<<<
- * 	res = ContextTeardown(_bytes(ctxName))
- * 	if res.r0 == 0:
+ *     res = ContextTeardown(_bytes(ctxName))
+ *     if res.r0 == 0:
  */
 
 /* Python wrapper */
@@ -2320,9 +2320,9 @@ static PyObject *__pyx_pf_7_pylumi_2context_teardown(CYTHON_UNUSED PyObject *__p
   /* "_pylumi.pyx":160
  * 
  * def context_teardown(str ctxName):
- * 	res = ContextTeardown(_bytes(ctxName))             # <<<<<<<<<<<<<<
- * 	if res.r0 == 0:
- * 		return None
+ *     res = ContextTeardown(_bytes(ctxName))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return None
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctxName); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2336,19 +2336,19 @@ static PyObject *__pyx_pf_7_pylumi_2context_teardown(CYTHON_UNUSED PyObject *__p
 
   /* "_pylumi.pyx":161
  * def context_teardown(str ctxName):
- * 	res = ContextTeardown(_bytes(ctxName))
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return None
- * 	raise ContextError(res.r0, _str(res.r1))
+ *     res = ContextTeardown(_bytes(ctxName))
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return None
+ *     raise ContextError(res.r0, _str(res.r1))
  */
   __pyx_t_3 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_3) {
 
     /* "_pylumi.pyx":162
- * 	res = ContextTeardown(_bytes(ctxName))
- * 	if res.r0 == 0:
- * 		return None             # <<<<<<<<<<<<<<
- * 	raise ContextError(res.r0, _str(res.r1))
+ *     res = ContextTeardown(_bytes(ctxName))
+ *     if res.r0 == 0:
+ *         return None             # <<<<<<<<<<<<<<
+ *     raise ContextError(res.r0, _str(res.r1))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -2357,17 +2357,17 @@ static PyObject *__pyx_pf_7_pylumi_2context_teardown(CYTHON_UNUSED PyObject *__p
 
     /* "_pylumi.pyx":161
  * def context_teardown(str ctxName):
- * 	res = ContextTeardown(_bytes(ctxName))
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return None
- * 	raise ContextError(res.r0, _str(res.r1))
+ *     res = ContextTeardown(_bytes(ctxName))
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return None
+ *     raise ContextError(res.r0, _str(res.r1))
  */
   }
 
   /* "_pylumi.pyx":163
- * 	if res.r0 == 0:
- * 		return None
- * 	raise ContextError(res.r0, _str(res.r1))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return None
+ *     raise ContextError(res.r0, _str(res.r1))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -2437,8 +2437,8 @@ static PyObject *__pyx_pf_7_pylumi_2context_teardown(CYTHON_UNUSED PyObject *__p
  * 
  * 
  * def context_teardown(str ctxName):             # <<<<<<<<<<<<<<
- * 	res = ContextTeardown(_bytes(ctxName))
- * 	if res.r0 == 0:
+ *     res = ContextTeardown(_bytes(ctxName))
+ *     if res.r0 == 0:
  */
 
   /* function exit code */
@@ -2461,8 +2461,8 @@ static PyObject *__pyx_pf_7_pylumi_2context_teardown(CYTHON_UNUSED PyObject *__p
  * 
  * 
  * def context_list_plugins(str ctxName):             # <<<<<<<<<<<<<<
- * 	res = ContextListPlugins(_bytes(ctxName))
- * 	if res.r0 == 0:
+ *     res = ContextListPlugins(_bytes(ctxName))
+ *     if res.r0 == 0:
  */
 
 /* Python wrapper */
@@ -2512,9 +2512,9 @@ static PyObject *__pyx_pf_7_pylumi_4context_list_plugins(CYTHON_UNUSED PyObject 
   /* "_pylumi.pyx":167
  * 
  * def context_list_plugins(str ctxName):
- * 	res = ContextListPlugins(_bytes(ctxName))             # <<<<<<<<<<<<<<
- * 	if res.r0 == 0:
- * 		return [x.decode() for x in res.r1[:res.r2]]
+ *     res = ContextListPlugins(_bytes(ctxName))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return [x.decode() for x in res.r1[:res.r2]]
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctxName); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2528,19 +2528,19 @@ static PyObject *__pyx_pf_7_pylumi_4context_list_plugins(CYTHON_UNUSED PyObject 
 
   /* "_pylumi.pyx":168
  * def context_list_plugins(str ctxName):
- * 	res = ContextListPlugins(_bytes(ctxName))
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return [x.decode() for x in res.r1[:res.r2]]
- * 	raise ContextError(res.r0, _str(res.r3))
+ *     res = ContextListPlugins(_bytes(ctxName))
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return [x.decode() for x in res.r1[:res.r2]]
+ *     raise ContextError(res.r0, _str(res.r3))
  */
   __pyx_t_3 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_3) {
 
     /* "_pylumi.pyx":169
- * 	res = ContextListPlugins(_bytes(ctxName))
- * 	if res.r0 == 0:
- * 		return [x.decode() for x in res.r1[:res.r2]]             # <<<<<<<<<<<<<<
- * 	raise ContextError(res.r0, _str(res.r3))
+ *     res = ContextListPlugins(_bytes(ctxName))
+ *     if res.r0 == 0:
+ *         return [x.decode() for x in res.r1[:res.r2]]             # <<<<<<<<<<<<<<
+ *     raise ContextError(res.r0, _str(res.r3))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -2563,17 +2563,17 @@ static PyObject *__pyx_pf_7_pylumi_4context_list_plugins(CYTHON_UNUSED PyObject 
 
     /* "_pylumi.pyx":168
  * def context_list_plugins(str ctxName):
- * 	res = ContextListPlugins(_bytes(ctxName))
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return [x.decode() for x in res.r1[:res.r2]]
- * 	raise ContextError(res.r0, _str(res.r3))
+ *     res = ContextListPlugins(_bytes(ctxName))
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return [x.decode() for x in res.r1[:res.r2]]
+ *     raise ContextError(res.r0, _str(res.r3))
  */
   }
 
   /* "_pylumi.pyx":170
- * 	if res.r0 == 0:
- * 		return [x.decode() for x in res.r1[:res.r2]]
- * 	raise ContextError(res.r0, _str(res.r3))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return [x.decode() for x in res.r1[:res.r2]]
+ *     raise ContextError(res.r0, _str(res.r3))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -2643,8 +2643,8 @@ static PyObject *__pyx_pf_7_pylumi_4context_list_plugins(CYTHON_UNUSED PyObject 
  * 
  * 
  * def context_list_plugins(str ctxName):             # <<<<<<<<<<<<<<
- * 	res = ContextListPlugins(_bytes(ctxName))
- * 	if res.r0 == 0:
+ *     res = ContextListPlugins(_bytes(ctxName))
+ *     if res.r0 == 0:
  */
 
   /* function exit code */
@@ -2667,8 +2667,8 @@ static PyObject *__pyx_pf_7_pylumi_4context_list_plugins(CYTHON_UNUSED PyObject 
  * # Provider methods
  * 
  * def provider_teardown(str ctx, str provider):             # <<<<<<<<<<<<<<
- * 	res = ProviderTeardown(_bytes(ctx), _bytes(provider))
- * 	if res.r0 == 0:
+ *     res = ProviderTeardown(_bytes(ctx), _bytes(provider))
+ *     if res.r0 == 0:
  */
 
 /* Python wrapper */
@@ -2764,9 +2764,9 @@ static PyObject *__pyx_pf_7_pylumi_6provider_teardown(CYTHON_UNUSED PyObject *__
   /* "_pylumi.pyx":176
  * 
  * def provider_teardown(str ctx, str provider):
- * 	res = ProviderTeardown(_bytes(ctx), _bytes(provider))             # <<<<<<<<<<<<<<
- * 	if res.r0 == 0:
- * 		return None
+ *     res = ProviderTeardown(_bytes(ctx), _bytes(provider))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return None
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2788,19 +2788,19 @@ static PyObject *__pyx_pf_7_pylumi_6provider_teardown(CYTHON_UNUSED PyObject *__
 
   /* "_pylumi.pyx":177
  * def provider_teardown(str ctx, str provider):
- * 	res = ProviderTeardown(_bytes(ctx), _bytes(provider))
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return None
- * 	raise ProviderError(res.r0, _str(res.r1))
+ *     res = ProviderTeardown(_bytes(ctx), _bytes(provider))
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return None
+ *     raise ProviderError(res.r0, _str(res.r1))
  */
   __pyx_t_5 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_5) {
 
     /* "_pylumi.pyx":178
- * 	res = ProviderTeardown(_bytes(ctx), _bytes(provider))
- * 	if res.r0 == 0:
- * 		return None             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r1))
+ *     res = ProviderTeardown(_bytes(ctx), _bytes(provider))
+ *     if res.r0 == 0:
+ *         return None             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r1))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -2809,17 +2809,17 @@ static PyObject *__pyx_pf_7_pylumi_6provider_teardown(CYTHON_UNUSED PyObject *__
 
     /* "_pylumi.pyx":177
  * def provider_teardown(str ctx, str provider):
- * 	res = ProviderTeardown(_bytes(ctx), _bytes(provider))
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return None
- * 	raise ProviderError(res.r0, _str(res.r1))
+ *     res = ProviderTeardown(_bytes(ctx), _bytes(provider))
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return None
+ *     raise ProviderError(res.r0, _str(res.r1))
  */
   }
 
   /* "_pylumi.pyx":179
- * 	if res.r0 == 0:
- * 		return None
- * 	raise ProviderError(res.r0, _str(res.r1))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return None
+ *     raise ProviderError(res.r0, _str(res.r1))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -2889,8 +2889,8 @@ static PyObject *__pyx_pf_7_pylumi_6provider_teardown(CYTHON_UNUSED PyObject *__
  * # Provider methods
  * 
  * def provider_teardown(str ctx, str provider):             # <<<<<<<<<<<<<<
- * 	res = ProviderTeardown(_bytes(ctx), _bytes(provider))
- * 	if res.r0 == 0:
+ *     res = ProviderTeardown(_bytes(ctx), _bytes(provider))
+ *     if res.r0 == 0:
  */
 
   /* function exit code */
@@ -2912,9 +2912,9 @@ static PyObject *__pyx_pf_7_pylumi_6provider_teardown(CYTHON_UNUSED PyObject *__
 /* "_pylumi.pyx":182
  * 
  * 
- * def provider_get_schema(str ctxName, str name, int version):             # <<<<<<<<<<<<<<
- * 	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
- * 	if res.r0 == 0:
+ * def provider_get_schema(str ctxName, str name, int version=0):             # <<<<<<<<<<<<<<
+ *     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
+ *     if res.r0 == 0:
  */
 
 /* Python wrapper */
@@ -2955,32 +2955,39 @@ static PyObject *__pyx_pw_7_pylumi_9provider_get_schema(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("provider_get_schema", 1, 3, 3, 1); __PYX_ERR(0, 182, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("provider_get_schema", 0, 2, 3, 1); __PYX_ERR(0, 182, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
-        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_version)) != 0)) kw_args--;
-        else {
-          __Pyx_RaiseArgtupleInvalid("provider_get_schema", 1, 3, 3, 2); __PYX_ERR(0, 182, __pyx_L3_error)
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_version);
+          if (value) { values[2] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "provider_get_schema") < 0)) __PYX_ERR(0, 182, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
-      goto __pyx_L5_argtuple_error;
     } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
     }
     __pyx_v_ctxName = ((PyObject*)values[0]);
     __pyx_v_name = ((PyObject*)values[1]);
-    __pyx_v_version = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_version == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 182, __pyx_L3_error)
+    if (values[2]) {
+      __pyx_v_version = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_version == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 182, __pyx_L3_error)
+    } else {
+      __pyx_v_version = ((int)0);
+    }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("provider_get_schema", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 182, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("provider_get_schema", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 182, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("_pylumi.provider_get_schema", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3020,10 +3027,10 @@ static PyObject *__pyx_pf_7_pylumi_8provider_get_schema(CYTHON_UNUSED PyObject *
 
   /* "_pylumi.pyx":183
  * 
- * def provider_get_schema(str ctxName, str name, int version):
- * 	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)             # <<<<<<<<<<<<<<
- * 	if res.r0 == 0:
- * 		return res.r1
+ * def provider_get_schema(str ctxName, str name, int version=0):
+ *     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return res.r1
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctxName); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3044,20 +3051,20 @@ static PyObject *__pyx_pf_7_pylumi_8provider_get_schema(CYTHON_UNUSED PyObject *
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "_pylumi.pyx":184
- * def provider_get_schema(str ctxName, str name, int version):
- * 	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return res.r1
- * 	raise ProviderError(res.r0, _str(res.r2))
+ * def provider_get_schema(str ctxName, str name, int version=0):
+ *     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return res.r1
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
   __pyx_t_5 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_5) {
 
     /* "_pylumi.pyx":185
- * 	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
- * 	if res.r0 == 0:
- * 		return res.r1             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
+ *     if res.r0 == 0:
+ *         return res.r1             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r2))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -3068,18 +3075,18 @@ static PyObject *__pyx_pf_7_pylumi_8provider_get_schema(CYTHON_UNUSED PyObject *
     goto __pyx_L0;
 
     /* "_pylumi.pyx":184
- * def provider_get_schema(str ctxName, str name, int version):
- * 	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return res.r1
- * 	raise ProviderError(res.r0, _str(res.r2))
+ * def provider_get_schema(str ctxName, str name, int version=0):
+ *     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return res.r1
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
   }
 
   /* "_pylumi.pyx":186
- * 	if res.r0 == 0:
- * 		return res.r1
- * 	raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return res.r1
+ *     raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -3148,9 +3155,9 @@ static PyObject *__pyx_pf_7_pylumi_8provider_get_schema(CYTHON_UNUSED PyObject *
   /* "_pylumi.pyx":182
  * 
  * 
- * def provider_get_schema(str ctxName, str name, int version):             # <<<<<<<<<<<<<<
- * 	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
- * 	if res.r0 == 0:
+ * def provider_get_schema(str ctxName, str name, int version=0):             # <<<<<<<<<<<<<<
+ *     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
+ *     if res.r0 == 0:
  */
 
   /* function exit code */
@@ -3173,8 +3180,8 @@ static PyObject *__pyx_pf_7_pylumi_8provider_get_schema(CYTHON_UNUSED PyObject *
  * 
  * 
  * def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
 /* Python wrapper */
@@ -3327,9 +3334,9 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
   /* "_pylumi.pyx":190
  * 
  * def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False):
- * 	olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCheckConfig(
+ *     olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCheckConfig(
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -3374,10 +3381,10 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
 
   /* "_pylumi.pyx":191
  * def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False):
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderCheckConfig(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderCheckConfig(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_json); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3421,11 +3428,11 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
   __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":193
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCheckConfig(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),             # <<<<<<<<<<<<<<
- * 		olds_encoded, news_encoded, allow_unknowns
- * 	)
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCheckConfig(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),             # <<<<<<<<<<<<<<
+ *         olds_encoded, news_encoded, allow_unknowns
+ *     )
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3450,22 +3457,22 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
   __pyx_t_7 = __Pyx_PyBytes_AsWritableString(__pyx_t_4); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 193, __pyx_L1_error)
 
   /* "_pylumi.pyx":194
- * 	res = ProviderCheckConfig(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		olds_encoded, news_encoded, allow_unknowns             # <<<<<<<<<<<<<<
- * 	)
- * 	if res.r0 == 0:
+ *     res = ProviderCheckConfig(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         olds_encoded, news_encoded, allow_unknowns             # <<<<<<<<<<<<<<
+ *     )
+ *     if res.r0 == 0:
  */
   __pyx_t_8 = __Pyx_PyObject_AsWritableString(__pyx_v_olds_encoded); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L1_error)
   __pyx_t_9 = __Pyx_PyObject_AsWritableString(__pyx_v_news_encoded); if (unlikely((!__pyx_t_9) && PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L1_error)
   __pyx_t_10 = __Pyx_PyInt_As_GoUint8(__pyx_v_allow_unknowns); if (unlikely((__pyx_t_10 == ((GoUint8)-1)) && PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L1_error)
 
   /* "_pylumi.pyx":192
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCheckConfig(             # <<<<<<<<<<<<<<
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		olds_encoded, news_encoded, allow_unknowns
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCheckConfig(             # <<<<<<<<<<<<<<
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         olds_encoded, news_encoded, allow_unknowns
  */
   __pyx_v_res = ProviderCheckConfig(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3473,21 +3480,21 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "_pylumi.pyx":196
- * 		olds_encoded, news_encoded, allow_unknowns
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		props_decoded = json.loads(_bytes(res.r1))
- * 		failures_decoded = json.loads(_bytes(res.r2))
+ *         olds_encoded, news_encoded, allow_unknowns
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         props_decoded = json.loads(_bytes(res.r1))
+ *         failures_decoded = json.loads(_bytes(res.r2))
  */
   __pyx_t_11 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_11) {
 
     /* "_pylumi.pyx":197
- * 	)
- * 	if res.r0 == 0:
- * 		props_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
- * 		failures_decoded = json.loads(_bytes(res.r2))
- * 		return props_decoded, failures_decoded
+ *     )
+ *     if res.r0 == 0:
+ *         props_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
+ *         failures_decoded = json.loads(_bytes(res.r2))
+ *         return props_decoded, failures_decoded
  */
     __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
@@ -3519,11 +3526,11 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
     __pyx_t_4 = 0;
 
     /* "_pylumi.pyx":198
- * 	if res.r0 == 0:
- * 		props_decoded = json.loads(_bytes(res.r1))
- * 		failures_decoded = json.loads(_bytes(res.r2))             # <<<<<<<<<<<<<<
- * 		return props_decoded, failures_decoded
- * 	raise ProviderError(res.r0, _str(res.r3))
+ *     if res.r0 == 0:
+ *         props_decoded = json.loads(_bytes(res.r1))
+ *         failures_decoded = json.loads(_bytes(res.r2))             # <<<<<<<<<<<<<<
+ *         return props_decoded, failures_decoded
+ *     raise ProviderError(res.r0, _str(res.r3))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_json); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -3555,10 +3562,10 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
     __pyx_t_4 = 0;
 
     /* "_pylumi.pyx":199
- * 		props_decoded = json.loads(_bytes(res.r1))
- * 		failures_decoded = json.loads(_bytes(res.r2))
- * 		return props_decoded, failures_decoded             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r3))
+ *         props_decoded = json.loads(_bytes(res.r1))
+ *         failures_decoded = json.loads(_bytes(res.r2))
+ *         return props_decoded, failures_decoded             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r3))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -3575,18 +3582,18 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
     goto __pyx_L0;
 
     /* "_pylumi.pyx":196
- * 		olds_encoded, news_encoded, allow_unknowns
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		props_decoded = json.loads(_bytes(res.r1))
- * 		failures_decoded = json.loads(_bytes(res.r2))
+ *         olds_encoded, news_encoded, allow_unknowns
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         props_decoded = json.loads(_bytes(res.r1))
+ *         failures_decoded = json.loads(_bytes(res.r2))
  */
   }
 
   /* "_pylumi.pyx":200
- * 		failures_decoded = json.loads(_bytes(res.r2))
- * 		return props_decoded, failures_decoded
- * 	raise ProviderError(res.r0, _str(res.r3))             # <<<<<<<<<<<<<<
+ *         failures_decoded = json.loads(_bytes(res.r2))
+ *         return props_decoded, failures_decoded
+ *     raise ProviderError(res.r0, _str(res.r3))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -3656,8 +3663,8 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
  * 
  * 
  * def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
   /* function exit code */
@@ -3684,8 +3691,8 @@ static PyObject *__pyx_pf_7_pylumi_10provider_check_config(CYTHON_UNUSED PyObjec
  * 
  * 
  * def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False, ignore_changes=()):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
 /* Python wrapper */
@@ -3851,9 +3858,9 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
   /* "_pylumi.pyx":204
  * 
  * def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False, ignore_changes=()):
- * 	olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDiffConfig(
+ *     olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDiffConfig(
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -3898,10 +3905,10 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
 
   /* "_pylumi.pyx":205
  * def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False, ignore_changes=()):
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderDiffConfig(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderDiffConfig(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_json); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3945,11 +3952,11 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
   __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":207
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDiffConfig(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),             # <<<<<<<<<<<<<<
- * 		olds_encoded, news_encoded,
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDiffConfig(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),             # <<<<<<<<<<<<<<
+ *         olds_encoded, news_encoded,
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3974,31 +3981,31 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
   __pyx_t_7 = __Pyx_PyBytes_AsWritableString(__pyx_t_4); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 207, __pyx_L1_error)
 
   /* "_pylumi.pyx":208
- * 	res = ProviderDiffConfig(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		olds_encoded, news_encoded,             # <<<<<<<<<<<<<<
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
- * 	)
+ *     res = ProviderDiffConfig(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         olds_encoded, news_encoded,             # <<<<<<<<<<<<<<
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
+ *     )
  */
   __pyx_t_8 = __Pyx_PyObject_AsWritableString(__pyx_v_olds_encoded); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L1_error)
   __pyx_t_9 = __Pyx_PyObject_AsWritableString(__pyx_v_news_encoded); if (unlikely((!__pyx_t_9) && PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L1_error)
 
   /* "_pylumi.pyx":209
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		olds_encoded, news_encoded,
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)             # <<<<<<<<<<<<<<
- * 	)
- * 	if res.r0 == 0:
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         olds_encoded, news_encoded,
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)             # <<<<<<<<<<<<<<
+ *     )
+ *     if res.r0 == 0:
  */
   __pyx_t_10 = __Pyx_PyInt_As_GoUint8(__pyx_v_allow_unknowns); if (unlikely((__pyx_t_10 == ((GoUint8)-1)) && PyErr_Occurred())) __PYX_ERR(0, 209, __pyx_L1_error)
   __pyx_t_11 = PyObject_Length(__pyx_v_ignore_changes); if (unlikely(__pyx_t_11 == ((Py_ssize_t)-1))) __PYX_ERR(0, 209, __pyx_L1_error)
 
   /* "_pylumi.pyx":206
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDiffConfig(             # <<<<<<<<<<<<<<
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		olds_encoded, news_encoded,
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDiffConfig(             # <<<<<<<<<<<<<<
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         olds_encoded, news_encoded,
  */
   __pyx_v_res = ProviderDiffConfig(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_f_7_pylumi_to_cstring_array(__pyx_v_ignore_changes), __pyx_t_11);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4006,21 +4013,21 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "_pylumi.pyx":211
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   __pyx_t_12 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_12) {
 
     /* "_pylumi.pyx":212
- * 	)
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     )
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
@@ -4052,10 +4059,10 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
     __pyx_t_4 = 0;
 
     /* "_pylumi.pyx":213
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r2))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -4064,18 +4071,18 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
     goto __pyx_L0;
 
     /* "_pylumi.pyx":211
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   }
 
   /* "_pylumi.pyx":214
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -4145,8 +4152,8 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
  * 
  * 
  * def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False, ignore_changes=()):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
   /* function exit code */
@@ -4172,8 +4179,8 @@ static PyObject *__pyx_pf_7_pylumi_12provider_diff_config(CYTHON_UNUSED PyObject
  * 
  * 
  * def provider_configure(str ctx, str provider, inputs):             # <<<<<<<<<<<<<<
- * 	inputs_encoded = json.dumps(inputs).encode()
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+ *     inputs_encoded = json.dumps(inputs).encode()
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
  */
 
 /* Python wrapper */
@@ -4282,9 +4289,9 @@ static PyObject *__pyx_pf_7_pylumi_14provider_configure(CYTHON_UNUSED PyObject *
   /* "_pylumi.pyx":218
  * 
  * def provider_configure(str ctx, str provider, inputs):
- * 	inputs_encoded = json.dumps(inputs).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
- * 	if res.r0 == 0:
+ *     inputs_encoded = json.dumps(inputs).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+ *     if res.r0 == 0:
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -4329,10 +4336,10 @@ static PyObject *__pyx_pf_7_pylumi_14provider_configure(CYTHON_UNUSED PyObject *
 
   /* "_pylumi.pyx":219
  * def provider_configure(str ctx, str provider, inputs):
- * 	inputs_encoded = json.dumps(inputs).encode()
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)             # <<<<<<<<<<<<<<
- * 	if res.r0 == 0:
- * 		return None
+ *     inputs_encoded = json.dumps(inputs).encode()
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return None
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -4354,20 +4361,20 @@ static PyObject *__pyx_pf_7_pylumi_14provider_configure(CYTHON_UNUSED PyObject *
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "_pylumi.pyx":220
- * 	inputs_encoded = json.dumps(inputs).encode()
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return None
- * 	raise ProviderError(res.r0, _str(res.r1))
+ *     inputs_encoded = json.dumps(inputs).encode()
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return None
+ *     raise ProviderError(res.r0, _str(res.r1))
  */
   __pyx_t_8 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_8) {
 
     /* "_pylumi.pyx":221
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
- * 	if res.r0 == 0:
- * 		return None             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r1))
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+ *     if res.r0 == 0:
+ *         return None             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r1))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -4375,18 +4382,18 @@ static PyObject *__pyx_pf_7_pylumi_14provider_configure(CYTHON_UNUSED PyObject *
     goto __pyx_L0;
 
     /* "_pylumi.pyx":220
- * 	inputs_encoded = json.dumps(inputs).encode()
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return None
- * 	raise ProviderError(res.r0, _str(res.r1))
+ *     inputs_encoded = json.dumps(inputs).encode()
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return None
+ *     raise ProviderError(res.r0, _str(res.r1))
  */
   }
 
   /* "_pylumi.pyx":222
- * 	if res.r0 == 0:
- * 		return None
- * 	raise ProviderError(res.r0, _str(res.r1))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return None
+ *     raise ProviderError(res.r0, _str(res.r1))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -4456,8 +4463,8 @@ static PyObject *__pyx_pf_7_pylumi_14provider_configure(CYTHON_UNUSED PyObject *
  * 
  * 
  * def provider_configure(str ctx, str provider, inputs):             # <<<<<<<<<<<<<<
- * 	inputs_encoded = json.dumps(inputs).encode()
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+ *     inputs_encoded = json.dumps(inputs).encode()
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
  */
 
   /* function exit code */
@@ -4481,8 +4488,8 @@ static PyObject *__pyx_pf_7_pylumi_14provider_configure(CYTHON_UNUSED PyObject *
  * 
  * 
  * def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
 /* Python wrapper */
@@ -4635,9 +4642,9 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
   /* "_pylumi.pyx":226
  * 
  * def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=False):
- * 	olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCheck(
+ *     olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCheck(
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -4682,10 +4689,10 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
 
   /* "_pylumi.pyx":227
  * def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=False):
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderCheck(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderCheck(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_json); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -4729,11 +4736,11 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
   __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":229
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCheck(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),             # <<<<<<<<<<<<<<
- * 		olds_encoded, news_encoded, allow_unknowns
- * 	)
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCheck(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),             # <<<<<<<<<<<<<<
+ *         olds_encoded, news_encoded, allow_unknowns
+ *     )
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -4758,22 +4765,22 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
   __pyx_t_7 = __Pyx_PyBytes_AsWritableString(__pyx_t_4); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 229, __pyx_L1_error)
 
   /* "_pylumi.pyx":230
- * 	res = ProviderCheck(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		olds_encoded, news_encoded, allow_unknowns             # <<<<<<<<<<<<<<
- * 	)
- * 	if res.r0 == 0:
+ *     res = ProviderCheck(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         olds_encoded, news_encoded, allow_unknowns             # <<<<<<<<<<<<<<
+ *     )
+ *     if res.r0 == 0:
  */
   __pyx_t_8 = __Pyx_PyObject_AsWritableString(__pyx_v_olds_encoded); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 230, __pyx_L1_error)
   __pyx_t_9 = __Pyx_PyObject_AsWritableString(__pyx_v_news_encoded); if (unlikely((!__pyx_t_9) && PyErr_Occurred())) __PYX_ERR(0, 230, __pyx_L1_error)
   __pyx_t_10 = __Pyx_PyInt_As_GoUint8(__pyx_v_allow_unknowns); if (unlikely((__pyx_t_10 == ((GoUint8)-1)) && PyErr_Occurred())) __PYX_ERR(0, 230, __pyx_L1_error)
 
   /* "_pylumi.pyx":228
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCheck(             # <<<<<<<<<<<<<<
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		olds_encoded, news_encoded, allow_unknowns
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCheck(             # <<<<<<<<<<<<<<
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         olds_encoded, news_encoded, allow_unknowns
  */
   __pyx_v_res = ProviderCheck(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4781,21 +4788,21 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "_pylumi.pyx":232
- * 		olds_encoded, news_encoded, allow_unknowns
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		props = json.loads(_bytes(res.r1))
- * 		failures = json.loads(_bytes(res.r2))
+ *         olds_encoded, news_encoded, allow_unknowns
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         props = json.loads(_bytes(res.r1))
+ *         failures = json.loads(_bytes(res.r2))
  */
   __pyx_t_11 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_11) {
 
     /* "_pylumi.pyx":233
- * 	)
- * 	if res.r0 == 0:
- * 		props = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
- * 		failures = json.loads(_bytes(res.r2))
- * 		return props, failures
+ *     )
+ *     if res.r0 == 0:
+ *         props = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
+ *         failures = json.loads(_bytes(res.r2))
+ *         return props, failures
  */
     __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
@@ -4827,11 +4834,11 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
     __pyx_t_4 = 0;
 
     /* "_pylumi.pyx":234
- * 	if res.r0 == 0:
- * 		props = json.loads(_bytes(res.r1))
- * 		failures = json.loads(_bytes(res.r2))             # <<<<<<<<<<<<<<
- * 		return props, failures
- * 	raise ProviderError(res.r0, _str(res.r3))
+ *     if res.r0 == 0:
+ *         props = json.loads(_bytes(res.r1))
+ *         failures = json.loads(_bytes(res.r2))             # <<<<<<<<<<<<<<
+ *         return props, failures
+ *     raise ProviderError(res.r0, _str(res.r3))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_json); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -4863,10 +4870,10 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
     __pyx_t_4 = 0;
 
     /* "_pylumi.pyx":235
- * 		props = json.loads(_bytes(res.r1))
- * 		failures = json.loads(_bytes(res.r2))
- * 		return props, failures             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r3))
+ *         props = json.loads(_bytes(res.r1))
+ *         failures = json.loads(_bytes(res.r2))
+ *         return props, failures             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r3))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -4883,18 +4890,18 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
     goto __pyx_L0;
 
     /* "_pylumi.pyx":232
- * 		olds_encoded, news_encoded, allow_unknowns
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		props = json.loads(_bytes(res.r1))
- * 		failures = json.loads(_bytes(res.r2))
+ *         olds_encoded, news_encoded, allow_unknowns
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         props = json.loads(_bytes(res.r1))
+ *         failures = json.loads(_bytes(res.r2))
  */
   }
 
   /* "_pylumi.pyx":236
- * 		failures = json.loads(_bytes(res.r2))
- * 		return props, failures
- * 	raise ProviderError(res.r0, _str(res.r3))             # <<<<<<<<<<<<<<
+ *         failures = json.loads(_bytes(res.r2))
+ *         return props, failures
+ *     raise ProviderError(res.r0, _str(res.r3))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -4964,8 +4971,8 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
  * 
  * 
  * def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
   /* function exit code */
@@ -4992,8 +4999,8 @@ static PyObject *__pyx_pf_7_pylumi_16provider_check(CYTHON_UNUSED PyObject *__py
  * 
  * 
  * def provider_diff(str ctx, str provider, str urn, str id, olds, news, allow_unknowns=False, ignore_changes=()):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
 /* Python wrapper */
@@ -5172,9 +5179,9 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
   /* "_pylumi.pyx":240
  * 
  * def provider_diff(str ctx, str provider, str urn, str id, olds, news, allow_unknowns=False, ignore_changes=()):
- * 	olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDiff(
+ *     olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDiff(
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -5219,10 +5226,10 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
 
   /* "_pylumi.pyx":241
  * def provider_diff(str ctx, str provider, str urn, str id, olds, news, allow_unknowns=False, ignore_changes=()):
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderDiff(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderDiff(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_json); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -5266,11 +5273,11 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":243
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDiff(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),             # <<<<<<<<<<<<<<
- * 		olds_encoded, news_encoded,
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDiff(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),             # <<<<<<<<<<<<<<
+ *         olds_encoded, news_encoded,
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5302,31 +5309,31 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_8 = __Pyx_PyBytes_AsWritableString(__pyx_t_2); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 243, __pyx_L1_error)
 
   /* "_pylumi.pyx":244
- * 	res = ProviderDiff(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		olds_encoded, news_encoded,             # <<<<<<<<<<<<<<
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
- * 	)
+ *     res = ProviderDiff(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         olds_encoded, news_encoded,             # <<<<<<<<<<<<<<
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
+ *     )
  */
   __pyx_t_9 = __Pyx_PyObject_AsWritableString(__pyx_v_olds_encoded); if (unlikely((!__pyx_t_9) && PyErr_Occurred())) __PYX_ERR(0, 244, __pyx_L1_error)
   __pyx_t_10 = __Pyx_PyObject_AsWritableString(__pyx_v_news_encoded); if (unlikely((!__pyx_t_10) && PyErr_Occurred())) __PYX_ERR(0, 244, __pyx_L1_error)
 
   /* "_pylumi.pyx":245
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		olds_encoded, news_encoded,
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)             # <<<<<<<<<<<<<<
- * 	)
- * 	if res.r0 == 0:
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         olds_encoded, news_encoded,
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)             # <<<<<<<<<<<<<<
+ *     )
+ *     if res.r0 == 0:
  */
   __pyx_t_11 = __Pyx_PyInt_As_GoUint8(__pyx_v_allow_unknowns); if (unlikely((__pyx_t_11 == ((GoUint8)-1)) && PyErr_Occurred())) __PYX_ERR(0, 245, __pyx_L1_error)
   __pyx_t_12 = PyObject_Length(__pyx_v_ignore_changes); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 245, __pyx_L1_error)
 
   /* "_pylumi.pyx":242
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDiff(             # <<<<<<<<<<<<<<
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		olds_encoded, news_encoded,
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDiff(             # <<<<<<<<<<<<<<
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         olds_encoded, news_encoded,
  */
   __pyx_v_res = ProviderDiff(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_f_7_pylumi_to_cstring_array(__pyx_v_ignore_changes), __pyx_t_12);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5335,21 +5342,21 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "_pylumi.pyx":247
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   __pyx_t_13 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_13) {
 
     /* "_pylumi.pyx":248
- * 	)
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     )
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_json); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 248, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -5381,10 +5388,10 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
     __pyx_t_2 = 0;
 
     /* "_pylumi.pyx":249
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r2))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -5393,18 +5400,18 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
     goto __pyx_L0;
 
     /* "_pylumi.pyx":247
- * 		allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   }
 
   /* "_pylumi.pyx":250
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -5474,8 +5481,8 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
  * 
  * 
  * def provider_diff(str ctx, str provider, str urn, str id, olds, news, allow_unknowns=False, ignore_changes=()):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
   /* function exit code */
@@ -5501,8 +5508,8 @@ static PyObject *__pyx_pf_7_pylumi_18provider_diff(CYTHON_UNUSED PyObject *__pyx
  * 
  * 
  * def provider_create(str ctx, str provider, str urn, news, int timeout=60, preview=False):             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCreate(
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCreate(
  */
 
 /* Python wrapper */
@@ -5657,9 +5664,9 @@ static PyObject *__pyx_pf_7_pylumi_20provider_create(CYTHON_UNUSED PyObject *__p
   /* "_pylumi.pyx":254
  * 
  * def provider_create(str ctx, str provider, str urn, news, int timeout=60, preview=False):
- * 	news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderCreate(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
+ *     news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderCreate(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 254, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -5703,11 +5710,11 @@ static PyObject *__pyx_pf_7_pylumi_20provider_create(CYTHON_UNUSED PyObject *__p
   __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":256
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCreate(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),             # <<<<<<<<<<<<<<
- * 		news_encoded, timeout, preview
- * 	)
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCreate(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),             # <<<<<<<<<<<<<<
+ *         news_encoded, timeout, preview
+ *     )
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5732,21 +5739,21 @@ static PyObject *__pyx_pf_7_pylumi_20provider_create(CYTHON_UNUSED PyObject *__p
   __pyx_t_7 = __Pyx_PyBytes_AsWritableString(__pyx_t_2); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 256, __pyx_L1_error)
 
   /* "_pylumi.pyx":257
- * 	res = ProviderCreate(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		news_encoded, timeout, preview             # <<<<<<<<<<<<<<
- * 	)
- * 	if res.r0 == 0:
+ *     res = ProviderCreate(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         news_encoded, timeout, preview             # <<<<<<<<<<<<<<
+ *     )
+ *     if res.r0 == 0:
  */
   __pyx_t_8 = __Pyx_PyObject_AsWritableString(__pyx_v_news_encoded); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 257, __pyx_L1_error)
   __pyx_t_9 = __Pyx_PyInt_As_GoUint8(__pyx_v_preview); if (unlikely((__pyx_t_9 == ((GoUint8)-1)) && PyErr_Occurred())) __PYX_ERR(0, 257, __pyx_L1_error)
 
   /* "_pylumi.pyx":255
  * def provider_create(str ctx, str provider, str urn, news, int timeout=60, preview=False):
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCreate(             # <<<<<<<<<<<<<<
- * 		_bytes(ctx), _bytes(provider), _bytes(urn),
- * 		news_encoded, timeout, preview
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCreate(             # <<<<<<<<<<<<<<
+ *         _bytes(ctx), _bytes(provider), _bytes(urn),
+ *         news_encoded, timeout, preview
  */
   __pyx_v_res = ProviderCreate(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_v_timeout, __pyx_t_9);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5754,21 +5761,21 @@ static PyObject *__pyx_pf_7_pylumi_20provider_create(CYTHON_UNUSED PyObject *__p
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "_pylumi.pyx":259
- * 		news_encoded, timeout, preview
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         news_encoded, timeout, preview
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   __pyx_t_10 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_10) {
 
     /* "_pylumi.pyx":260
- * 	)
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     )
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_json); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 260, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -5800,10 +5807,10 @@ static PyObject *__pyx_pf_7_pylumi_20provider_create(CYTHON_UNUSED PyObject *__p
     __pyx_t_2 = 0;
 
     /* "_pylumi.pyx":261
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r2))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -5812,18 +5819,18 @@ static PyObject *__pyx_pf_7_pylumi_20provider_create(CYTHON_UNUSED PyObject *__p
     goto __pyx_L0;
 
     /* "_pylumi.pyx":259
- * 		news_encoded, timeout, preview
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         news_encoded, timeout, preview
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   }
 
   /* "_pylumi.pyx":262
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -5893,8 +5900,8 @@ static PyObject *__pyx_pf_7_pylumi_20provider_create(CYTHON_UNUSED PyObject *__p
  * 
  * 
  * def provider_create(str ctx, str provider, str urn, news, int timeout=60, preview=False):             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCreate(
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCreate(
  */
 
   /* function exit code */
@@ -5919,8 +5926,8 @@ static PyObject *__pyx_pf_7_pylumi_20provider_create(CYTHON_UNUSED PyObject *__p
  * 
  * 
  * def provider_read(str ctx, str provider, str urn, str id, inputs, state):             # <<<<<<<<<<<<<<
- * 	input_encoded = json.dumps(inputs).encode()
- * 	state_encoded = json.dumps(state).encode()
+ *     input_encoded = json.dumps(inputs).encode()
+ *     state_encoded = json.dumps(state).encode()
  */
 
 /* Python wrapper */
@@ -6069,9 +6076,9 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
   /* "_pylumi.pyx":266
  * 
  * def provider_read(str ctx, str provider, str urn, str id, inputs, state):
- * 	input_encoded = json.dumps(inputs).encode()             # <<<<<<<<<<<<<<
- * 	state_encoded = json.dumps(state).encode()
- * 	res = ProviderRead(
+ *     input_encoded = json.dumps(inputs).encode()             # <<<<<<<<<<<<<<
+ *     state_encoded = json.dumps(state).encode()
+ *     res = ProviderRead(
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -6116,10 +6123,10 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
 
   /* "_pylumi.pyx":267
  * def provider_read(str ctx, str provider, str urn, str id, inputs, state):
- * 	input_encoded = json.dumps(inputs).encode()
- * 	state_encoded = json.dumps(state).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderRead(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *     input_encoded = json.dumps(inputs).encode()
+ *     state_encoded = json.dumps(state).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderRead(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_json); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -6163,11 +6170,11 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":269
- * 	state_encoded = json.dumps(state).encode()
- * 	res = ProviderRead(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),             # <<<<<<<<<<<<<<
- * 		input_encoded, state_encoded
- * 	)
+ *     state_encoded = json.dumps(state).encode()
+ *     res = ProviderRead(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),             # <<<<<<<<<<<<<<
+ *         input_encoded, state_encoded
+ *     )
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 269, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -6199,21 +6206,21 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_8 = __Pyx_PyBytes_AsWritableString(__pyx_t_2); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 269, __pyx_L1_error)
 
   /* "_pylumi.pyx":270
- * 	res = ProviderRead(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		input_encoded, state_encoded             # <<<<<<<<<<<<<<
- * 	)
- * 	if res.r0 == 0:
+ *     res = ProviderRead(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         input_encoded, state_encoded             # <<<<<<<<<<<<<<
+ *     )
+ *     if res.r0 == 0:
  */
   __pyx_t_9 = __Pyx_PyObject_AsWritableString(__pyx_v_input_encoded); if (unlikely((!__pyx_t_9) && PyErr_Occurred())) __PYX_ERR(0, 270, __pyx_L1_error)
   __pyx_t_10 = __Pyx_PyObject_AsWritableString(__pyx_v_state_encoded); if (unlikely((!__pyx_t_10) && PyErr_Occurred())) __PYX_ERR(0, 270, __pyx_L1_error)
 
   /* "_pylumi.pyx":268
- * 	input_encoded = json.dumps(inputs).encode()
- * 	state_encoded = json.dumps(state).encode()
- * 	res = ProviderRead(             # <<<<<<<<<<<<<<
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		input_encoded, state_encoded
+ *     input_encoded = json.dumps(inputs).encode()
+ *     state_encoded = json.dumps(state).encode()
+ *     res = ProviderRead(             # <<<<<<<<<<<<<<
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         input_encoded, state_encoded
  */
   __pyx_v_res = ProviderRead(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6222,21 +6229,21 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "_pylumi.pyx":272
- * 		input_encoded, state_encoded
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         input_encoded, state_encoded
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   __pyx_t_11 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_11) {
 
     /* "_pylumi.pyx":273
- * 	)
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     )
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_json); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 273, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -6268,10 +6275,10 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
     __pyx_t_2 = 0;
 
     /* "_pylumi.pyx":274
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r2))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -6280,18 +6287,18 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
     goto __pyx_L0;
 
     /* "_pylumi.pyx":272
- * 		input_encoded, state_encoded
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         input_encoded, state_encoded
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   }
 
   /* "_pylumi.pyx":275
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -6361,8 +6368,8 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
  * 
  * 
  * def provider_read(str ctx, str provider, str urn, str id, inputs, state):             # <<<<<<<<<<<<<<
- * 	input_encoded = json.dumps(inputs).encode()
- * 	state_encoded = json.dumps(state).encode()
+ *     input_encoded = json.dumps(inputs).encode()
+ *     state_encoded = json.dumps(state).encode()
  */
 
   /* function exit code */
@@ -6388,8 +6395,8 @@ static PyObject *__pyx_pf_7_pylumi_22provider_read(CYTHON_UNUSED PyObject *__pyx
  * 
  * 
  * def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), preview=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
 /* Python wrapper */
@@ -6584,9 +6591,9 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
   /* "_pylumi.pyx":279
  * 
  * def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), preview=False):
- * 	olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderUpdate(
+ *     olds_encoded = json.dumps(olds).encode()             # <<<<<<<<<<<<<<
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderUpdate(
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 279, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -6631,10 +6638,10 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
 
   /* "_pylumi.pyx":280
  * def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), preview=False):
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderUpdate(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderUpdate(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_json); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -6678,11 +6685,11 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
   __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":282
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderUpdate(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),             # <<<<<<<<<<<<<<
- * 		olds_encoded, news_encoded,
- * 		timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderUpdate(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),             # <<<<<<<<<<<<<<
+ *         olds_encoded, news_encoded,
+ *         timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -6714,31 +6721,31 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
   __pyx_t_8 = __Pyx_PyBytes_AsWritableString(__pyx_t_2); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 282, __pyx_L1_error)
 
   /* "_pylumi.pyx":283
- * 	res = ProviderUpdate(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		olds_encoded, news_encoded,             # <<<<<<<<<<<<<<
- * 		timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
- * 	)
+ *     res = ProviderUpdate(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         olds_encoded, news_encoded,             # <<<<<<<<<<<<<<
+ *         timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
+ *     )
  */
   __pyx_t_9 = __Pyx_PyObject_AsWritableString(__pyx_v_olds_encoded); if (unlikely((!__pyx_t_9) && PyErr_Occurred())) __PYX_ERR(0, 283, __pyx_L1_error)
   __pyx_t_10 = __Pyx_PyObject_AsWritableString(__pyx_v_news_encoded); if (unlikely((!__pyx_t_10) && PyErr_Occurred())) __PYX_ERR(0, 283, __pyx_L1_error)
 
   /* "_pylumi.pyx":284
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		olds_encoded, news_encoded,
- * 		timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview             # <<<<<<<<<<<<<<
- * 	)
- * 	if res.r0 == 0:
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         olds_encoded, news_encoded,
+ *         timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview             # <<<<<<<<<<<<<<
+ *     )
+ *     if res.r0 == 0:
  */
   __pyx_t_11 = PyObject_Length(__pyx_v_ignore_changes); if (unlikely(__pyx_t_11 == ((Py_ssize_t)-1))) __PYX_ERR(0, 284, __pyx_L1_error)
   __pyx_t_12 = __Pyx_PyInt_As_GoUint8(__pyx_v_preview); if (unlikely((__pyx_t_12 == ((GoUint8)-1)) && PyErr_Occurred())) __PYX_ERR(0, 284, __pyx_L1_error)
 
   /* "_pylumi.pyx":281
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderUpdate(             # <<<<<<<<<<<<<<
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		olds_encoded, news_encoded,
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderUpdate(             # <<<<<<<<<<<<<<
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         olds_encoded, news_encoded,
  */
   __pyx_v_res = ProviderUpdate(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_v_timeout, __pyx_f_7_pylumi_to_cstring_array(__pyx_v_ignore_changes), __pyx_t_11, __pyx_t_12);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6747,21 +6754,21 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "_pylumi.pyx":286
- * 		timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   __pyx_t_13 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_13) {
 
     /* "_pylumi.pyx":287
- * 	)
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     )
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))             # <<<<<<<<<<<<<<
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
     __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_json); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -6793,10 +6800,10 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
     __pyx_t_2 = 0;
 
     /* "_pylumi.pyx":288
- * 	if res.r0 == 0:
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     if res.r0 == 0:
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r2))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -6805,18 +6812,18 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
     goto __pyx_L0;
 
     /* "_pylumi.pyx":286
- * 		timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
+ *         timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
  */
   }
 
   /* "_pylumi.pyx":289
- * 		out_decoded = json.loads(_bytes(res.r1))
- * 		return out_decoded
- * 	raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
+ *         out_decoded = json.loads(_bytes(res.r1))
+ *         return out_decoded
+ *     raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -6886,8 +6893,8 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
  * 
  * 
  * def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), preview=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
 
   /* function exit code */
@@ -6913,8 +6920,8 @@ static PyObject *__pyx_pf_7_pylumi_24provider_update(CYTHON_UNUSED PyObject *__p
  * 
  * 
  * def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDelete(
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDelete(
  */
 
 /* Python wrapper */
@@ -7067,9 +7074,9 @@ static PyObject *__pyx_pf_7_pylumi_26provider_delete(CYTHON_UNUSED PyObject *__p
   /* "_pylumi.pyx":293
  * 
  * def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):
- * 	news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
- * 	res = ProviderDelete(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *     news_encoded = json.dumps(news).encode()             # <<<<<<<<<<<<<<
+ *     res = ProviderDelete(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_json); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 293, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -7113,11 +7120,11 @@ static PyObject *__pyx_pf_7_pylumi_26provider_delete(CYTHON_UNUSED PyObject *__p
   __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":295
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDelete(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),             # <<<<<<<<<<<<<<
- * 		news_encoded, timeout
- * 	)
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDelete(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),             # <<<<<<<<<<<<<<
+ *         news_encoded, timeout
+ *     )
  */
   __pyx_t_1 = __pyx_f_7_pylumi__bytes(__pyx_v_ctx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7149,20 +7156,20 @@ static PyObject *__pyx_pf_7_pylumi_26provider_delete(CYTHON_UNUSED PyObject *__p
   __pyx_t_8 = __Pyx_PyBytes_AsWritableString(__pyx_t_3); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 295, __pyx_L1_error)
 
   /* "_pylumi.pyx":296
- * 	res = ProviderDelete(
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		news_encoded, timeout             # <<<<<<<<<<<<<<
- * 	)
- * 	if res.r0 == 0:
+ *     res = ProviderDelete(
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         news_encoded, timeout             # <<<<<<<<<<<<<<
+ *     )
+ *     if res.r0 == 0:
  */
   __pyx_t_9 = __Pyx_PyObject_AsWritableString(__pyx_v_news_encoded); if (unlikely((!__pyx_t_9) && PyErr_Occurred())) __PYX_ERR(0, 296, __pyx_L1_error)
 
   /* "_pylumi.pyx":294
  * def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDelete(             # <<<<<<<<<<<<<<
- * 		_bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
- * 		news_encoded, timeout
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDelete(             # <<<<<<<<<<<<<<
+ *         _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
+ *         news_encoded, timeout
  */
   __pyx_v_res = ProviderDelete(__pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_v_timeout);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7171,20 +7178,20 @@ static PyObject *__pyx_pf_7_pylumi_26provider_delete(CYTHON_UNUSED PyObject *__p
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "_pylumi.pyx":298
- * 		news_encoded, timeout
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return res.r1
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *         news_encoded, timeout
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return res.r1
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
   __pyx_t_10 = ((__pyx_v_res.r0 == 0) != 0);
   if (__pyx_t_10) {
 
     /* "_pylumi.pyx":299
- * 	)
- * 	if res.r0 == 0:
- * 		return res.r1             # <<<<<<<<<<<<<<
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *     )
+ *     if res.r0 == 0:
+ *         return res.r1             # <<<<<<<<<<<<<<
+ *     raise ProviderError(res.r0, _str(res.r2))
  * 
  */
     __Pyx_XDECREF(__pyx_r);
@@ -7195,18 +7202,18 @@ static PyObject *__pyx_pf_7_pylumi_26provider_delete(CYTHON_UNUSED PyObject *__p
     goto __pyx_L0;
 
     /* "_pylumi.pyx":298
- * 		news_encoded, timeout
- * 	)
- * 	if res.r0 == 0:             # <<<<<<<<<<<<<<
- * 		return res.r1
- * 	raise ProviderError(res.r0, _str(res.r2))
+ *         news_encoded, timeout
+ *     )
+ *     if res.r0 == 0:             # <<<<<<<<<<<<<<
+ *         return res.r1
+ *     raise ProviderError(res.r0, _str(res.r2))
  */
   }
 
   /* "_pylumi.pyx":300
- * 	if res.r0 == 0:
- * 		return res.r1
- * 	raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
+ *     if res.r0 == 0:
+ *         return res.r1
+ *     raise ProviderError(res.r0, _str(res.r2))             # <<<<<<<<<<<<<<
  * 
  * 
  */
@@ -7276,8 +7283,8 @@ static PyObject *__pyx_pf_7_pylumi_26provider_delete(CYTHON_UNUSED PyObject *__p
  * 
  * 
  * def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDelete(
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDelete(
  */
 
   /* function exit code */
@@ -7298,11 +7305,11 @@ static PyObject *__pyx_pf_7_pylumi_26provider_delete(CYTHON_UNUSED PyObject *__p
 }
 
 /* "_pylumi.pyx":313
- * 	Errors from context_ methods
- * 	"""
- * 	def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
- * 		self.status_code = status_code
- * 		self.message = message
+ *     Errors from context_ methods
+ *     """
+ *     def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
+ *         self.status_code = status_code
+ *         self.message = message
  */
 
 /* Python wrapper */
@@ -7399,11 +7406,11 @@ static PyObject *__pyx_pf_7_pylumi_12ContextError___init__(CYTHON_UNUSED PyObjec
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "_pylumi.pyx":314
- * 	"""
- * 	def __init__(self, int status_code, str message):
- * 		self.status_code = status_code             # <<<<<<<<<<<<<<
- * 		self.message = message
- * 		super().__init__(
+ *     """
+ *     def __init__(self, int status_code, str message):
+ *         self.status_code = status_code             # <<<<<<<<<<<<<<
+ *         self.message = message
+ *         super().__init__(
  */
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_status_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7411,20 +7418,20 @@ static PyObject *__pyx_pf_7_pylumi_12ContextError___init__(CYTHON_UNUSED PyObjec
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":315
- * 	def __init__(self, int status_code, str message):
- * 		self.status_code = status_code
- * 		self.message = message             # <<<<<<<<<<<<<<
- * 		super().__init__(
- * 			'Error from pulumi context: %s (status code: %d)'
+ *     def __init__(self, int status_code, str message):
+ *         self.status_code = status_code
+ *         self.message = message             # <<<<<<<<<<<<<<
+ *         super().__init__(
+ *             'Error from pulumi context: %s (status code: %d)'
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_message, __pyx_v_message) < 0) __PYX_ERR(0, 315, __pyx_L1_error)
 
   /* "_pylumi.pyx":316
- * 		self.status_code = status_code
- * 		self.message = message
- * 		super().__init__(             # <<<<<<<<<<<<<<
- * 			'Error from pulumi context: %s (status code: %d)'
- * 			% (message, status_code)
+ *         self.status_code = status_code
+ *         self.message = message
+ *         super().__init__(             # <<<<<<<<<<<<<<
+ *             'Error from pulumi context: %s (status code: %d)'
+ *             % (message, status_code)
  */
   __pyx_t_2 = __Pyx_CyFunction_GetClassObj(__pyx_self);
   if (!__pyx_t_2) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 316, __pyx_L1_error) }
@@ -7445,10 +7452,10 @@ static PyObject *__pyx_pf_7_pylumi_12ContextError___init__(CYTHON_UNUSED PyObjec
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "_pylumi.pyx":318
- * 		super().__init__(
- * 			'Error from pulumi context: %s (status code: %d)'
- * 			% (message, status_code)             # <<<<<<<<<<<<<<
- * 		)
+ *         super().__init__(
+ *             'Error from pulumi context: %s (status code: %d)'
+ *             % (message, status_code)             # <<<<<<<<<<<<<<
+ *         )
  * 
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_status_code); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 318, __pyx_L1_error)
@@ -7483,11 +7490,11 @@ static PyObject *__pyx_pf_7_pylumi_12ContextError___init__(CYTHON_UNUSED PyObjec
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":313
- * 	Errors from context_ methods
- * 	"""
- * 	def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
- * 		self.status_code = status_code
- * 		self.message = message
+ *     Errors from context_ methods
+ *     """
+ *     def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
+ *         self.status_code = status_code
+ *         self.message = message
  */
 
   /* function exit code */
@@ -7507,11 +7514,11 @@ static PyObject *__pyx_pf_7_pylumi_12ContextError___init__(CYTHON_UNUSED PyObjec
 }
 
 /* "_pylumi.pyx":326
- * 	Errors from provider_ methods
- * 	"""
- * 	def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
- * 		self.status_code = status_code
- * 		self.message = message
+ *     Errors from provider_ methods
+ *     """
+ *     def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
+ *         self.status_code = status_code
+ *         self.message = message
  */
 
 /* Python wrapper */
@@ -7608,11 +7615,11 @@ static PyObject *__pyx_pf_7_pylumi_13ProviderError___init__(CYTHON_UNUSED PyObje
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "_pylumi.pyx":327
- * 	"""
- * 	def __init__(self, int status_code, str message):
- * 		self.status_code = status_code             # <<<<<<<<<<<<<<
- * 		self.message = message
- * 		super().__init__(
+ *     """
+ *     def __init__(self, int status_code, str message):
+ *         self.status_code = status_code             # <<<<<<<<<<<<<<
+ *         self.message = message
+ *         super().__init__(
  */
   __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_status_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 327, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7620,20 +7627,20 @@ static PyObject *__pyx_pf_7_pylumi_13ProviderError___init__(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":328
- * 	def __init__(self, int status_code, str message):
- * 		self.status_code = status_code
- * 		self.message = message             # <<<<<<<<<<<<<<
- * 		super().__init__(
- * 			'Error from pulumi provider: %s (status code: %d)'
+ *     def __init__(self, int status_code, str message):
+ *         self.status_code = status_code
+ *         self.message = message             # <<<<<<<<<<<<<<
+ *         super().__init__(
+ *             'Error from pulumi provider: %s (status code: %d)'
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_message, __pyx_v_message) < 0) __PYX_ERR(0, 328, __pyx_L1_error)
 
   /* "_pylumi.pyx":329
- * 		self.status_code = status_code
- * 		self.message = message
- * 		super().__init__(             # <<<<<<<<<<<<<<
- * 			'Error from pulumi provider: %s (status code: %d)'
- * 			% (message, status_code)
+ *         self.status_code = status_code
+ *         self.message = message
+ *         super().__init__(             # <<<<<<<<<<<<<<
+ *             'Error from pulumi provider: %s (status code: %d)'
+ *             % (message, status_code)
  */
   __pyx_t_2 = __Pyx_CyFunction_GetClassObj(__pyx_self);
   if (!__pyx_t_2) { PyErr_SetString(PyExc_SystemError, "super(): empty __class__ cell"); __PYX_ERR(0, 329, __pyx_L1_error) }
@@ -7654,10 +7661,10 @@ static PyObject *__pyx_pf_7_pylumi_13ProviderError___init__(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "_pylumi.pyx":331
- * 		super().__init__(
- * 			'Error from pulumi provider: %s (status code: %d)'
- * 			% (message, status_code)             # <<<<<<<<<<<<<<
- * 		)
+ *         super().__init__(
+ *             'Error from pulumi provider: %s (status code: %d)'
+ *             % (message, status_code)             # <<<<<<<<<<<<<<
+ *         )
  */
   __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_status_code); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 331, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -7691,11 +7698,11 @@ static PyObject *__pyx_pf_7_pylumi_13ProviderError___init__(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_pylumi.pyx":326
- * 	Errors from provider_ methods
- * 	"""
- * 	def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
- * 		self.status_code = status_code
- * 		self.message = message
+ *     Errors from provider_ methods
+ *     """
+ *     def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
+ *         self.status_code = status_code
+ *         self.message = message
  */
 
   /* function exit code */
@@ -7863,8 +7870,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * # Context methods
  * 
  * def context_setup(str ctxName, str cwd):             # <<<<<<<<<<<<<<
- * 	res = ContextSetup(_bytes(ctxName), _bytes(cwd))
- * 	if res.r0 == 0:
+ *     res = ContextSetup(_bytes(ctxName), _bytes(cwd))
+ *     if res.r0 == 0:
  */
   __pyx_tuple__2 = PyTuple_Pack(3, __pyx_n_s_ctxName, __pyx_n_s_cwd, __pyx_n_s_res); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
@@ -7875,8 +7882,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def context_teardown(str ctxName):             # <<<<<<<<<<<<<<
- * 	res = ContextTeardown(_bytes(ctxName))
- * 	if res.r0 == 0:
+ *     res = ContextTeardown(_bytes(ctxName))
+ *     if res.r0 == 0:
  */
   __pyx_tuple__4 = PyTuple_Pack(2, __pyx_n_s_ctxName, __pyx_n_s_res); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
@@ -7887,8 +7894,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def context_list_plugins(str ctxName):             # <<<<<<<<<<<<<<
- * 	res = ContextListPlugins(_bytes(ctxName))
- * 	if res.r0 == 0:
+ *     res = ContextListPlugins(_bytes(ctxName))
+ *     if res.r0 == 0:
  */
   __pyx_tuple__6 = PyTuple_Pack(3, __pyx_n_s_ctxName, __pyx_n_s_res, __pyx_n_s_x); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
@@ -7899,8 +7906,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * # Provider methods
  * 
  * def provider_teardown(str ctx, str provider):             # <<<<<<<<<<<<<<
- * 	res = ProviderTeardown(_bytes(ctx), _bytes(provider))
- * 	if res.r0 == 0:
+ *     res = ProviderTeardown(_bytes(ctx), _bytes(provider))
+ *     if res.r0 == 0:
  */
   __pyx_tuple__8 = PyTuple_Pack(3, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_res); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
@@ -7910,9 +7917,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "_pylumi.pyx":182
  * 
  * 
- * def provider_get_schema(str ctxName, str name, int version):             # <<<<<<<<<<<<<<
- * 	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
- * 	if res.r0 == 0:
+ * def provider_get_schema(str ctxName, str name, int version=0):             # <<<<<<<<<<<<<<
+ *     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
+ *     if res.r0 == 0:
  */
   __pyx_tuple__10 = PyTuple_Pack(4, __pyx_n_s_ctxName, __pyx_n_s_name, __pyx_n_s_version, __pyx_n_s_res); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
@@ -7923,8 +7930,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_tuple__12 = PyTuple_Pack(11, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_urn, __pyx_n_s_olds, __pyx_n_s_news, __pyx_n_s_allow_unknowns, __pyx_n_s_olds_encoded, __pyx_n_s_news_encoded, __pyx_n_s_res, __pyx_n_s_props_decoded, __pyx_n_s_failures_decoded); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
@@ -7935,8 +7942,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False, ignore_changes=()):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_tuple__14 = PyTuple_Pack(11, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_urn, __pyx_n_s_olds, __pyx_n_s_news, __pyx_n_s_allow_unknowns, __pyx_n_s_ignore_changes, __pyx_n_s_olds_encoded, __pyx_n_s_news_encoded, __pyx_n_s_res, __pyx_n_s_out_decoded); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
@@ -7947,8 +7954,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_configure(str ctx, str provider, inputs):             # <<<<<<<<<<<<<<
- * 	inputs_encoded = json.dumps(inputs).encode()
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+ *     inputs_encoded = json.dumps(inputs).encode()
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
  */
   __pyx_tuple__16 = PyTuple_Pack(5, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_inputs, __pyx_n_s_inputs_encoded, __pyx_n_s_res); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
@@ -7959,8 +7966,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_tuple__18 = PyTuple_Pack(11, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_urn, __pyx_n_s_olds, __pyx_n_s_news, __pyx_n_s_allow_unknowns, __pyx_n_s_olds_encoded, __pyx_n_s_news_encoded, __pyx_n_s_res, __pyx_n_s_props, __pyx_n_s_failures); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
@@ -7971,8 +7978,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_diff(str ctx, str provider, str urn, str id, olds, news, allow_unknowns=False, ignore_changes=()):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_tuple__20 = PyTuple_Pack(12, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_urn, __pyx_n_s_id, __pyx_n_s_olds, __pyx_n_s_news, __pyx_n_s_allow_unknowns, __pyx_n_s_ignore_changes, __pyx_n_s_olds_encoded, __pyx_n_s_news_encoded, __pyx_n_s_res, __pyx_n_s_out_decoded); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__20);
@@ -7983,8 +7990,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_create(str ctx, str provider, str urn, news, int timeout=60, preview=False):             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCreate(
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCreate(
  */
   __pyx_tuple__22 = PyTuple_Pack(9, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_urn, __pyx_n_s_news, __pyx_n_s_timeout, __pyx_n_s_preview, __pyx_n_s_news_encoded, __pyx_n_s_res, __pyx_n_s_out_decoded); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
@@ -7995,8 +8002,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_read(str ctx, str provider, str urn, str id, inputs, state):             # <<<<<<<<<<<<<<
- * 	input_encoded = json.dumps(inputs).encode()
- * 	state_encoded = json.dumps(state).encode()
+ *     input_encoded = json.dumps(inputs).encode()
+ *     state_encoded = json.dumps(state).encode()
  */
   __pyx_tuple__24 = PyTuple_Pack(10, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_urn, __pyx_n_s_id, __pyx_n_s_inputs, __pyx_n_s_state, __pyx_n_s_input_encoded, __pyx_n_s_state_encoded, __pyx_n_s_res, __pyx_n_s_out_decoded); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
@@ -8007,8 +8014,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), preview=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_tuple__26 = PyTuple_Pack(13, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_urn, __pyx_n_s_id, __pyx_n_s_olds, __pyx_n_s_news, __pyx_n_s_timeout, __pyx_n_s_ignore_changes, __pyx_n_s_preview, __pyx_n_s_olds_encoded, __pyx_n_s_news_encoded, __pyx_n_s_res, __pyx_n_s_out_decoded); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
@@ -8019,8 +8026,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  * def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDelete(
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDelete(
  */
   __pyx_tuple__28 = PyTuple_Pack(8, __pyx_n_s_ctx, __pyx_n_s_provider, __pyx_n_s_urn, __pyx_n_s_id, __pyx_n_s_news, __pyx_n_s_timeout, __pyx_n_s_news_encoded, __pyx_n_s_res); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
@@ -8028,11 +8035,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(6, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pylumi_pyx, __pyx_n_s_provider_delete, 292, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 292, __pyx_L1_error)
 
   /* "_pylumi.pyx":313
- * 	Errors from context_ methods
- * 	"""
- * 	def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
- * 		self.status_code = status_code
- * 		self.message = message
+ *     Errors from context_ methods
+ *     """
+ *     def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
+ *         self.status_code = status_code
+ *         self.message = message
  */
   __pyx_tuple__30 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_status_code, __pyx_n_s_message); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__30);
@@ -8040,11 +8047,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_pylumi_pyx, __pyx_n_s_init, 313, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 313, __pyx_L1_error)
 
   /* "_pylumi.pyx":326
- * 	Errors from provider_ methods
- * 	"""
- * 	def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
- * 		self.status_code = status_code
- * 		self.message = message
+ *     Errors from provider_ methods
+ *     """
+ *     def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
+ *         self.status_code = status_code
+ *         self.message = message
  */
   __pyx_tuple__32 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_status_code, __pyx_n_s_message); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 326, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__32);
@@ -8367,8 +8374,8 @@ if (!__Pyx_RefNanny) {
  * # Context methods
  * 
  * def context_setup(str ctxName, str cwd):             # <<<<<<<<<<<<<<
- * 	res = ContextSetup(_bytes(ctxName), _bytes(cwd))
- * 	if res.r0 == 0:
+ *     res = ContextSetup(_bytes(ctxName), _bytes(cwd))
+ *     if res.r0 == 0:
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_1context_setup, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8379,8 +8386,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def context_teardown(str ctxName):             # <<<<<<<<<<<<<<
- * 	res = ContextTeardown(_bytes(ctxName))
- * 	if res.r0 == 0:
+ *     res = ContextTeardown(_bytes(ctxName))
+ *     if res.r0 == 0:
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_3context_teardown, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8391,8 +8398,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def context_list_plugins(str ctxName):             # <<<<<<<<<<<<<<
- * 	res = ContextListPlugins(_bytes(ctxName))
- * 	if res.r0 == 0:
+ *     res = ContextListPlugins(_bytes(ctxName))
+ *     if res.r0 == 0:
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_5context_list_plugins, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8403,8 +8410,8 @@ if (!__Pyx_RefNanny) {
  * # Provider methods
  * 
  * def provider_teardown(str ctx, str provider):             # <<<<<<<<<<<<<<
- * 	res = ProviderTeardown(_bytes(ctx), _bytes(provider))
- * 	if res.r0 == 0:
+ *     res = ProviderTeardown(_bytes(ctx), _bytes(provider))
+ *     if res.r0 == 0:
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_7provider_teardown, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8414,9 +8421,9 @@ if (!__Pyx_RefNanny) {
   /* "_pylumi.pyx":182
  * 
  * 
- * def provider_get_schema(str ctxName, str name, int version):             # <<<<<<<<<<<<<<
- * 	res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
- * 	if res.r0 == 0:
+ * def provider_get_schema(str ctxName, str name, int version=0):             # <<<<<<<<<<<<<<
+ *     res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
+ *     if res.r0 == 0:
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_9provider_get_schema, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8427,8 +8434,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_11provider_check_config, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8439,8 +8446,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False, ignore_changes=()):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_13provider_diff_config, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8451,8 +8458,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_configure(str ctx, str provider, inputs):             # <<<<<<<<<<<<<<
- * 	inputs_encoded = json.dumps(inputs).encode()
- * 	res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+ *     inputs_encoded = json.dumps(inputs).encode()
+ *     res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_15provider_configure, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8463,8 +8470,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_17provider_check, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8475,8 +8482,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_diff(str ctx, str provider, str urn, str id, olds, news, allow_unknowns=False, ignore_changes=()):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_19provider_diff, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8487,8 +8494,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_create(str ctx, str provider, str urn, news, int timeout=60, preview=False):             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderCreate(
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderCreate(
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_21provider_create, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8499,8 +8506,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_read(str ctx, str provider, str urn, str id, inputs, state):             # <<<<<<<<<<<<<<
- * 	input_encoded = json.dumps(inputs).encode()
- * 	state_encoded = json.dumps(state).encode()
+ *     input_encoded = json.dumps(inputs).encode()
+ *     state_encoded = json.dumps(state).encode()
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_23provider_read, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8511,8 +8518,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), preview=False):             # <<<<<<<<<<<<<<
- * 	olds_encoded = json.dumps(olds).encode()
- * 	news_encoded = json.dumps(news).encode()
+ *     olds_encoded = json.dumps(olds).encode()
+ *     news_encoded = json.dumps(news).encode()
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_25provider_update, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8523,8 +8530,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):             # <<<<<<<<<<<<<<
- * 	news_encoded = json.dumps(news).encode()
- * 	res = ProviderDelete(
+ *     news_encoded = json.dumps(news).encode()
+ *     res = ProviderDelete(
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_7_pylumi_27provider_delete, NULL, __pyx_n_s_pylumi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8535,8 +8542,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * class PylumiGoError(Exception):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Errors originating from go within Pylumi
+ *     """
+ *     Errors originating from go within Pylumi
  */
   __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8559,8 +8566,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * class ContextError(PylumiGoError):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Errors from context_ methods
+ *     """
+ *     Errors from context_ methods
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_PylumiGoError); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -8577,11 +8584,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_4);
 
   /* "_pylumi.pyx":313
- * 	Errors from context_ methods
- * 	"""
- * 	def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
- * 		self.status_code = status_code
- * 		self.message = message
+ *     Errors from context_ methods
+ *     """
+ *     def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
+ *         self.status_code = status_code
+ *         self.message = message
  */
   __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_7_pylumi_12ContextError_1__init__, 0, __pyx_n_s_ContextError___init, NULL, __pyx_n_s_pylumi, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
@@ -8595,8 +8602,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * class ContextError(PylumiGoError):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Errors from context_ methods
+ *     """
+ *     Errors from context_ methods
  */
   __pyx_t_5 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_ContextError, __pyx_t_2, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
@@ -8612,8 +8619,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * class ProviderError(PylumiGoError):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Errors from provider_ methods
+ *     """
+ *     Errors from provider_ methods
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_PylumiGoError); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -8630,11 +8637,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_5);
 
   /* "_pylumi.pyx":326
- * 	Errors from provider_ methods
- * 	"""
- * 	def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
- * 		self.status_code = status_code
- * 		self.message = message
+ *     Errors from provider_ methods
+ *     """
+ *     def __init__(self, int status_code, str message):             # <<<<<<<<<<<<<<
+ *         self.status_code = status_code
+ *         self.message = message
  */
   __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_7_pylumi_13ProviderError_1__init__, 0, __pyx_n_s_ProviderError___init, NULL, __pyx_n_s_pylumi, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 326, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -8648,8 +8655,8 @@ if (!__Pyx_RefNanny) {
  * 
  * 
  * class ProviderError(PylumiGoError):             # <<<<<<<<<<<<<<
- * 	"""
- * 	Errors from provider_ methods
+ *     """
+ *     Errors from provider_ methods
  */
   __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_ProviderError, __pyx_t_1, __pyx_t_3, NULL, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
