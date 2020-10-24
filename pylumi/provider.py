@@ -187,6 +187,7 @@ class Provider:
         **Returns:**
 
         A dictionary with the following keys:
+
         * **ID** - The ID of the new created resource
         * **Properties** - A dictonary of properties of the new created resource.
         * **Status** - An integer status code for the operation
@@ -209,6 +210,15 @@ class Provider:
         * **id** - plumi resource ID.
         * **inputs** - input properties
         * **state** - properties from the current state of the resource
+
+        **Returns:**
+
+        A dictionary with the following keys:
+
+        * **ID** - The ID of the read resource.
+        * **Inputs** - The dictionary of inputs for the read resource.
+        * **Outputs** - The dictionary of outputs for the read resource.
+        * **Status** - An integer status code from the operation.
 
         **Pulumi Docs:**
 
@@ -233,6 +243,14 @@ class Provider:
         * **news** - new bag of properties.
         * **timeout** - timeout for the operation, default 60.
 
+        **Returns:**
+
+        A dictionary with the following keys:
+
+        * **ID** - The ID of the new created resource
+        * **Properties** - A dictonary of properties of the new created resource.
+        * **Status** - An integer status code for the operation
+
         **Pulumi Docs:**
 
         Update updates an existing resource with new values.
@@ -241,7 +259,7 @@ class Provider:
         """
         return _pylumi.provider_update(self.ctx.name, self.name, str(urn), id, olds, news, timeout)
 
-    def delete(self, urn: str, id: str, news: Dict[str, Any], timeout: int = 60) -> Dict[str, Any]:
+    def delete(self, urn: str, id: str, news: Dict[str, Any], timeout: int = 60) -> int:
         """
         Delete a pulumi resource.
 
@@ -251,6 +269,10 @@ class Provider:
         * **id** - pulumi resource ID.
         * **news** - new bag of properties.
         * **timeout** - timeout for the operation, default 60.
+
+        **Returns:**
+
+        An integer status code.
 
         **Pulumi Docs:**
 

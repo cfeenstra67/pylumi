@@ -124,16 +124,8 @@ def test_provider_diff_stable(aws):
     }
 
 
-def test_provider_create_preview(aws, s3_client):
-    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
-
-    try:
-        s3_client.delete_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
-    except botocore.exceptions.ClientError:
-        pass
-
-    with pytest.raises(botocore.exceptions.ClientError):
-        s3_client.get_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+def test_provider_create_preview(aws, s3_client, s3_key):
+    new_props = {'bucket': TEST_BUCKET, 'key': s3_key, 'content': 'Hello, world! 2'}
 
     resp = aws.create(
         pylumi.URN('aws:s3/bucketObject:BucketObject'),
@@ -148,19 +140,11 @@ def test_provider_create_preview(aws, s3_client):
     }
 
     with pytest.raises(botocore.exceptions.ClientError):
-        s3_client.get_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+        s3_client.get_object(Bucket=TEST_BUCKET, Key=s3_key)
 
 
-def test_provider_create(aws, s3_client):
-    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
-
-    try:
-        s3_client.delete_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
-    except botocore.exceptions.ClientError:
-        pass
-
-    with pytest.raises(botocore.exceptions.ClientError):
-        s3_client.get_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+def test_provider_create(aws, s3_client, s3_key):
+    new_props = {'bucket': TEST_BUCKET, 'key': s3_key, 'content': 'Hello, world! 2'}
 
     resp = aws.create(
         pylumi.URN('aws:s3/bucketObject:BucketObject'),
@@ -197,5 +181,141 @@ def test_provider_create(aws, s3_client):
         'Status': 0
     }
 
-    resp = s3_client.get_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+    resp = s3_client.get_object(Bucket=TEST_BUCKET, Key=s3_key)
     assert resp['Body'].read().decode() == new_props['content']
+
+
+def test_provider_read(aws, s3_client, s3_key):
+    new_props = {'bucket': TEST_BUCKET, 'key': s3_key, 'content': 'Hello, world! 2'}
+
+    create_resp = aws.create(
+        pylumi.URN('aws:s3/bucketObject:BucketObject'),
+        new_props
+    )
+
+    resp = aws.read(
+        pylumi.URN('aws:s3/bucketObject:BucketObject', create_resp['ID']),
+        create_resp['ID'],
+        {},
+        new_props,
+    )
+
+    assert resp == {
+        'ID': 'pulumi-test-2',
+        'Inputs': {
+            'acl': 'private',
+            'bucket': 'clf-misc',
+            'cacheControl': '',
+            'content': 'Hello, world! 2',
+            'contentDisposition': '',
+            'contentEncoding': '',
+            'contentLanguage': '',
+            'contentType': 'binary/octet-stream',
+            'etag': '53554dd9d7d18fc279ff5546b714465f',
+            'forceDestroy': False,
+            'key': 'pulumi-test-2',
+            'metadata': {},
+            'objectLockLegalHoldStatus': '',
+            'objectLockMode': '',
+            'objectLockRetainUntilDate': '',
+            'serverSideEncryption': '',
+            'storageClass': 'STANDARD',
+            'tags': {},
+            'websiteRedirect': ''
+        },
+        'Outputs': {
+            'acl': 'private',
+            'bucket': 'clf-misc',
+            'cacheControl': '',
+            'content': 'Hello, world! 2',
+            'contentDisposition': '',
+            'contentEncoding': '',
+            'contentLanguage': '',
+            'contentType': 'binary/octet-stream',
+            'etag': '53554dd9d7d18fc279ff5546b714465f',
+            'forceDestroy': False,
+            'id': 'pulumi-test-2',
+            'key': 'pulumi-test-2',
+            'metadata': {},
+            'objectLockLegalHoldStatus': '',
+            'objectLockMode': '',
+            'objectLockRetainUntilDate': '',
+            'serverSideEncryption': '',
+            'storageClass': 'STANDARD',
+            'tags': {},
+            'versionId': '',
+            'websiteRedirect': ''
+        },
+        'Status': 0
+    }
+
+
+def test_provider_update(aws, s3_client, s3_key):
+    new_props = {'bucket': TEST_BUCKET, 'key': s3_key, 'content': 'Hello, world! 2'}
+    new_content = 'Mr. Magoo'
+
+    create_resp = aws.create(
+        pylumi.URN('aws:s3/bucketObject:BucketObject'),
+        new_props
+    )
+
+    resp = aws.update(
+        pylumi.URN('aws:s3/bucketObject:BucketObject', create_resp['ID']),
+        create_resp['ID'],
+        new_props,
+        dict(new_props, content=new_content)
+    )
+
+    assert resp['Properties'].pop('__meta').startswith('{"')
+
+    assert resp == {
+        'ID': 'pulumi-test-2',
+        'Properties': {
+            'acl': 'private',
+            'bucket': 'clf-misc',
+            'cacheControl': '',
+            'content': new_content,
+            'contentDisposition': '',
+            'contentEncoding': '',
+            'contentLanguage': '',
+            'contentType': 'binary/octet-stream',
+            'etag': 'a96e6203ad76aa4969cc0e5e6c5ef9c7',
+            'forceDestroy': False,
+            'id': 'pulumi-test-2',
+            'key': 'pulumi-test-2',
+            'metadata': {},
+            'objectLockLegalHoldStatus': '',
+            'objectLockMode': '',
+            'objectLockRetainUntilDate': '',
+            'serverSideEncryption': '',
+            'storageClass': 'STANDARD',
+            'tags': {},
+            'versionId': '',
+            'websiteRedirect': ''
+        },
+        'Status': 0
+    }
+
+    resp = s3_client.get_object(Bucket=TEST_BUCKET, Key=s3_key)
+    assert resp['Body'].read().decode() == new_content
+
+
+def test_provider_delete(aws, s3_client, s3_key):
+    new_props = {'bucket': TEST_BUCKET, 'key': s3_key, 'content': 'Hello, world! 2'}
+    new_content = 'Mr. Magoo'
+
+    create_resp = aws.create(
+        pylumi.URN('aws:s3/bucketObject:BucketObject'),
+        new_props
+    )
+
+    resp = aws.delete(
+        pylumi.URN('aws:s3/bucketObject:BucketObject', create_resp['ID']),
+        create_resp['ID'],
+        new_props
+    )
+
+    assert resp == 0
+
+    with pytest.raises(botocore.exceptions.ClientError):
+        s3_client.get_object(Bucket=TEST_BUCKET, Key=s3_key)
