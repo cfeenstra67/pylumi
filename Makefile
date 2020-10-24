@@ -25,14 +25,13 @@ pypi-upload-test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 update-pulumi-version:
-	bumpversion \
+	@bumpversion \
 		--config-file .bumpversion-pulumi.cfg \
 		--new-version $(PULUMI_VERSION) \
-		--dry-run --list \
-		major
+		--list major
 
 bumpversion:
-	bumpversion --dry-run --list $(PART)
+	@bumpversion --list $(PART)
 
 pypi-upload:
 	twine upload dist/*
