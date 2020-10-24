@@ -1,5 +1,10 @@
 
 
+PULUMI_VERSION:=2.12.0
+
+PART:=patch
+
+
 build-go:
 	@mkdir -p build/go
 	@cd go &&\
@@ -18,6 +23,16 @@ pypi-check:
 
 pypi-upload-test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+update-pulumi-version:
+	bumpversion \
+		--config-file .bumpversion-pulumi.cfg \
+		--new-version $(PULUMI_VERSION) \
+		--dry-run --list \
+		major
+
+bumpversion:
+	bumpversion --dry-run --list $(PART)
 
 pypi-upload:
 	twine upload dist/*
