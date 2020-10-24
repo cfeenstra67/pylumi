@@ -7,7 +7,9 @@ from pylumi.ext import _pylumi
 
 class Provider:
     """
-
+    A pulumi provider logically maps to a real-world service or API, and in Pulumi
+    terms maps to a resource provider process running locally that Pulumi communicates
+    with via a gRPC interface. Common examples would be AWS or GCP.
     """
     def __init__(
             self,
