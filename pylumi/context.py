@@ -41,6 +41,9 @@ class Context:
         * **name** - The name of the provider, e.g. 'aws'.
         * **config** - (optional) configuration parameters for the provider.
 
+        **Returns:**
+
+        A new Provider instance.
 
         **Pulumi Docs:**
 
@@ -57,6 +60,10 @@ class Context:
         """
         Set up this Pulumi context. This creates an interface in the Go runtime
         that can create and communicate with resource provider proce
+
+        **Returns:**
+
+        None
         """
         return _pylumi.context_setup(self.name, self.cwd)
 
@@ -64,12 +71,20 @@ class Context:
         """
         Tear down this provider, removing associated OS resources such as plugin
         processes.
+
+        **Returns:**
+
+        None
         """
         return _pylumi.context_teardown(self.name)
 
-    def list_plugins(self) -> None:
+    def list_plugins(self) -> Sequence[str]:
         """
         List the currently loaded plugins in this context.
+
+        **Returns:**
+
+        A list of plugin names that are currently loaded in the context.
 
         **Pulumi docs**:
 
