@@ -33,10 +33,24 @@ else:
         language_level='3str'
     ))
 
+with open('README.md') as f:
+    long_description = f.read().strip()
+
 setup(
     name='pylumi',
     version='0.0.1',
-    description='Python API for interacting with Pulumi resource plugins',
+    description='Python API for interacting with Pulumi resource plugins.',
+    long_description=long_description,
+    classifiers=[
+        'Development Status :: 1 - Planning',
+        'Programming Language :: Cython',
+    ],
+    keywords='go cython terraform pulumi infra-as-code cloudformation',
+    url='https://github.com/cfeenstra67/pylumi',
+    author='Cam Feenstra',
+    author_email='cameron.l.feenstra@gmail.com',
+    license='MIT',
+    # Actual package data
     cmdclass={'build_ext': _get_build_ext_cls(_build_ext, 'github.com/cfeenstra67/pylumi')},
     packages=['pylumi'],
     ext_modules=extensions,

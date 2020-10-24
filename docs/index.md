@@ -28,3 +28,5 @@ Install this package by running
 $ pip install git+https://github.com/cfeenstra67/pylumi
 ```
 Note: since the build for this package requires compiling a go extension and a c extension that depends on it, the script is slightly fragile and may not work properly with all platforms. It has been tested on OS X and Ubuntu, but not exhaustively on either.
+
+Currently this will build with Pulumi version 2.12.0; at the moment it isn't set up to easy change this, however if desired you can update `go/go.mod` and `go/pylumi/go.mod` to build the extensions with a different pulumi version.
