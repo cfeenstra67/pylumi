@@ -25,7 +25,7 @@ with pylumi.Context() as ctx, \
 
 Install this package by running
 ```bash
-$ pip install git+https://github.com/cfeenstra67/pylumi
+$ pip install pylumi
 ```
 Note: since the build for this package requires compiling a go extension and a c extension that depends on it, the script is slightly fragile and may not work properly with all platforms. It has been tested on OS X and Ubuntu, but not exhaustively on either.
 

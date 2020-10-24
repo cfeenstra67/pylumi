@@ -41,9 +41,12 @@ setup(
     version='0.0.1',
     description='Python API for interacting with Pulumi resource plugins.',
     long_description=long_description,
+    long_description_content_type='text/markdown; variant=GFM',
     classifiers=[
         'Development Status :: 1 - Planning',
         'Programming Language :: Cython',
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License"
     ],
     keywords='go cython terraform pulumi infra-as-code cloudformation',
     url='https://github.com/cfeenstra67/pylumi',

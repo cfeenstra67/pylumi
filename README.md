@@ -19,9 +19,11 @@ with pylumi.Context() as ctx, \
 
 ## Installation
 
-Install this package by running
+Before installing `pylumi`, you must have Go installed on your system. For additional information, see the [Go Programming Language Installation Page](https://golang.org/doc/install).
+
+Once that is done, install this package using:
 ```bash
-$ pip install git+https://github.com/cfeenstra67/pylumi
+$ pip install pylumi
 ```
 Note: since the build for this package requires compiling a go extension and a c extension that depends on it, the script is slightly fragile and may not work properly with all platforms. It has been tested on OS X and Ubuntu, but not exhaustively on either.
 

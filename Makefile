@@ -8,10 +8,19 @@ build-go:
 
 
 build: clean
-	python setup.py bdist_wheel
+	python setup.py sdist bdist_wheel
 
 install: clean
 	python setup.py install
+
+pypi-check:
+	twine check dist/*
+
+pypi-upload-test:
+	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+pypi-upload:
+	twine upload dist/*
 
 clean:
 	@pip uninstall -y pylumi
