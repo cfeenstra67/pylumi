@@ -1,4 +1,9 @@
+import botocore
+import boto3
 import pylumi
+import pytest
+
+from tests.conftest import TEST_BUCKET, TEST_REGION
 
 
 def test_provider_get_schema_bytes(aws):
@@ -38,9 +43,11 @@ def test_provider_check_invalid(aws):
     new_props = {'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
     props, errs = aws.check(
         pylumi.URN('aws:s3/bucketObject:BucketObject'),
-        {'bucket': 'clf-misc', 'key': 'pulumi-test-1', 'content': 'Hello, world!'},
+        {'bucket': TEST_BUCKET, 'key': 'pulumi-test-1', 'content': 'Hello, world!'},
         new_props
     )
+
+    props['__defaults'].sort()
 
     assert props == {
         '__defaults': ['acl', 'forceDestroy'],
@@ -53,12 +60,14 @@ def test_provider_check_invalid(aws):
 
 
 def test_provider_check_valid(aws):
-    new_props = {'bucket': 'clf-misc', 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
     props, errs = aws.check(
         pylumi.URN('aws:s3/bucketObject:BucketObject'),
-        {'bucket': 'clf-misc', 'key': 'pulumi-test-1', 'content': 'Hello, world!'},
+        {'bucket': TEST_BUCKET, 'key': 'pulumi-test-1', 'content': 'Hello, world!'},
         new_props
     )
+
+    props['__defaults'].sort()
 
     assert props == {
         '__defaults': ['acl', 'forceDestroy'],
@@ -69,3 +78,124 @@ def test_provider_check_valid(aws):
 
     assert errs is None
 
+
+def test_provider_diff_changes(aws):
+    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+    resp = aws.diff(
+        pylumi.URN('aws:s3/bucketObject:BucketObject'),
+        'test-123-1',
+        {'bucket': TEST_BUCKET, 'key': 'pulumi-test-1', 'content': 'Hello, world!'},
+        new_props
+    )
+
+    resp['ChangedKeys'].sort()
+
+    assert resp == {
+        'Changes': 2,
+        'ReplaceKeys': ['key'],
+        'StableKeys': ['bucket'],
+        'ChangedKeys': ['content', 'key'],
+        'DetailedDiff': {
+            'content': {'Kind': 4, 'InputDiff': False},
+            'key': {'Kind': 5, 'InputDiff': False}
+        },
+        'DeleteBeforeReplace': False
+    }
+
+
+def test_provider_diff_stable(aws):
+    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+    resp = aws.diff(
+        pylumi.URN('aws:s3/bucketObject:BucketObject'),
+        'test-123-1',
+        new_props,
+        new_props
+    )
+
+    resp['StableKeys'].sort()
+
+    assert resp == {
+        'Changes': 1,
+        'ReplaceKeys': None,
+        'StableKeys': ['bucket', 'key'],
+        'ChangedKeys': None,
+        'DetailedDiff': {},
+        'DeleteBeforeReplace': False
+    }
+
+
+def test_provider_create_preview(aws, s3_client):
+    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+
+    try:
+        s3_client.delete_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+    except botocore.exceptions.ClientError:
+        pass
+
+    with pytest.raises(botocore.exceptions.ClientError):
+        s3_client.get_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+
+    resp = aws.create(
+        pylumi.URN('aws:s3/bucketObject:BucketObject'),
+        new_props,
+        preview=True
+    )
+
+    assert resp == {
+        'ID': '',
+        'Properties': new_props,
+        'Status': 0
+    }
+
+    with pytest.raises(botocore.exceptions.ClientError):
+        s3_client.get_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+
+
+def test_provider_create(aws, s3_client):
+    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+
+    try:
+        s3_client.delete_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+    except botocore.exceptions.ClientError:
+        pass
+
+    with pytest.raises(botocore.exceptions.ClientError):
+        s3_client.get_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+
+    resp = aws.create(
+        pylumi.URN('aws:s3/bucketObject:BucketObject'),
+        new_props
+    )
+
+    assert resp['Properties'].pop('__meta').startswith('{"')
+
+    assert resp == {
+        'ID': 'pulumi-test-2',
+        'Properties': {
+            'acl': 'private',
+            'bucket': 'clf-misc',
+            'cacheControl': '',
+            'content': 'Hello, world! 2',
+            'contentDisposition': '',
+            'contentEncoding': '',
+            'contentLanguage': '',
+            'contentType': 'binary/octet-stream',
+            'etag': '53554dd9d7d18fc279ff5546b714465f',
+            'forceDestroy': False,
+            'id': 'pulumi-test-2',
+            'key': 'pulumi-test-2',
+            'metadata': {},
+            'objectLockLegalHoldStatus': '',
+            'objectLockMode': '',
+            'objectLockRetainUntilDate': '',
+            'serverSideEncryption': '',
+            'storageClass': 'STANDARD',
+            'tags': {},
+            'versionId': '',
+            'websiteRedirect': ''
+        },
+        'Status': 0
+    }
+
+    resp = s3_client.get_object(Bucket=TEST_BUCKET, Key='pulumi-test-2')
+    assert resp['Body'].read().decode() == new_props['content']
