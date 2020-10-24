@@ -40,3 +40,6 @@ pypi-upload:
 clean:
 	@pip uninstall -y pylumi
 	@rm -rf build/ dist/ *.egg-info .eggs
+
+test:
+	py.test -vv tests

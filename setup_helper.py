@@ -113,10 +113,16 @@ def _check_call(cmd: Tuple[str, ...], cwd: str, env: Dict[str, str]) -> None:
     subprocess.check_call(cmd, cwd=cwd, env=dict(os.environ, **env))
 
 
-def _get_build_extension_method(
+def _get_build_extension_methods(
         base: Type[_build_ext],
         root: str,
 ) -> Callable[[_build_ext, Extension], None]:
+
+    def get_ext_filename(self, name: str) -> str:
+        if name == 'libpylumigo':
+            return 'libpylumigo.so'
+        return base.get_ext_filename(self, name)
+
     def build_extension(self: _build_ext, ext: Extension) -> None:
         # If there are no .go files then the parent should handle this
         if not any(source.endswith('.go') for source in ext.sources):
@@ -180,12 +186,14 @@ def _get_build_extension_method(
             if platform.system() == 'Darwin':
                 _check_call(['install_name_tool', '-id', '@loader_path/' + fname, fpath], cwd=pkg_path, env=env)
 
-    return build_extension
+    return {
+        'build_extension': build_extension,
+        'get_ext_filename': get_ext_filename
+    }
 
 
 def _get_build_ext_cls(base: Type[_build_ext], root: str) -> Type[_build_ext]:
-    attrs = {'build_extension': _get_build_extension_method(base, root)}
-    return type('build_ext', (base,), attrs)
+    return type('build_ext', (base,), _get_build_extension_methods(base, root))
 
 
 def set_build_ext(

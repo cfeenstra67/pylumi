@@ -30,7 +30,7 @@ class Context:
         self.name = name
         self.cwd = cwd
 
-    def Provider(self, name: str, config: Optional[Dict[str, Any]] = None) -> Provider:
+    def Provider(self, name: str, config: Optional[Dict[str, Any]] = None) -> provider.Provider:
         """
         Get a Provider object with the given name. This just creates the provider object,
         no interaction is done with the Pulumi engine until configure() if called (or
@@ -76,10 +76,10 @@ class Context:
         ListPlugins lists all plugins that have been loaded, with version information.
         Reference: [Host.ListPlugins](github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin/host.go)
         """
-        return _pylumi.list_plugins(self.name)
+        return _pylumi.context_list_plugins(self.name)
 
     def __enter__(self) -> Any:
-        self.setup(self.cwd)
+        self.setup()
         return self
 
     def __exit__(self, exc_type, exc_value, tb) -> None:

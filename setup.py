@@ -36,6 +36,9 @@ else:
 with open('README.md') as f:
     long_description = f.read().strip()
 
+with open('requirements.txt') as f:
+    install_requires = list(filter(None, map(str.strip, f)))
+
 setup(
     name='pylumi',
     version='0.0.4',
@@ -52,6 +55,7 @@ setup(
     url='https://github.com/cfeenstra67/pylumi',
     author='Cam Feenstra',
     author_email='cameron.l.feenstra@gmail.com',
+    install_requires=install_requires,
     license='MIT',
     # Actual package data
     cmdclass={'build_ext': _get_build_ext_cls(_build_ext, 'github.com/cfeenstra67/pylumi')},

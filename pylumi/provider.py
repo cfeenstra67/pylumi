@@ -1,3 +1,4 @@
+import json
 from functools import partial
 from typing import Any, Sequence, Dict, Optional
 
@@ -30,6 +31,10 @@ class Provider:
         * **inputs** - (optional) configure this provider with the given configuration
         instead of the one passed in the constructor.
 
+        **Returns:**
+
+        None
+
         **Pulumi Docs:**
        
         Configure configures the resource provider with "globals" that control its behavior.
@@ -43,33 +48,50 @@ class Provider:
     def teardown(self) -> None:
         """
         Tear down resources associated with this provider.
+
+        **Returns:**
+
+        None
         """
         _pylumi.provider_teardown(self.ctx.name, self.name)
 
-    def get_schema(self, version: int = 0) -> None:
+    def get_schema(self, version: int = 0, decode: bool = True) -> Dict[str, Any]:
         """
         Get the schema information about this provider.
 
-        **Parameters**
+        **Parameters:**
 
         * **version** - (optional) specify a schema version for the provider. Default is 0.
+        * **decode** - (optional) decode the raw JSON schema string and return a Python dictionary,
+        defaluts to True.
+
+        **Returns:**
+
+        A Python dictionary with the decoded JSON schema information if `decode=True`. Otherwise,
+        a bytes object that can be decoded via `json.loads()`.
 
         **Pulumi Docs:**
 
         Reference: [Provider.GetSchema](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        _pylumi.provider_get_schema(self.ctx.name, self.name, version)
+        res = _pylumi.provider_get_schema(self.ctx.name, self.name, version)
+        return json.loads(res) if decode else res
 
     def check_config(self, urn: str, olds: Dict[str, Any], news: Dict[str, Any], allow_unknowns: bool = False) -> Dict[str, Any]:
         """
         Validate the given provider configuration.
 
-        **Parameters**
+        **Parameters:**
 
         * **urn** - pulumi resource URN.
         * **olds** - old bag of properties
         * **news** - new bag of properties
         * **allow_unknowns** - (optional) allow unknown values in the output, default False.
+
+        **Returns:**
+
+        (properties, errors) tuple, where `properties` is a validated version of the configuration that
+        should be passed to configure() and `errors` is a list of errors indicating validation errors or `None`.
 
         **Pulumi Docs:**
         
@@ -77,18 +99,22 @@ class Provider:
         
         Reference: [Provider.CheckConfig](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_check_config(self.ctx.name, self.name, urn, olds, news, allow_unknowns)
+        return _pylumi.provider_check_config(self.ctx.name, self.name, str(urn), olds, news, allow_unknowns)
 
     def diff_config(self, urn: str, olds: Dict[str, Any], news: Dict[str, Any], allow_unknowns: bool = False, ignore_changes: Sequence[str] = ()) -> Dict[str, Any]:
         """
         Diff the given provider configurations.
 
-        **Parameters**
+        **Parameters:**
 
         * **urn** - pulumi resource URN.
         * **olds** - old bag of properties
         * **news** - new bag of properties
         * **allow_unknowns** - (optional) allow unknown values in the output, default False.
+
+        **Returns:**
+
+        A dictionary response containing information about the diff.
 
         **Pulumi Docs:**
         
@@ -96,7 +122,7 @@ class Provider:
         
         Reference: [Provider.DiffConfig](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_diff_config(self.ctx.name, self.name, urn, olds, news, allow_unknowns, ignore_changes)
+        return _pylumi.provider_diff_config(self.ctx.name, self.name, str(urn), olds, news, allow_unknowns, ignore_changes)
 
     def check(self, urn: str, olds: Dict[str, Any], news: Dict[str, Any], allow_unknowns: bool = False) -> Dict[str, Any]:
         """
@@ -109,6 +135,10 @@ class Provider:
         * **news** - new bag of properties
         * **allow_unknowns** - (optional) allow unknown values in the output, default False.
 
+        **Returns:**
+        (properties, errors) tuple, where `properties` is the validated bag of properties to be used
+        for subsequent operations and errors is a list of validation errors, or None.
+
         **Pulumi Docs:**
         
         Check validates that the given property bag is valid for a resource of the given type and returns
@@ -116,7 +146,7 @@ class Provider:
         
         Reference: [Provider.Check](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_check(self.ctx.name, self.name, urn, olds, news, allow_unknowns)
+        return _pylumi.provider_check(self.ctx.name, self.name, str(urn), olds, news, allow_unknowns)
 
     def diff(self, urn: str, id: str, olds: Dict[str, Any], news: Dict[str, Any], allow_unknowns: bool = False, ignore_changes: Sequence[str] = ()) -> Dict[str, Any]:
         """
@@ -136,7 +166,7 @@ class Provider:
         
         Reference: [Provider.Diff](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_diff(self.ctx.name, self.name, urn, id, olds, news, allow_unknowns, ignore_changes)
+        return _pylumi.provider_diff(self.ctx.name, self.name, str(urn), id, olds, news, allow_unknowns, ignore_changes)
 
     def create(self, urn: str, news: Dict[str, Any], timeout: int = 60, preview: bool = False) -> Dict[str, Any]:
         """
@@ -156,7 +186,7 @@ class Provider:
         
         Reference: [Provider.Create](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_create(self.ctx.name, self.name, urn, olds, news, timeout, preview)
+        return _pylumi.provider_create(self.ctx.name, self.name, str(urn), olds, news, timeout, preview)
 
     def read(self, urn: str, id: str, inputs: Dict[str, Any], state: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -178,7 +208,7 @@ class Provider:
         
         Reference: [Provider.Read](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_read(self.ctx.name, self.name, urn, id, inputs, state)
+        return _pylumi.provider_read(self.ctx.name, self.name, str(urn), id, inputs, state)
 
     def update(self, urn: str, id: str, olds: Dict[str, Any], news: Dict[str, Any], timeout: int = 60) -> Dict[str, Any]:
         """
@@ -198,7 +228,7 @@ class Provider:
         
         Reference: [Provider.Update](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_update(self.ctx.name, self.name, urn, id, olds, news, timeout)
+        return _pylumi.provider_update(self.ctx.name, self.name, str(urn), id, olds, news, timeout)
 
     def delete(self, urn: str, id: str, news: Dict[str, Any], timeout: int = 60) -> Dict[str, Any]:
         """
@@ -217,7 +247,7 @@ class Provider:
         
         Reference: [Provider.Delete](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_delete(self.ctx.name, self.name, urn, id, news, timeout)
+        return _pylumi.provider_delete(self.ctx.name, self.name, str(urn), id, news, timeout)
 
     def __enter__(self) -> Any:
         self.configure()

@@ -27,6 +27,16 @@ func PropertyMapToJSON(data resource.PropertyMap) ([]byte, error) {
         switch v := value.V.(type) {
         case resource.PropertyMap:
             return v.MapRepl(nil, mapper), true
+        case resource.PropertyValue:
+            return mapper(v)
+        case []resource.PropertyValue:
+            var out []interface{}
+            for _, item := range v {
+                if obj, add := mapper(item); add {
+                    out = append(out, obj)
+                }
+            }
+            return out, true
         }
         return value.V, true
     }
