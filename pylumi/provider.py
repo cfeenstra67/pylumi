@@ -152,13 +152,17 @@ class Provider:
         """
         Diff the given resource configurations.
 
-        **Parameters**
+        **Parameters:**
 
         * **urn** - pulumi resource URN.
         * **id** - pulumi resource ID.
         * **olds** - old bag of properties
         * **news** - new bag of properties
         * **allow_unknowns** - (optional) allow unknown values in the output, default False.
+
+        **Returns:**
+
+        A dictionary response containing information about the diff.
 
         **Pulumi Docs:**
         
@@ -172,7 +176,7 @@ class Provider:
         """
         Create a pulumi resource.
 
-        **Parameters**
+        **Parameters:**
 
         * **urn** - pulumi resource URN.
         * **id** - pulumi resource ID.
@@ -180,13 +184,20 @@ class Provider:
         * **timeout** - (optional) timeout for the operation, default 60
         * **preview** - (optional) predict the future state of the resource, default False.
 
+        **Returns:**
+
+        A dictionary with the following keys:
+        * **ID** - The ID of the new created resource
+        * **Properties** - A dictonary of properties of the new created resource.
+        * **Status** - An integer status code for the operation
+
         **Pulumi Docs:**
 
         Create allocates a new instance of the provided resource and returns its unique resource.ID.
         
         Reference: [Provider.Create](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
         """
-        return _pylumi.provider_create(self.ctx.name, self.name, str(urn), olds, news, timeout, preview)
+        return _pylumi.provider_create(self.ctx.name, self.name, str(urn), news, timeout, preview)
 
     def read(self, urn: str, id: str, inputs: Dict[str, Any], state: Dict[str, Any]) -> Dict[str, Any]:
         """
