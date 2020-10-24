@@ -28,6 +28,7 @@ update-pulumi-version:
 	@bumpversion \
 		--config-file .bumpversion-pulumi.cfg \
 		--new-version $(PULUMI_VERSION) \
+		--allow-dirty \
 		--list major
 
 bumpversion:
