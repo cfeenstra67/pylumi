@@ -3,8 +3,8 @@ import uuid
 from functools import partial, wraps
 from typing import Any, Sequence, Optional, Dict
 
+from pylumi import provider
 from pylumi.ext import _pylumi
-from pylumi.provider import Provider
 
 
 class Context:
@@ -51,7 +51,7 @@ class Context:
         """
         if config is None:
             config = {}
-        return Provider(self, name, config)
+        return provider.Provider(self, name, config)
 
     def setup(self) -> None:
         """
