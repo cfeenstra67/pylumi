@@ -38,7 +38,7 @@ with open('README.md') as f:
 
 setup(
     name='pylumi',
-    version='0.0.1',
+    version='0.0.2',
     description='Python API for interacting with Pulumi resource plugins.',
     long_description=long_description,
     long_description_content_type='text/markdown; variant=GFM',
