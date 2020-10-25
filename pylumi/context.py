@@ -30,7 +30,7 @@ class Context:
         self.name = name
         self.cwd = cwd
 
-    def Provider(self, name: str, config: Optional[Dict[str, Any]] = None) -> provider.Provider:
+    def provider(self, name: str, config: Optional[Dict[str, Any]] = None) -> provider.Provider:
         """
         Get a Provider object with the given name. This just creates the provider object,
         no interaction is done with the Pulumi engine until configure() if called (or

@@ -27,7 +27,7 @@ def test_list_plugins_create_provider():
     assert not run_pgrep('pulumi')
 
     with pylumi.Context() as ctx:
-        provider = ctx.Provider('aws', {'region': 'us-east-2'})
+        provider = ctx.provider('aws', {'region': 'us-east-2'})
 
         # Processes dont' get created until the configure() call.
         assert not run_pgrep('pulumi')

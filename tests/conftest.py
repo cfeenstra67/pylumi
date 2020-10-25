@@ -8,6 +8,8 @@ TEST_BUCKET = 'clf-misc'
 
 TEST_REGION = 'us-east-2'
 
+TEST_KEY = 'pulumi-test-2'
+
 
 @pytest.fixture(scope='session')
 def ctx():
@@ -17,7 +19,7 @@ def ctx():
 
 @pytest.fixture(scope='session')
 def aws(ctx):
-    with ctx.Provider('aws', {'region': TEST_REGION}) as prov:
+    with ctx.provider('aws', {'region': TEST_REGION}) as prov:
         yield prov
 
 
@@ -28,13 +30,12 @@ def s3_client():
 
 @pytest.fixture(scope='function')
 def s3_key(s3_client):
-    key = 'pulumi-test-2'
     try:
-        s3_client.delete_object(Bucket=TEST_BUCKET, Key=key)
+        s3_client.delete_object(Bucket=TEST_BUCKET, Key=TEST_KEY)
     except botocore.exceptions.ClientError:
         pass
-    yield key
+    yield TEST_KEY
     try:
-        s3_client.delete_object(Bucket=TEST_BUCKET, Key=key)
+        s3_client.delete_object(Bucket=TEST_BUCKET, Key=TEST_KEY)
     except botocore.exceptions.ClientError:
         pass
