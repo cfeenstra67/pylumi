@@ -39,6 +39,12 @@ with open('README.md') as f:
 with open('requirements.txt') as f:
     install_requires = list(filter(None, map(str.strip, f)))
 
+with open('requirements-tests.txt') as f:
+    install_requires_tests = list(filter(None, map(str.strip, f)))
+
+with open('requirements-dev.txt') as f:
+    install_requires_dev = list(filter(None, map(str.strip, f)))
+
 setup(
     name='pylumi',
     version='0.0.4',
@@ -61,4 +67,8 @@ setup(
     cmdclass={'build_ext': _get_build_ext_cls(_build_ext, 'github.com/cfeenstra67/pylumi')},
     packages=['pylumi'],
     ext_modules=extensions,
+    extras_require={
+        'tests': install_requires_tests,
+        'dev': install_requires_dev
+    }
 )

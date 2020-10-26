@@ -1,14 +1,17 @@
+import os
+import uuid
+
 import boto3
 import botocore
 import pytest
 import pylumi
 
 
-TEST_BUCKET = 'clf-misc'
+TEST_BUCKET = os.getenv('PYLUMI_TEST_BUCKET', 'clf-misc')
 
-TEST_REGION = 'us-east-2'
+TEST_REGION = os.getenv('PYLUMI_TEST_REGION', 'us-east-2')
 
-TEST_KEY = 'pulumi-test-2'
+TEST_KEY = os.getenv('PYLUMI_TEST_KEY', 'pylumi-test.txt')
 
 
 @pytest.fixture(scope='session')
@@ -23,7 +26,7 @@ def aws(ctx):
         yield prov
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def s3_client():
     return boto3.client('s3', region_name=TEST_REGION)
 
