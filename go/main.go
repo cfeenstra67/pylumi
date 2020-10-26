@@ -7,7 +7,7 @@ import (
     "fmt"
     "unsafe"
 
-    "pylumi"
+    "github.com/cfeenstra67/pylumi"
     "github.com/pulumi/pulumi/sdk/v2/go/common/resource"
     "github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
     "github.com/pulumi/pulumi/sdk/v2/go/common/tokens"

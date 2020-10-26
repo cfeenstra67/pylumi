@@ -1,4 +1,4 @@
-module pylumi
+module github.com/cfeenstra67/pylumi
 
 go 1.15
 
