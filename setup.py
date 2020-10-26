@@ -8,6 +8,8 @@ from setup_helper import _get_build_ext_cls
 
 extensions = [Extension('libpylumigo', ['go/main.go'])]
 
+platform_args = []
+
 if platform.system() == 'Darwin':
     platform_args.append('-fPIC')
 else:
