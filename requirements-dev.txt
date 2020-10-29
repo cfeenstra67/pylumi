@@ -1,3 +1,4 @@
 cython
 twine
 bumpversion
+wheel
