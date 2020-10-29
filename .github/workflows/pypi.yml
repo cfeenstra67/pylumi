@@ -19,7 +19,7 @@ jobs:
           python-version: 3.8
       - name: Build Distribution Package
         run: |
-          pip install .[dev]
+          pip install -r requirements-dev.txt
           make build
       - name: Check Distribution Package
         run: |
