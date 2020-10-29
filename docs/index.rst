@@ -6,6 +6,8 @@
 Welcome to pylumi's documentation!
 ==================================
 
+Hello hello hello
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
