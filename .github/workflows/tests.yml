@@ -25,6 +25,8 @@ jobs:
       - name: Install dependencies
         run: |
           curl -fsSL https://get.pulumi.com | sh
+          export PATH=$PATH:~/.pulumi/bin
+
           pulumi plugin install resource aws 2.13.1
 
           python -m pip install --upgrade pip

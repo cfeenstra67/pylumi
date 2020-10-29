@@ -49,6 +49,7 @@ setup(
     # Actual package data
     cmdclass={'build_ext': _get_build_ext_cls(_build_ext, 'github.com/cfeenstra67/pylumi')},
     packages=['pylumi'],
+    py_modules=['setup_helper'],
     ext_modules=extensions,
     extras_require={
         'tests': install_requires_tests,
