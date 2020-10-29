@@ -8,28 +8,15 @@ from setup_helper import _get_build_ext_cls
 
 extensions = [Extension('libpylumigo', ['go/main.go'])]
 
-platform_args = []
-
-if platform.system() == 'Darwin':
-    platform_args.append('-fPIC')
-else:
-    platform_args.append('-symbolic')
-
 try:
     from Cython.Build import cythonize
 except ImportError:
     extensions.append(Extension(
-        '_pylumi',
-        sources=['_pylumi.c'],
-        extra_compile_args=platform_args
+        '_pylumi', ['_pylumi.c']
     ))
 else:
     extensions.extend(cythonize(
-        Extension(
-            '_pylumi',
-            sources=['_pylumi.pyx'],
-            extra_compile_args=platform_args
-        ),
+        Extension('_pylumi', ['_pylumi.pyx']),
         language_level='3str'
     ))
 
