@@ -40,7 +40,7 @@ def test_provider_diff_config(aws):
 
 
 def test_provider_check_invalid(aws):
-    new_props = {'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+    new_props = {'key': 'pylumi-test.txt', 'content': 'Hello, world! 2'}
     props, errs = aws.check(
         pylumi.URN('aws:s3/bucketObject:BucketObject'),
         {'bucket': TEST_BUCKET, 'key': 'pulumi-test-1', 'content': 'Hello, world!'},
@@ -60,7 +60,7 @@ def test_provider_check_invalid(aws):
 
 
 def test_provider_check_valid(aws):
-    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+    new_props = {'bucket': TEST_BUCKET, 'key': 'pylumi-test.txt', 'content': 'Hello, world! 2'}
     props, errs = aws.check(
         pylumi.URN('aws:s3/bucketObject:BucketObject'),
         {'bucket': TEST_BUCKET, 'key': 'pulumi-test-1', 'content': 'Hello, world!'},
@@ -80,7 +80,7 @@ def test_provider_check_valid(aws):
 
 
 def test_provider_diff_changes(aws):
-    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+    new_props = {'bucket': TEST_BUCKET, 'key': 'pylumi-test.txt', 'content': 'Hello, world! 2'}
     resp = aws.diff(
         pylumi.URN('aws:s3/bucketObject:BucketObject'),
         'test-123-1',
@@ -104,7 +104,7 @@ def test_provider_diff_changes(aws):
 
 
 def test_provider_diff_stable(aws):
-    new_props = {'bucket': TEST_BUCKET, 'key': 'pulumi-test-2', 'content': 'Hello, world! 2'}
+    new_props = {'bucket': TEST_BUCKET, 'key': 'pylumi-test.txt', 'content': 'Hello, world! 2'}
     resp = aws.diff(
         pylumi.URN('aws:s3/bucketObject:BucketObject'),
         'test-123-1',
@@ -154,7 +154,7 @@ def test_provider_create(aws, s3_client, s3_key):
     assert resp['Properties'].pop('__meta').startswith('{"')
 
     assert resp == {
-        'ID': 'pulumi-test-2',
+        'ID': 'pylumi-test.txt',
         'Properties': {
             'acl': 'private',
             'bucket': 'clf-misc',
@@ -166,8 +166,8 @@ def test_provider_create(aws, s3_client, s3_key):
             'contentType': 'binary/octet-stream',
             'etag': '53554dd9d7d18fc279ff5546b714465f',
             'forceDestroy': False,
-            'id': 'pulumi-test-2',
-            'key': 'pulumi-test-2',
+            'id': 'pylumi-test.txt',
+            'key': 'pylumi-test.txt',
             'metadata': {},
             'objectLockLegalHoldStatus': '',
             'objectLockMode': '',
@@ -201,7 +201,7 @@ def test_provider_read(aws, s3_client, s3_key):
     )
 
     assert resp == {
-        'ID': 'pulumi-test-2',
+        'ID': 'pylumi-test.txt',
         'Inputs': {
             'acl': 'private',
             'bucket': 'clf-misc',
@@ -213,7 +213,7 @@ def test_provider_read(aws, s3_client, s3_key):
             'contentType': 'binary/octet-stream',
             'etag': '53554dd9d7d18fc279ff5546b714465f',
             'forceDestroy': False,
-            'key': 'pulumi-test-2',
+            'key': 'pylumi-test.txt',
             'metadata': {},
             'objectLockLegalHoldStatus': '',
             'objectLockMode': '',
@@ -234,8 +234,8 @@ def test_provider_read(aws, s3_client, s3_key):
             'contentType': 'binary/octet-stream',
             'etag': '53554dd9d7d18fc279ff5546b714465f',
             'forceDestroy': False,
-            'id': 'pulumi-test-2',
-            'key': 'pulumi-test-2',
+            'id': 'pylumi-test.txt',
+            'key': 'pylumi-test.txt',
             'metadata': {},
             'objectLockLegalHoldStatus': '',
             'objectLockMode': '',
@@ -269,7 +269,7 @@ def test_provider_update(aws, s3_client, s3_key):
     assert resp['Properties'].pop('__meta').startswith('{"')
 
     assert resp == {
-        'ID': 'pulumi-test-2',
+        'ID': 'pylumi-test.txt',
         'Properties': {
             'acl': 'private',
             'bucket': 'clf-misc',
@@ -281,8 +281,8 @@ def test_provider_update(aws, s3_client, s3_key):
             'contentType': 'binary/octet-stream',
             'etag': 'a96e6203ad76aa4969cc0e5e6c5ef9c7',
             'forceDestroy': False,
-            'id': 'pulumi-test-2',
-            'key': 'pulumi-test-2',
+            'id': 'pylumi-test.txt',
+            'key': 'pylumi-test.txt',
             'metadata': {},
             'objectLockLegalHoldStatus': '',
             'objectLockMode': '',
