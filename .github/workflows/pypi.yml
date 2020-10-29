@@ -9,14 +9,14 @@ jobs:
 
   push-to-pypi:
 
-    runs-on: ubuntu-18.04
+    runs-on: macos-10.15
 
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.6
       - name: Build Distribution Package
         run: |
           pip install -r requirements-dev.txt
