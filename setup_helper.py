@@ -133,16 +133,15 @@ def _get_build_extension_methods(
             ext_copy = copy.deepcopy(ext)
             build_lib = os.path.abspath(self.build_lib)
             ext_copy.include_dirs.append(build_lib)
-            if platform.system() == 'Darwin':
-                ext_copy.library_dirs.append(build_lib)
-                ext_copy.runtime_library_dirs.append(build_lib)
-                ext_copy.extra_link_args.append(f'-Wl,-rpath,{build_lib}')
-            else:
-                ext_copy.library_dirs.append('$ORIGIN')
-                ext_copy.runtime_library_dirs.append('$ORIGIN')
-                ext_copy.extra_link_args.append(f'-Wl,-rpath,$ORIGIN')
+            ext_copy.library_dirs.append('$ORIGIN')
+            ext_copy.runtime_library_dirs.append('$ORIGIN')
+            ext_copy.library_dirs.append(build_lib)
+            ext_copy.runtime_library_dirs.append(build_lib)
+            ext_copy.extra_link_args.append(f'-Wl,-rpath,{build_lib}')
+            ext_copy.extra_link_args.append(f'-Wl,-rpath,$ORIGIN')
 
-            ext_copy.extra_objects.append(os.path.join(build_lib, 'libpylumigo.so'))
+            # ext_copy.extra_objects.append(os.path.join(build_lib, 'libpylumigo.so'))
+            ext_copy.libraries.append('pylumigo')
 
             try:
                 return base.build_extension(self, ext_copy)
