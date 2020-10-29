@@ -11,14 +11,10 @@ extensions = [Extension('libpylumigo', ['go/main.go'])]
 try:
     from Cython.Build import cythonize
 except ImportError:
-    extensions.append(Extension(
-        '_pylumi', ['_pylumi.c']
-    ))
+    extensions.append(Extension('_pylumi', ['_pylumi.c']))
 else:
-    extensions.extend(cythonize(
-        Extension('_pylumi', ['_pylumi.pyx']),
-        language_level='3str'
-    ))
+    extensions.append(Extension('_pylumi', ['_pylumi.pyx'], language_level='3str'))
+    extensions = cythonize(extensions)
 
 with open('README.rst') as f:
     long_description = f.read().strip()
