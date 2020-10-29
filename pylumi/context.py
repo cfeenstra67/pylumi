@@ -20,6 +20,7 @@ class Context:
     so if two contexts are created with the same name then they will point to
     the same Provider object in the go runtime.
     * **cwd** - (optional) Pass a current working directory to use for the context.
+
     """
     def __init__(self, name: Optional[str] = None, cwd: Optional[str] = None) -> None:
         if cwd is None:
@@ -50,7 +51,7 @@ class Context:
         Provider loads a new copy of the provider for a given package.  If a provider for
         this package could not be found, or an error occurs while creating it, a non-nil
         error is returned.
-        Reference: [Host.Provider](github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin/host.go)
+        Reference: `Provider <github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin/host.go>`_
         """
         if config is None:
             config = {}
@@ -89,7 +90,7 @@ class Context:
         **Pulumi docs**:
 
         ListPlugins lists all plugins that have been loaded, with version information.
-        Reference: [Host.ListPlugins](github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin/host.go)
+        Reference: `ListPlugins <github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin/host.go>`_
         """
         return _pylumi.context_list_plugins(self.name)
 

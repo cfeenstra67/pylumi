@@ -41,7 +41,7 @@ class Provider:
        
         Configure configures the resource provider with "globals" that control its behavior.
         
-        Reference: [Provider.Configure](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `Configure <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         if inputs is None:
             inputs = self.config
@@ -74,7 +74,7 @@ class Provider:
 
         **Pulumi Docs:**
 
-        Reference: [Provider.GetSchema](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `GetSchema <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         res = _pylumi.provider_get_schema(self.ctx.name, self.name, version)
         return json.loads(res) if decode else res
@@ -99,7 +99,7 @@ class Provider:
         
         CheckConfig validates the configuration for this resource provider.
         
-        Reference: [Provider.CheckConfig](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `CheckConfig <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_check_config(self.ctx.name, self.name, str(urn), olds, news, allow_unknowns)
 
@@ -122,7 +122,7 @@ class Provider:
         
         DiffConfig checks what impacts a hypothetical change to this provider's configuration will have on the provider.
         
-        Reference: [Provider.DiffConfig](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `DiffConfig <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_diff_config(self.ctx.name, self.name, str(urn), olds, news, allow_unknowns, ignore_changes)
 
@@ -146,7 +146,7 @@ class Provider:
         Check validates that the given property bag is valid for a resource of the given type and returns
         the inputs that should be passed to successive calls to Diff, Create, or Update for this resource.
         
-        Reference: [Provider.Check](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `Check <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_check(self.ctx.name, self.name, str(urn), olds, news, allow_unknowns)
 
@@ -170,7 +170,7 @@ class Provider:
         
         Diff checks what impacts a hypothetical update will have on the resource's properties.
         
-        Reference: [Provider.Diff](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `Diff <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_diff(self.ctx.name, self.name, str(urn), id, olds, news, allow_unknowns, ignore_changes)
 
@@ -198,7 +198,7 @@ class Provider:
 
         Create allocates a new instance of the provided resource and returns its unique resource.ID.
         
-        Reference: [Provider.Create](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `Create <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_create(self.ctx.name, self.name, str(urn), news, timeout, preview)
 
@@ -229,7 +229,7 @@ class Provider:
         include some properties.  If the resource is missing (for instance, because it has been deleted),
         the resulting property map will be nil.
         
-        Reference: [Provider.Read](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `Read <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_read(self.ctx.name, self.name, str(urn), id, inputs, state)
 
@@ -257,7 +257,7 @@ class Provider:
 
         Update updates an existing resource with new values.
         
-        Reference: [Provider.Update](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `Update <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_update(self.ctx.name, self.name, str(urn), id, olds, news, timeout)
 
@@ -280,7 +280,7 @@ class Provider:
 
         Delete tears down an existing resource.
         
-        Reference: [Provider.Delete](https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go)
+        Reference: `Delete <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_delete(self.ctx.name, self.name, str(urn), id, news, timeout)
 

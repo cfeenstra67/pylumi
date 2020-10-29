@@ -2,9 +2,9 @@
 Pylumi
 ############
 
-**Pylumi** is a Python API providing the ability to manage [pulumi](https://github.com/pulumi/pulumi) resource plugin contexts and interact with the resource [`plugin.Provider`](https://github.com/pulumi/pulumi/blob/89c956d18942c1fcbf687da3052dd26089d8f486/sdk/go/common/resource/plugin/provider.go#L37) interface.
+**Pylumi** is a Python API providing the ability to manage `pulumi <https://github.com/pulumi/pulumi>`_ resource plugin contexts and interact with the resource `Provider <https://github.com/pulumi/pulumi/blob/89c956d18942c1fcbf687da3052dd26089d8f486/sdk/go/common/resource/plugin/provider.go#L37>`_ interface.
 
-Usage Example:
+Usage Example
 ##############
 
 .. code-block:: python
@@ -23,9 +23,10 @@ Usage Example:
 Installation
 #############
 
-Before installing `pylumi`, you must have Go installed on your system. For additional information, see the [Go Programming Language Installation Page](https://golang.org/doc/install).
+Before installing `pylumi`, you must have Go installed on your system. For additional information, see the `Go Programming Language Installation Page <https://golang.org/doc/install>`_.
 
 Once that is done, install this package using:
+
 .. code-block:: bash
    
    $ pip install pylumi

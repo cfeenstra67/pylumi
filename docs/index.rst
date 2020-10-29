@@ -3,15 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pylumi's documentation!
-==================================
+################
+Getting Started
+################
 
-Hello hello hello
+.. include:: ../README.rst
+	:start-line: 5
+	:end-before: Contact
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Pylumi Documentation:
 
+   index.rst
+   reference.rst
 
 
 Indices and tables
