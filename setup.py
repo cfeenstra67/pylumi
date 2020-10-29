@@ -13,8 +13,8 @@ try:
 except ImportError:
     extensions.append(Extension('_pylumi', ['_pylumi.c']))
 else:
-    extensions.append(Extension('_pylumi', ['_pylumi.pyx'], language_level='3str'))
-    extensions = cythonize(extensions)
+    extensions.append(Extension('_pylumi', ['_pylumi.pyx']))
+    extensions = cythonize(extensions, , language_level='3str')
 
 with open('README.rst') as f:
     long_description = f.read().strip()
