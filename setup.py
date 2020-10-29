@@ -20,7 +20,7 @@ else:
         language_level='3str'
     ))
 
-with open('README.md') as f:
+with open('README.rst') as f:
     long_description = f.read().strip()
 
 with open('requirements.txt') as f:
@@ -37,7 +37,7 @@ setup(
     version='0.0.4',
     description='Python API for interacting with Pulumi resource plugins.',
     long_description=long_description,
-    long_description_content_type='text/markdown; variant=GFM',
+    long_description_content_type='text/x-rst',
     classifiers=[
         'Development Status :: 1 - Planning',
         'Programming Language :: Cython',
