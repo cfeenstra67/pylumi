@@ -1,0 +1,28 @@
+name: Upload to PyPI
+
+on:
+  create:
+    tags:
+      - v*
+
+jobs:
+
+  push-to-pypi:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Build Distribution Package
+        run: |
+          make build
+      - name: Check Distribution Package
+        run: |
+          make pypi-check
+      - name: Push Distribution Package
+        run: |
+          make pypi-upload
