@@ -34,7 +34,7 @@ with open('requirements-dev.txt') as f:
 
 setup(
     name='pylumi',
-    version='0.0.4',
+    version='1.0.0',
     description='Python API for interacting with Pulumi resource plugins.',
     long_description=long_description,
     long_description_content_type='text/x-rst',
