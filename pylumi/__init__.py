@@ -3,6 +3,6 @@ from pylumi.context import Context
 from pylumi.provider import Provider
 from pylumi.urn import URN
 
-__version__ = '1.0.6'
+__version__ = '1.0.7'
 
 __pulumi_version__ = '2.12.0'
