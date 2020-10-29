@@ -140,7 +140,6 @@ def _get_build_extension_methods(
             ext_copy.extra_link_args.append(f'-Wl,-rpath,{build_lib}')
             ext_copy.extra_link_args.append(f'-Wl,-rpath,$ORIGIN')
 
-            # ext_copy.extra_objects.append(os.path.join(build_lib, 'libpylumigo.so'))
             ext_copy.libraries.append('pylumigo')
 
             try:

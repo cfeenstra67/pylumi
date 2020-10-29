@@ -1,5 +1,6 @@
 import subprocess
 
+import psutil
 import pylumi
 
 
@@ -13,7 +14,17 @@ def run_pgrep(pattern):
 
     assert not stderr
 
-    return list(map(int, filter(None, stdout.decode().strip().split('\n'))))
+    pids = list(map(int, filter(None, stdout.decode().strip().split('\n'))))
+
+    out = []
+
+    for pid in pids:
+        proc = psutil.Process(pid)
+        # On linux child processes stick around as defunct after shutting down
+        if proc.status() != psutil.STATUS_ZOMBIE:
+            out.append(pid)
+
+    return out
 
 
 def test_list_plugins():
