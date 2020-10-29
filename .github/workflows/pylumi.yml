@@ -20,7 +20,7 @@ jobs:
           python-version: 3.8
       - name: Install dependencies
         run: |
-          apt-get install pulumi
+          sudo apt-get install pulumi
           pulumi plugin install resource aws 2.13.1
 
           python -m pip install --upgrade pip
