@@ -27,3 +27,6 @@ jobs:
       - name: Push Distribution Package
         run: |
           make pypi-upload
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
