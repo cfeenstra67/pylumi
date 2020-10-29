@@ -12,7 +12,7 @@ Usage Example
    import pylumi
 
    with pylumi.Context() as ctx, \
-        ctx.Provider('aws', {'region': 'us-east-1'}) as aws:
+        ctx.provider('aws', {'region': 'us-east-1'}) as aws:
 
        resp = aws.create(
            'urn:pulumi:_::_::aws:s3/bucketObject:BucketObject::_',
