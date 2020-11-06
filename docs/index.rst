@@ -8,7 +8,7 @@ Getting Started
 ################
 
 .. include:: ../README.rst
-	:start-line: 5
+	:start-after: Purpose
 	:end-before: Contact
 
 .. toctree::

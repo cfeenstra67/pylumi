@@ -2,6 +2,11 @@
 Pylumi
 ############
 
+|docs|
+
+Purpose
+########
+
 **Pylumi** is a Python API providing the ability to manage `pulumi <https://github.com/pulumi/pulumi>`_ resource plugin contexts and interact with the resource `Provider <https://github.com/pulumi/pulumi/blob/89c956d18942c1fcbf687da3052dd26089d8f486/sdk/go/common/resource/plugin/provider.go#L37>`_ interface.
 
 Usage Example
@@ -31,7 +36,10 @@ Once that is done, install this package using:
    
    $ pip install pylumi
 
-**Note**: since the build for this package requires compiling a go extension and a c extension that depends on it, the script is slightly fragile and may not work properly with all platforms. It has been tested on OS X and Ubuntu, but not exhaustively on either.
+Compatibility
+###############
+
+Tests are passing on Mac OS X and Ubuntu, see recent test runs in `Actions <https://github.com/cfeenstra67/pylumi/actions>`_ for details.
 
 Documentation
 ##############
@@ -42,3 +50,9 @@ Contact
 #########
 
 If you have issues using this repository please open a issue or reach out to me at cameron.l.feenstra@gmail.com.
+
+
+.. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
+    :alt: Documentation Status
+    :scale: 100%
+    :target: https://docs.readthedocs.io/en/latest/?badge=latest
