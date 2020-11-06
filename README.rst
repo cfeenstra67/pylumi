@@ -2,7 +2,7 @@
 Pylumi
 ############
 
-|tests-passing| |build-passing| |docs| |pypi-version| |pypi-downloads|
+|tests-passing| |build-passing| |docs| |pypi-version|
 
 Purpose
 ########
