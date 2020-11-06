@@ -2,7 +2,7 @@
 Pylumi
 ############
 
-|docs|
+|tests-passing| |build-passing| |docs| |pypi-version| |pypi-downloads|
 
 Purpose
 ########
@@ -52,7 +52,23 @@ Contact
 If you have issues using this repository please open a issue or reach out to me at cameron.l.feenstra@gmail.com.
 
 
-.. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
+.. |docs| image:: https://readthedocs.org/projects/pylumi/badge/?version=latest
     :alt: Documentation Status
     :scale: 100%
-    :target: https://docs.readthedocs.io/en/latest/?badge=latest
+    :target: https://pylumi.readthedocs.io/en/latest/?badge=latest
+
+.. |pypi-version| image:: https://pypip.in/v/pylumi/badge.png
+    :target: https://crate.io/packages/pylumi/
+    :alt: Latest PyPI version
+
+.. |pypi-downloads| image:: https://pypip.in/d/pylumi/badge.png
+    :target: https://crate.io/packages/pylumi/
+    :alt: Number of PyPI downloads
+
+.. |tests-passing| image:: https://github.com/cfeenstra67/pylumi/workflows/Run%20tests/badge.svg
+	:target: https://github.com/cfeenstra67/pylumi/actions?query=workflow%3A%22Run+tests%22
+	:alt: Tests Passing
+
+.. |build-passing| image:: https://github.com/cfeenstra67/pylumi/workflows/Upload%20to%20PyPI/badge.svg
+	:target: https://github.com/cfeenstra67/pylumi/actions?query=workflow%3A%22Upload+to+PyPI%22
+	:alt: Build Passing
