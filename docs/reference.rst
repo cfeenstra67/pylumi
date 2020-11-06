@@ -17,3 +17,9 @@ Provider Reference
 
 .. autoclass:: pylumi.Provider
    :inherited-members:
+
+URN Reference
+##############
+
+.. autoclass:: pylumi.URN
+   :inherited-members:
