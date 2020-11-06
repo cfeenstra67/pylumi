@@ -4,18 +4,18 @@ import re
 from pylumi import exc
 
 
-URN_TEMPLATE = 'urn:pulumi:{stack}::{project}::{type}::{name}'
+URN_TEMPLATE = "urn:pulumi:{stack}::{project}::{type}::{name}"
 
 
 URN_PATTERNS = (
-    r'^urn:pulumi:(?P<stack>[a-zA-Z0-9_\-/]+?)::(?P<project>[a-zA-Z0-9_\-/]+?)'
-    r'::(?P<type>[a-zA-Z0-9_\-/:]+?)::(?P<name>[a-zA-Z0-9_\-/]+?)$',
+    r"^urn:pulumi:(?P<stack>[a-zA-Z0-9_\-/]+?)::(?P<project>[a-zA-Z0-9_\-/]+?)"
+    r"::(?P<type>[a-zA-Z0-9_\-/:]+?)::(?P<name>[a-zA-Z0-9_\-/]+?)$",
     # A short form of a URN omitting project and stack info.
-    r'^urn:pulumi:(?P<type>[a-zA-Z0-9_\-/:]+?)::(?P<name>[a-zA-Z0-9_\-/]+?)$',
+    r"^urn:pulumi:(?P<type>[a-zA-Z0-9_\-/:]+?)::(?P<name>[a-zA-Z0-9_\-/]+?)$",
 )
 
 
-BLANK = '_'
+BLANK = "_"
 
 
 @dc.dataclass(frozen=True, repr=False)
@@ -23,6 +23,7 @@ class URN:
     """
     A URN builder class
     """
+
     type: str
     name: str = BLANK
     stack: str = BLANK
@@ -43,10 +44,10 @@ class URN:
         raise exc.InvalidURN(urn)
 
     def __post_init__(self) -> None:
-        if self.type.startswith('urn:pulumi'):
+        if self.type.startswith("urn:pulumi"):
             obj = type(self).parse(self.type)
             for key, val in dc.asdict(obj).items():
-                if self.__dict__[key] == BLANK or key == 'type':
+                if self.__dict__[key] == BLANK or key == "type":
                     self.__dict__[key] = val
 
     def render(self) -> str:
@@ -65,7 +66,7 @@ class URN:
         """
         Render an object representation for this URN.
         """
-        return f'URN({self.render()})'
+        return f"URN({self.render()})"
 
     def __str__(self) -> str:
         """

@@ -43,3 +43,9 @@ clean:
 
 test:
 	py.test -vv tests
+
+fmt:
+	black pylumi
+
+check-fmt:
+	black pylumi --check

@@ -2,3 +2,4 @@ cython
 twine
 bumpversion
 wheel
+black==20.8b1

@@ -22,6 +22,7 @@ class Context:
     * **cwd** - (optional) Pass a current working directory to use for the context.
 
     """
+
     def __init__(self, name: Optional[str] = None, cwd: Optional[str] = None) -> None:
         if cwd is None:
             cwd = os.getcwd()
@@ -31,7 +32,9 @@ class Context:
         self.name = name
         self.cwd = cwd
 
-    def provider(self, name: str, config: Optional[Dict[str, Any]] = None) -> provider.Provider:
+    def provider(
+        self, name: str, config: Optional[Dict[str, Any]] = None
+    ) -> provider.Provider:
         """
         Get a Provider object with the given name. This just creates the provider object,
         no interaction is done with the Pulumi engine until configure() if called (or

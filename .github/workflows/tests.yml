@@ -32,6 +32,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-tests.txt -r requirements-dev.txt
           pip install .
+      - name: Check Formatting
+        run: |
+          make check-fmt
       - name: Run tests
         run: |
           make test

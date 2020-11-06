@@ -4,7 +4,7 @@ import os
 try:
     import _pylumi
 except ImportError:
-    if os.getenv('READTHEDOCS'):
+    if os.getenv("READTHEDOCS"):
         _pylumi = None
     else:
         raise
