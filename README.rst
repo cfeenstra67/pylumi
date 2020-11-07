@@ -65,7 +65,7 @@ If you have issues using this repository please open a issue or reach out to me 
     :target: https://pypi.org/project/pylumi/
     :alt: Number of PyPI downloads
 
-.. |pypi-license| image:: https://pypip.in/l/pylumi/badge.png
+.. |pypi-license| image:: https://img.shields.io/pypi/l/pylumi.svg
     :target: https://pypi.org/project/pylumi/
     :alt: PyPI License
 
