@@ -2,7 +2,7 @@
 Pylumi
 ############
 
-|tests-passing| |build-passing| |docs| |pypi-version|
+|tests-passing| |build-passing| |docs| |pypi-version| |pypi-license|
 
 Purpose
 ########
@@ -58,12 +58,16 @@ If you have issues using this repository please open a issue or reach out to me 
     :target: https://pylumi.readthedocs.io/en/latest/?badge=latest
 
 .. |pypi-version| image:: https://pypip.in/v/pylumi/badge.png
-    :target: https://crate.io/packages/pylumi/
+    :target: https://pypi.org/project/pylumi/
     :alt: Latest PyPI version
 
 .. |pypi-downloads| image:: https://pypip.in/d/pylumi/badge.png
-    :target: https://crate.io/packages/pylumi/
+    :target: https://pypi.org/project/pylumi/
     :alt: Number of PyPI downloads
+
+.. |pypi-license| image:: https://pypip.in/l/pylumi/badge.png
+    :target: https://pypi.org/project/pylumi/
+    :alt: PyPI License
 
 .. |tests-passing| image:: https://github.com/cfeenstra67/pylumi/workflows/Run%20tests/badge.svg
 	:target: https://github.com/cfeenstra67/pylumi/actions?query=workflow%3A%22Run+tests%22
