@@ -62,7 +62,8 @@ setup(
             'requirements.txt',
             'requirements-dev.txt',
             'requirements-tests.txt',
-            'README.md'
+            'README.md',
+            'go/*'
         ],
     },
     include_package_data=True
