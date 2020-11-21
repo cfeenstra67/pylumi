@@ -58,11 +58,12 @@ setup(
         'dev': install_requires_dev
     },
     package_data={
-        'dependencies': [
+        '': [
             'requirements.txt',
             'requirements-dev.txt',
-            'requirements-tests.txt'
+            'requirements-tests.txt',
+            'README.md'
         ],
-        'docs': ['README.md']
-    }
+    },
+    include_package_data=True
 )
