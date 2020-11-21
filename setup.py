@@ -54,5 +54,13 @@ setup(
     extras_require={
         'tests': install_requires_tests,
         'dev': install_requires_dev
+    },
+    package_data={
+        'dependencies': [
+            'requirements.txt',
+            'requirements-dev.txt',
+            'requirements-tests.txt'
+        ],
+        'docs': ['README.md']
     }
 )
