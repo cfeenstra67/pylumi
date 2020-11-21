@@ -6,6 +6,8 @@ from setuptools.command.build_ext import build_ext as _build_ext
 
 from setup_helper import _get_build_ext_cls
 
+CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
+
 extensions = [Extension('libpylumigo', ['go/main.go'])]
 
 try:
@@ -16,16 +18,16 @@ else:
     extensions.append(Extension('_pylumi', ['_pylumi.pyx']))
     extensions = cythonize(extensions, language_level='3str')
 
-with open('README.rst') as f:
+with open(os.path.join(CURRENT_DIR, 'README.rst')) as f:
     long_description = f.read().strip()
 
-with open('requirements.txt') as f:
+with open(os.path.join(CURRENT_DIR, 'requirements.txt')) as f:
     install_requires = list(filter(None, map(str.strip, f)))
 
-with open('requirements-tests.txt') as f:
+with open(os.path.join(CURRENT_DIR, 'requirements-tests.txt')) as f:
     install_requires_tests = list(filter(None, map(str.strip, f)))
 
-with open('requirements-dev.txt') as f:
+with open(os.path.join(CURRENT_DIR, 'requirements-dev.txt')) as f:
     install_requires_dev = list(filter(None, map(str.strip, f)))
 
 setup(
