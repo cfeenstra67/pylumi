@@ -541,7 +541,7 @@ func ProviderDelete(
 //export GetUnknowns
 func GetUnknowns() C.Unknowns {
     return C.Unknowns{
-        Key: pylumi.UnknownKey,
+        Key: C.CString(pylumi.UnknownKey),
         BoolValue: C.CString(plugin.UnknownBoolValue),
         NumberValue: C.CString(plugin.UnknownNumberValue),
         StringValue: C.CString(plugin.UnknownStringValue),
