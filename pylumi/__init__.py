@@ -1,4 +1,6 @@
-from _pylumi import (
+from pylumi import exc
+from pylumi.context import Context
+from pylumi.ext import (
     UNKNOWN_KEY,
     UNKNOWN_BOOL_VALUE,
     UNKNOWN_NUMBER_VALUE,
@@ -7,9 +9,6 @@ from _pylumi import (
     UNKNOWN_ARCHIVE_VALUE,
     UNKNOWN_OBJECT_VALUE,
 )
-
-from pylumi import exc
-from pylumi.context import Context
 from pylumi.provider import Provider
 from pylumi.urn import URN
 
