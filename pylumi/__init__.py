@@ -1,4 +1,5 @@
 from _pylumi import (
+    UNKNOWN_KEY,
     UNKNOWN_BOOL_VALUE,
     UNKNOWN_NUMBER_VALUE,
     UNKNOWN_ARRAY_VALUE,

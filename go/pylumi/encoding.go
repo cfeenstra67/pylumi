@@ -5,7 +5,41 @@ import (
     "fmt"
 
     "github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+    "github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
+
+
+const (
+    UnknownKey = "$unknown"
+)
+
+
+// Copied from the `plugin` module
+func unmarshalUnknownPropertyValue(s string) (resource.PropertyValue, bool) {
+    var elem resource.PropertyValue
+    var unknown bool
+    switch s {
+    case plugin.UnknownBoolValue:
+        elem, unknown = resource.NewBoolProperty(false), true
+    case plugin.UnknownNumberValue:
+        elem, unknown = resource.NewNumberProperty(0), true
+    case plugin.UnknownStringValue:
+        elem, unknown = resource.NewStringProperty(""), true
+    case plugin.UnknownArrayValue:
+        elem, unknown = resource.NewArrayProperty([]resource.PropertyValue{}), true
+    case plugin.UnknownAssetValue:
+        elem, unknown = resource.NewAssetProperty(&resource.Asset{}), true
+    case plugin.UnknownArchiveValue:
+        elem, unknown = resource.NewArchiveProperty(&resource.Archive{}), true
+    case plugin.UnknownObjectValue:
+        elem, unknown = resource.NewObjectProperty(make(resource.PropertyMap)), true
+    }
+    if unknown {
+        comp := resource.Computed{Element: elem}
+        return resource.NewComputedProperty(comp), true
+    }
+    return resource.PropertyValue{}, false
+}
 
 
 func JSONToPropertyMap(data []byte) (resource.PropertyMap, error) {
@@ -16,7 +50,26 @@ func JSONToPropertyMap(data []byte) (resource.PropertyMap, error) {
         return nil, fmt.Errorf("error unmarshalling data: %v", err)
     }
 
-    return resource.NewPropertyMapFromMap(raw), nil
+    replv := func(value interface{}) (resource.PropertyValue, bool) {
+        switch i := value.(type) {
+        case map[string]interface{}:
+            one := false
+            for key, _ := range i {
+                one = true
+                if key != UnknownKey {
+                    return resource.NewNullProperty(), false
+                }
+            }
+            if one {
+                val := i[UnknownKey].(string)
+                property, _ := unmarshalUnknownPropertyValue(val)
+                return property, true
+            }
+        }
+        return resource.NewNullProperty(), false
+    }
+
+    return resource.NewPropertyMapFromMapRepl(raw, nil, replv), nil
 }
 
 

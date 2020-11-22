@@ -116,6 +116,7 @@ cdef extern from "libpylumigo.h":
     ProviderDelete_return ProviderDelete(char* ctx, char* provider, char* urn, char* id, char* news, GoFloat64 timeout)
 
     ctypedef struct Unknowns:
+        char* Key
         char* BoolValue
         char* NumberValue
         char* StringValue
@@ -161,6 +162,8 @@ cdef char ** to_cstring_array(list_str):
 # Globals
 
 cdef Unknowns UNKNOWNS_C = GetUnknowns()
+
+UNKNOWN_KEY = _str(UNKNOWNS_C.Key)
 
 UNKNOWN_BOOL_VALUE = _str(UNKNOWNS_C.BoolValue)
 
