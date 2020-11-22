@@ -157,7 +157,7 @@ def test_provider_create(aws, s3_client, s3_key):
         'ID': TEST_KEY,
         'Properties': {
             'acl': 'private',
-            'bucket': 'clf-misc',
+            'bucket': TEST_BUCKET,
             'cacheControl': '',
             'content': 'Hello, world! 2',
             'contentDisposition': '',
@@ -204,7 +204,7 @@ def test_provider_read(aws, s3_client, s3_key):
         'ID': TEST_KEY,
         'Inputs': {
             'acl': 'private',
-            'bucket': 'clf-misc',
+            'bucket': TEST_BUCKET,
             'cacheControl': '',
             'content': 'Hello, world! 2',
             'contentDisposition': '',
@@ -225,7 +225,7 @@ def test_provider_read(aws, s3_client, s3_key):
         },
         'Outputs': {
             'acl': 'private',
-            'bucket': 'clf-misc',
+            'bucket': TEST_BUCKET,
             'cacheControl': '',
             'content': 'Hello, world! 2',
             'contentDisposition': '',
@@ -272,7 +272,7 @@ def test_provider_update(aws, s3_client, s3_key):
         'ID': TEST_KEY,
         'Properties': {
             'acl': 'private',
-            'bucket': 'clf-misc',
+            'bucket': TEST_BUCKET,
             'cacheControl': '',
             'content': new_content,
             'contentDisposition': '',
