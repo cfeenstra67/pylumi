@@ -1,3 +1,12 @@
+from _pylumi import (
+    UNKNOWN_BOOL_VALUE,
+    UNKNOWN_NUMBER_VALUE,
+    UNKNOWN_ARRAY_VALUE,
+    UNKNOWN_ASSET_VALUE,
+    UNKNOWN_ARCHIVE_VALUE,
+    UNKNOWN_OBJECT_VALUE
+)
+
 from pylumi import exc
 from pylumi.context import Context
 from pylumi.provider import Provider

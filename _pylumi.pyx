@@ -115,6 +115,17 @@ cdef extern from "libpylumigo.h":
 
     ProviderDelete_return ProviderDelete(char* ctx, char* provider, char* urn, char* id, char* news, GoFloat64 timeout)
 
+    ctypedef struct Unknowns:
+        char* BoolValue
+        char* NumberValue
+        char* StringValue
+        char* ArrayValue
+        char* AssetValue
+        char* ArchiveValue
+        char* ObjectValue
+
+    Unknowns GetUnknowns()
+
 
 # Helper functions
 cdef bytes _bytes(s):
@@ -139,6 +150,7 @@ cdef str _str(s):
     raise TypeError(f'Invalid str value: {s}.')
 
 
+
 cdef char ** to_cstring_array(list_str):
     cdef char **ret = <char **>malloc(len(list_str) * sizeof(char *))
     for i in xrange(len(list_str)):
@@ -146,6 +158,21 @@ cdef char ** to_cstring_array(list_str):
         ret[i] = as_bytes
     return ret
 
+# Globals
+
+cdef Unknowns UNKNOWNS_C = GetUnknowns()
+
+UNKNOWN_BOOL_VALUE = _str(UNKNOWNS_C.BoolValue)
+
+UNKNOWN_NUMBER_VALUE = _str(UNKNOWNS_C.NumberValue)
+
+UNKNOWN_ARRAY_VALUE = _str(UNKNOWNS_C.ArrayValue)
+
+UNKNOWN_ASSET_VALUE = _str(UNKNOWNS_C.AssetValue)
+
+UNKNOWN_ARCHIVE_VALUE = _str(UNKNOWNS_C.ArchiveValue)
+
+UNKNOWN_OBJECT_VALUE = _str(UNKNOWNS_C.ObjectValue)
 
 # Context methods
 

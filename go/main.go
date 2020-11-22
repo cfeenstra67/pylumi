@@ -1,5 +1,16 @@
 package main
 
+/*
+typedef struct tagUnknowns {
+    char* BoolValue;
+    char* NumberValue;
+    char* StringValue;
+    char* ArrayValue;
+    char* AssetValue;
+    char* ArchiveValue;
+    char* ObjectValue;
+} Unknowns;
+*/
 import "C"
 
 import (
@@ -9,6 +20,7 @@ import (
 
     "github.com/cfeenstra67/pylumi/go/pylumi"
     "github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+    "github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
     "github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
     "github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
@@ -523,6 +535,19 @@ func ProviderDelete(
 
     return 0, int(status), nil
 
+}
+
+//export GetUnknowns
+func GetUnknowns() C.Unknowns {
+    return C.Unknowns{
+        BoolValue: C.CString(plugin.UnknownBoolValue),
+        NumberValue: C.CString(plugin.UnknownNumberValue),
+        StringValue: C.CString(plugin.UnknownStringValue),
+        ArrayValue: C.CString(plugin.UnknownArrayValue),
+        AssetValue: C.CString(plugin.UnknownAssetValue),
+        ArchiveValue: C.CString(plugin.UnknownArchiveValue),
+        ObjectValue: C.CString(plugin.UnknownObjectValue),
+    }
 }
 
 func main() {}

@@ -8,7 +8,7 @@ PART:=patch
 build-go:
 	@mkdir -p build/go
 	@cd go &&\
-	go build -o ../build/go/libpylumigo.so -buildmode=c-shared connector/main.go
+	go build -o ../build/go/libpylumigo.so -buildmode=c-shared main.go
 	@install_name_tool -id @rpath/libpylumigo.so build/go/libpylumigo.so
 
 
