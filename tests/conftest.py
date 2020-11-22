@@ -11,7 +11,7 @@ TEST_BUCKET = os.getenv('PYLUMI_TEST_BUCKET', 'clf-misc')
 
 TEST_REGION = os.getenv('PYLUMI_TEST_REGION', 'us-east-2')
 
-TEST_KEY = os.getenv('PYLUMI_TEST_KEY', 'pylumi-test.txt')
+TEST_KEY = os.getenv('PYLUMI_TEST_KEY', f'pylumi-test-{uuid.uuid4().hex}.txt')
 
 
 @pytest.fixture(scope='session')
