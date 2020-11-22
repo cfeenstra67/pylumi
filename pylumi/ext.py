@@ -13,10 +13,10 @@ try:
     UNKNOWN_OBJECT_VALUE = _pylumi.UNKNOWN_OBJECT_VALUE
 
 except ImportError:
-    if os.getenv("READTHEDOCS"):
-        _pylumi = None
-    else:
+    if not os.getenv("READTHEDOCS"):
         raise
+
+    _pylumi = None
 
     UNKNOWN_KEY = None
     UNKNOWN_BOOL_VALUE = None
