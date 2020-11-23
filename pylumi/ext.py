@@ -1,3 +1,4 @@
+import enum
 import os
 
 # Used to import null _pylumi name on ReadTheDocs
@@ -39,3 +40,27 @@ except ImportError:
     DIFF_DELETE_REPLACE = None
     DIFF_UPDATE = None
     DIFF_UPDATE_REPLACE = None
+
+
+class UnknownValue(enum.Enum):
+    """
+    Enum for the UNKNOWN_*_VALUE values
+    """
+    BOOL = UNKNOWN_BOOL_VALUE
+    NUMBER = UNKNOWN_NUMBER_VALUE
+    ARRAY = UNKNOWN_ARRAY_VALUE
+    ASSET = UNKNOWN_ASSET_VALUE
+    ARCHIVE = UNKNOWN_ARCHIVE_VALUE
+    OBJECT = UNKNOWN_OBJECT_VALUE
+
+
+class DiffType(enum.Enum):
+    """
+    Enum for diff types
+    """
+    ADD = DIFF_ADD
+    ADD_REPLACE = DIFF_ADD_REPLACE
+    DELETE = DIFF_DELETE
+    DELETE_REPLACE = DIFF_DELETE_REPLACE
+    UPDATE = DIFF_UPDATE
+    UPDATE_REPLACE = DIFF_UPDATE_REPLACE
