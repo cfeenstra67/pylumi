@@ -11,6 +11,15 @@ typedef struct tagUnknowns {
     char* ArchiveValue;
     char* ObjectValue;
 } Unknowns;
+
+typedef struct tagDiffKinds {
+    int DiffAdd;
+    int DiffAddReplace;
+    int DiffDelete;
+    int DiffDeleteReplace;
+    int DiffUpdate;
+    int DiffUpdateReplace;
+} DiffKinds;
 */
 import "C"
 
@@ -549,6 +558,18 @@ func GetUnknowns() C.Unknowns {
         AssetValue: C.CString(plugin.UnknownAssetValue),
         ArchiveValue: C.CString(plugin.UnknownArchiveValue),
         ObjectValue: C.CString(plugin.UnknownObjectValue),
+    }
+}
+
+//export GetDiffKinds
+func GetDiffKinds() C.DiffKinds {
+    return C.DiffKinds{
+        DiffAdd: C.int(plugin.DiffAdd),
+        DiffAddReplace: C.int(plugin.DiffAddReplace),
+        DiffDelete: C.int(plugin.DiffDelete),
+        DiffDeleteReplace: C.int(plugin.DiffDeleteReplace),
+        DiffUpdate: C.int(plugin.DiffUpdate),
+        DiffUpdateReplace: C.int(plugin.DiffUpdateReplace),
     }
 }
 

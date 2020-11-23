@@ -127,6 +127,16 @@ cdef extern from "libpylumigo.h":
 
     Unknowns GetUnknowns()
 
+    ctypedef struct DiffKinds:
+        int DiffAdd
+        int DiffAddReplace
+        int DiffDelete
+        int DiffDeleteReplace
+        int DiffUpdate
+        int DiffUpdateReplace
+
+    DiffKinds GetDiffKinds()
+
 
 # Helper functions
 cdef bytes _bytes(s):
@@ -176,6 +186,20 @@ UNKNOWN_ASSET_VALUE = _str(UNKNOWNS_C.AssetValue)
 UNKNOWN_ARCHIVE_VALUE = _str(UNKNOWNS_C.ArchiveValue)
 
 UNKNOWN_OBJECT_VALUE = _str(UNKNOWNS_C.ObjectValue)
+
+cdef DiffKinds DIFF_KINDS_C = GetDiffKinds()
+
+DIFF_ADD = DIFF_KINDS_C.DiffAdd
+
+DIFF_ADD_REPLACE = DIFF_KINDS_C.DiffAddReplace
+
+DIFF_DELETE = DIFF_KINDS_C.DiffDelete
+
+DIFF_DELETE_REPLACE = DIFF_KINDS_C.DiffDeleteReplace
+
+DIFF_UPDATE = DIFF_KINDS_C.DiffUpdate
+
+DIFF_UPDATE_REPLACE = DIFF_KINDS_C.DiffUpdateReplace
 
 # Context methods
 
