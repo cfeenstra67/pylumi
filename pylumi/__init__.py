@@ -12,6 +12,6 @@ from pylumi.ext import (
 from pylumi.provider import Provider
 from pylumi.urn import URN
 
-__version__ = "1.1.4"
+__version__ = "1.1.5"
 
 __pulumi_version__ = "2.12.0"
