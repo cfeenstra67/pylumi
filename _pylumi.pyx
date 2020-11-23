@@ -1,6 +1,8 @@
 import json
+
 from cpython.string cimport PyString_AsString
 from libc.stdlib cimport malloc, free
+from libc.string cimport strcpy
 
 
 cdef extern from "libpylumigo.h":
@@ -22,13 +24,13 @@ cdef extern from "libpylumigo.h":
         GoInt r0
         char* r1
 
-    ContextSetup_return ContextSetup(char* name, char* cwd)
+    ContextSetup_return ContextSetup(char* name, char* cwd) nogil
 
     struct ContextTeardown_return:
         GoInt r0
         char* r1
 
-    ContextTeardown_return ContextTeardown(char* name)
+    ContextTeardown_return ContextTeardown(char* name) nogil
 
     struct ContextListPlugins_return:
         GoInt r0
@@ -36,20 +38,20 @@ cdef extern from "libpylumigo.h":
         GoInt r2
         char* r3
 
-    ContextListPlugins_return ContextListPlugins(char* name)
+    ContextListPlugins_return ContextListPlugins(char* name) nogil
 
     struct ProviderTeardown_return:
         GoInt r0
         char* r1
 
-    ProviderTeardown_return ProviderTeardown(char* ctx, char* provider)
+    ProviderTeardown_return ProviderTeardown(char* ctx, char* provider) nogil
 
     struct ProviderGetSchema_return:
         GoInt r0
         char* r1
         char* r2
 
-    ProviderGetSchema_return ProviderGetSchema(char* ctxName, char* name, GoInt version)
+    ProviderGetSchema_return ProviderGetSchema(char* ctxName, char* name, GoInt version) nogil
 
     struct ProviderCheckConfig_return:
         GoInt r0
@@ -57,20 +59,20 @@ cdef extern from "libpylumigo.h":
         char* r2
         char* r3
 
-    ProviderCheckConfig_return ProviderCheckConfig(char* ctx, char* provider, char* urn, char* olds, char* news, GoUint8 allowUnknowns)
+    ProviderCheckConfig_return ProviderCheckConfig(char* ctx, char* provider, char* urn, char* olds, char* news, GoUint8 allowUnknowns) nogil
 
     struct ProviderDiffConfig_return:
         GoInt r0
         char* r1
         char* r2
 
-    ProviderDiffConfig_return ProviderDiffConfig(char* ctx, char* provider, char* urn, char* olds, char* news, GoUint8 allowUnknowns, char** ignoreChanges, GoInt nIgnoreChanges)
+    ProviderDiffConfig_return ProviderDiffConfig(char* ctx, char* provider, char* urn, char* olds, char* news, GoUint8 allowUnknowns, char** ignoreChanges, GoInt nIgnoreChanges) nogil
 
     struct ProviderConfigure_return:
         GoInt r0
         char* r1
 
-    ProviderConfigure_return ProviderConfigure(char* ctx, char* provider, char* inputs)
+    ProviderConfigure_return ProviderConfigure(char* ctx, char* provider, char* inputs) nogil
 
     struct ProviderCheck_return:
         GoInt r0
@@ -78,42 +80,42 @@ cdef extern from "libpylumigo.h":
         char* r2
         char* r3
 
-    ProviderCheck_return ProviderCheck(char* ctx, char* provider, char* urn, char* olds, char* news, GoUint8 allowUnknowns)
+    ProviderCheck_return ProviderCheck(char* ctx, char* provider, char* urn, char* olds, char* news, GoUint8 allowUnknowns) nogil
 
     struct ProviderDiff_return:
         GoInt r0
         char* r1
         char* r2
 
-    ProviderDiff_return ProviderDiff(char* ctx, char* provider, char* urn, char* id, char* olds, char* news, GoUint8 allowUnknowns, char** ignoreChanges, GoInt nIgnoreChanges)
+    ProviderDiff_return ProviderDiff(char* ctx, char* provider, char* urn, char* id, char* olds, char* news, GoUint8 allowUnknowns, char** ignoreChanges, GoInt nIgnoreChanges) nogil
 
     struct ProviderCreate_return:
         GoInt r0
         char* r1
         char* r2
 
-    ProviderCreate_return ProviderCreate(char* ctx, char* provider, char* urn, char* news, GoFloat64 timeout, GoUint8 preview)
+    ProviderCreate_return ProviderCreate(char* ctx, char* provider, char* urn, char* news, GoFloat64 timeout, GoUint8 preview) nogil
 
     struct ProviderRead_return:
         GoInt r0
         char* r1
         char* r2
 
-    ProviderRead_return ProviderRead(char* ctx, char* provider, char* urn, char* id, char* inputs, char* state)
+    ProviderRead_return ProviderRead(char* ctx, char* provider, char* urn, char* id, char* inputs, char* state) nogil
 
     struct ProviderUpdate_return:
         GoInt r0
         char* r1
         char* r2
 
-    ProviderUpdate_return ProviderUpdate(char* ctx, char* provider, char* urn, char* id, char* olds, char* news, GoFloat64 timeout, char** ignoreChanges, GoInt nIgnoreChanges, GoUint8 preview)
+    ProviderUpdate_return ProviderUpdate(char* ctx, char* provider, char* urn, char* id, char* olds, char* news, GoFloat64 timeout, char** ignoreChanges, GoInt nIgnoreChanges, GoUint8 preview) nogil
 
     struct ProviderDelete_return:
         GoInt r0
         GoInt r1
         char* r2
 
-    ProviderDelete_return ProviderDelete(char* ctx, char* provider, char* urn, char* id, char* news, GoFloat64 timeout)
+    ProviderDelete_return ProviderDelete(char* ctx, char* provider, char* urn, char* id, char* news, GoFloat64 timeout) nogil
 
     ctypedef struct Unknowns:
         char* Key
@@ -125,7 +127,7 @@ cdef extern from "libpylumigo.h":
         char* ArchiveValue
         char* ObjectValue
 
-    Unknowns GetUnknowns()
+    Unknowns GetUnknowns() nogil
 
     ctypedef struct DiffKinds:
         int DiffAdd
@@ -135,7 +137,7 @@ cdef extern from "libpylumigo.h":
         int DiffUpdate
         int DiffUpdateReplace
 
-    DiffKinds GetDiffKinds()
+    DiffKinds GetDiffKinds() nogil
 
 
 # Helper functions
@@ -160,6 +162,15 @@ cdef str _str(s):
         return s.decode()
     raise TypeError(f'Invalid str value: {s}.')
 
+
+cdef char* _cstr(s):
+    """
+    Coerce text or bytes to a c string. This must be freed by the caller.
+    """
+    bytes_val = _bytes(s)
+    cdef char* out = <char*> malloc((len(bytes_val) + 1) * sizeof(char))
+    strcpy(bytes_val, out)
+    return out
 
 
 cdef char ** to_cstring_array(list_str):
@@ -204,21 +215,32 @@ DIFF_UPDATE_REPLACE = DIFF_KINDS_C.DiffUpdateReplace
 # Context methods
 
 def context_setup(str ctxName, str cwd):
-    res = ContextSetup(_bytes(ctxName), _bytes(cwd))
+    cdef char* ctx_name_c = _cstr(ctxName)
+    cdef char* cwd_c = _cstr(cwd)
+    with nogil:
+        res = ContextSetup(ctx_name_c, cwd_c)
+    free(ctx_name_c)
+    free(cwd_c)
     if res.r0 == 0:
         return None
     raise ContextError(res.r0, _str(res.r1))
 
 
 def context_teardown(str ctxName):
-    res = ContextTeardown(_bytes(ctxName))
+    cdef char* ctx_name_c = _cstr(ctxName)
+    with nogil:
+        res = ContextTeardown(ctx_name_c)
+    free(ctx_name_c)
     if res.r0 == 0:
         return None
     raise ContextError(res.r0, _str(res.r1))
 
 
 def context_list_plugins(str ctxName):
-    res = ContextListPlugins(_bytes(ctxName))
+    cdef char* ctx_name_c = _cstr(ctxName)
+    with nogil:
+        res = ContextListPlugins(ctx_name_c)
+    free(ctx_name_c)
     if res.r0 == 0:
         return [x.decode() for x in res.r1[:res.r2]]
     raise ContextError(res.r0, _str(res.r3))
@@ -227,26 +249,45 @@ def context_list_plugins(str ctxName):
 # Provider methods
 
 def provider_teardown(str ctx, str provider):
-    res = ProviderTeardown(_bytes(ctx), _bytes(provider))
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    with nogil:
+        res = ProviderTeardown(ctx_c, provider_c)
+    free(ctx_c)
+    free(provider_c)
     if res.r0 == 0:
         return None
     raise ProviderError(res.r0, _str(res.r1))
 
 
 def provider_get_schema(str ctxName, str name, int version=0):
-    res = ProviderGetSchema(_bytes(ctxName), _bytes(name), version)
+    cdef char* ctx_c = _cstr(ctxName)
+    cdef char* provider_c = _cstr(name)
+    with nogil:
+        res = ProviderGetSchema(ctx_c, provider_c, version)
+    free(ctx_c)
+    free(provider_c)
     if res.r0 == 0:
         return res.r1
     raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False):
-    olds_encoded = json.dumps(olds).encode()
-    news_encoded = json.dumps(news).encode()
-    res = ProviderCheckConfig(
-        _bytes(ctx), _bytes(provider), _bytes(urn),
-        olds_encoded, news_encoded, allow_unknowns
-    )
+def provider_check_config(str ctx, str provider, str urn, olds, news, bint allow_unknowns=False):
+    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* urn_c = _cstr(urn)
+    with nogil:
+        res = ProviderCheckConfig(
+            ctx_c, provider_c,  urn_c,
+            olds_encoded, news_encoded, allow_unknowns
+        )
+    free(olds_encoded)
+    free(news_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(urn_c)
     if res.r0 == 0:
         props_decoded = json.loads(_bytes(res.r1))
         failures_decoded = json.loads(_bytes(res.r2))
@@ -254,14 +295,26 @@ def provider_check_config(str ctx, str provider, str urn, olds, news, allow_unkn
     raise ProviderError(res.r0, _str(res.r3))
 
 
-def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unknowns=False, ignore_changes=()):
-    olds_encoded = json.dumps(olds).encode()
-    news_encoded = json.dumps(news).encode()
-    res = ProviderDiffConfig(
-        _bytes(ctx), _bytes(provider), _bytes(urn),
-        olds_encoded, news_encoded,
-        allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
-    )
+def provider_diff_config(str ctx, str provider, str urn, olds, news, bint allow_unknowns=False, ignore_changes=()):
+    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* urn_c = _cstr(urn)
+    cdef char** ignore_changes_c = to_cstring_array(ignore_changes)
+    cdef int ignore_changes_len_c = len(ignore_changes)
+    with nogil:
+        res = ProviderDiffConfig(
+            ctx_c, provider_c, urn_c,
+            olds_encoded, news_encoded,
+            allow_unknowns, ignore_changes_c, ignore_changes_len_c
+        )
+    free(olds_encoded)
+    free(news_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(urn_c)
+    free(ignore_changes_c)
     if res.r0 == 0:
         out_decoded = json.loads(_bytes(res.r1))
         return out_decoded
@@ -269,20 +322,35 @@ def provider_diff_config(str ctx, str provider, str urn, olds, news, allow_unkno
 
 
 def provider_configure(str ctx, str provider, inputs):
-    inputs_encoded = json.dumps(inputs).encode()
-    res = ProviderConfigure(_bytes(ctx), _bytes(provider), inputs_encoded)
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* inputs_encoded = _cstr(json.dumps(inputs).encode())
+    with nogil:
+        res = ProviderConfigure(ctx_c, provider_c, inputs_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(inputs_encoded)
     if res.r0 == 0:
         return None
     raise ProviderError(res.r0, _str(res.r1))
 
 
-def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=False):
-    olds_encoded = json.dumps(olds).encode()
-    news_encoded = json.dumps(news).encode()
-    res = ProviderCheck(
-        _bytes(ctx), _bytes(provider), _bytes(urn),
-        olds_encoded, news_encoded, allow_unknowns
-    )
+def provider_check(str ctx, str provider, str urn, olds, news, bint allow_unknowns=False):
+    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* urn_c = _cstr(urn)
+    with nogil:
+        res = ProviderCheck(
+            ctx_c, provider_c, urn_c,
+            olds_encoded, news_encoded, allow_unknowns
+        )
+    free(olds_encoded)
+    free(news_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(urn_c)
     if res.r0 == 0:
         props = json.loads(_bytes(res.r1))
         failures = json.loads(_bytes(res.r2))
@@ -290,26 +358,48 @@ def provider_check(str ctx, str provider, str urn, olds, news, allow_unknowns=Fa
     raise ProviderError(res.r0, _str(res.r3))
 
 
-def provider_diff(str ctx, str provider, str urn, str id, olds, news, allow_unknowns=False, ignore_changes=()):
-    olds_encoded = json.dumps(olds).encode()
-    news_encoded = json.dumps(news).encode()
-    res = ProviderDiff(
-        _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
-        olds_encoded, news_encoded,
-        allow_unknowns, to_cstring_array(ignore_changes), len(ignore_changes)
-    )
+def provider_diff(str ctx, str provider, str urn, str id, olds, news, bint allow_unknowns=False, ignore_changes=()):
+    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* urn_c = _cstr(urn)
+    cdef char* id_c = _cstr(id)
+    cdef char** ignore_changes_c = to_cstring_array(ignore_changes)
+    cdef int ignore_changes_len_c = len(ignore_changes)
+    with nogil:
+        res = ProviderDiff(
+            ctx_c, provider_c, urn_c, id_c,
+            olds_encoded, news_encoded,
+            allow_unknowns, ignore_changes_c, ignore_changes_len_c
+        )
+    free(olds_encoded)
+    free(news_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(urn_c)
+    free(id_c)
+    free(ignore_changes_c)
     if res.r0 == 0:
         out_decoded = json.loads(_bytes(res.r1))
         return out_decoded
     raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_create(str ctx, str provider, str urn, news, int timeout=60, preview=False):
-    news_encoded = json.dumps(news).encode()
-    res = ProviderCreate(
-        _bytes(ctx), _bytes(provider), _bytes(urn),
-        news_encoded, timeout, preview
-    )
+def provider_create(str ctx, str provider, str urn, news, int timeout=60, bint preview=False):
+    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* urn_c = _cstr(urn)
+    with nogil:
+        res = ProviderCreate(
+            ctx_c, provider_c, urn_c,
+            news_encoded, timeout, preview
+        )
+    free(news_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(urn_c)
     if res.r0 == 0:
         out_decoded = json.loads(_bytes(res.r1))
         return out_decoded
@@ -317,26 +407,57 @@ def provider_create(str ctx, str provider, str urn, news, int timeout=60, previe
 
 
 def provider_read(str ctx, str provider, str urn, str id, inputs, state):
-    input_encoded = json.dumps(inputs).encode()
-    state_encoded = json.dumps(state).encode()
-    res = ProviderRead(
-        _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
-        input_encoded, state_encoded
-    )
+    cdef char* input_encoded = _cstr(json.dumps(inputs).encode())
+    cdef char* state_encoded = _cstr(json.dumps(state).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* urn_c = _cstr(urn)
+    cdef char* id_c = _cstr(id)
+
+    with nogil:
+        res = ProviderRead(
+            ctx_c, provider_c, urn_c, id_c,
+            input_encoded, state_encoded
+        )
+
+    free(input_encoded)
+    free(state_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(urn_c)
+    free(id_c)
+
     if res.r0 == 0:
         out_decoded = json.loads(_bytes(res.r1))
         return out_decoded
     raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), preview=False):
-    olds_encoded = json.dumps(olds).encode()
-    news_encoded = json.dumps(news).encode()
-    res = ProviderUpdate(
-        _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
-        olds_encoded, news_encoded,
-        timeout, to_cstring_array(ignore_changes), len(ignore_changes), preview
-    )
+def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), bint preview=False):
+    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* urn_c = _cstr(urn)
+    cdef char* id_c = _cstr(id)
+    cdef char** ignore_changes_c = to_cstring_array(ignore_changes)
+    cdef int ignore_changes_len_c = len(ignore_changes)
+
+    with nogil:
+        res = ProviderUpdate(
+            ctx_c, provider_c, urn_c, id_c,
+            olds_encoded, news_encoded,
+            timeout, ignore_changes_c, ignore_changes_len_c, preview
+        )
+
+    free(olds_encoded)
+    free(news_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(urn_c)
+    free(id_c)
+    free(ignore_changes_c)
+
     if res.r0 == 0:
         out_decoded = json.loads(_bytes(res.r1))
         return out_decoded
@@ -344,11 +465,24 @@ def provider_update(str ctx, str provider, str urn, str id, olds, news, int time
 
 
 def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):
-    news_encoded = json.dumps(news).encode()
-    res = ProviderDelete(
-        _bytes(ctx), _bytes(provider), _bytes(urn), _bytes(id),
-        news_encoded, timeout
-    )
+    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* urn_c = _cstr(urn)
+    cdef char* id_c = _cstr(id)
+
+    with nogil:
+        res = ProviderDelete(
+            ctx_c, provider_c, urn_c, id_c,
+            news_encoded, timeout
+        )
+
+    free(news_encoded)
+    free(ctx_c)
+    free(provider_c)
+    free(urn_c)
+    free(id_c)
+
     if res.r0 == 0:
         return res.r1
     raise ProviderError(res.r0, _str(res.r2))
