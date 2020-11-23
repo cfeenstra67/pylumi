@@ -167,10 +167,11 @@ cdef char* _cstr(s):
     """
     Coerce text or bytes to a c string. This must be freed by the caller.
     """
-    bytes_val = _bytes(s)
-    cdef char* out = <char*> malloc((len(bytes_val) + 1) * sizeof(char))
-    strcpy(bytes_val, out)
-    return out
+    cdef char* c_string = <char*> malloc((len(s) + 1) * sizeof(char))
+    if not c_string:
+        raise MemoryError()
+    strcpy(c_string, _bytes(s))
+    return c_string
 
 
 cdef char ** to_cstring_array(list_str):
@@ -283,10 +284,10 @@ def provider_check_config(str ctx, str provider, str urn, olds, news, bint allow
             ctx_c, provider_c,  urn_c,
             olds_encoded, news_encoded, allow_unknowns
         )
-    free(olds_encoded)
-    free(news_encoded)
     free(ctx_c)
     free(provider_c)
+    free(olds_encoded)
+    free(news_encoded)
     free(urn_c)
     if res.r0 == 0:
         props_decoded = json.loads(_bytes(res.r1))
@@ -309,10 +310,10 @@ def provider_diff_config(str ctx, str provider, str urn, olds, news, bint allow_
             olds_encoded, news_encoded,
             allow_unknowns, ignore_changes_c, ignore_changes_len_c
         )
-    free(olds_encoded)
-    free(news_encoded)
     free(ctx_c)
     free(provider_c)
+    free(olds_encoded)
+    free(news_encoded)
     free(urn_c)
     free(ignore_changes_c)
     if res.r0 == 0:
@@ -346,11 +347,13 @@ def provider_check(str ctx, str provider, str urn, olds, news, bint allow_unknow
             ctx_c, provider_c, urn_c,
             olds_encoded, news_encoded, allow_unknowns
         )
-    free(olds_encoded)
-    free(news_encoded)
+
     free(ctx_c)
     free(provider_c)
+    free(olds_encoded)
+    free(news_encoded)
     free(urn_c)
+
     if res.r0 == 0:
         props = json.loads(_bytes(res.r1))
         failures = json.loads(_bytes(res.r2))
@@ -373,13 +376,15 @@ def provider_diff(str ctx, str provider, str urn, str id, olds, news, bint allow
             olds_encoded, news_encoded,
             allow_unknowns, ignore_changes_c, ignore_changes_len_c
         )
-    free(olds_encoded)
-    free(news_encoded)
+
     free(ctx_c)
     free(provider_c)
+    free(olds_encoded)
+    free(news_encoded)
     free(urn_c)
     free(id_c)
     free(ignore_changes_c)
+
     if res.r0 == 0:
         out_decoded = json.loads(_bytes(res.r1))
         return out_decoded
@@ -396,10 +401,12 @@ def provider_create(str ctx, str provider, str urn, news, int timeout=60, bint p
             ctx_c, provider_c, urn_c,
             news_encoded, timeout, preview
         )
+
     free(news_encoded)
     free(ctx_c)
     free(provider_c)
     free(urn_c)
+
     if res.r0 == 0:
         out_decoded = json.loads(_bytes(res.r1))
         return out_decoded
@@ -450,10 +457,10 @@ def provider_update(str ctx, str provider, str urn, str id, olds, news, int time
             timeout, ignore_changes_c, ignore_changes_len_c, preview
         )
 
-    free(olds_encoded)
-    free(news_encoded)
     free(ctx_c)
     free(provider_c)
+    free(olds_encoded)
+    free(news_encoded)
     free(urn_c)
     free(id_c)
     free(ignore_changes_c)
@@ -477,9 +484,9 @@ def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60
             news_encoded, timeout
         )
 
-    free(news_encoded)
     free(ctx_c)
     free(provider_c)
+    free(news_encoded)
     free(urn_c)
     free(id_c)
 
