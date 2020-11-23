@@ -15,7 +15,7 @@ from pylumi.ext import (
     DIFF_UPDATE,
     DIFF_UPDATE_REPLACE,
     UnknownValue,
-    DiffType
+    DiffType,
 )
 from pylumi.provider import Provider
 from pylumi.urn import URN

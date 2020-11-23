@@ -46,6 +46,7 @@ class UnknownValue(enum.Enum):
     """
     Enum for the UNKNOWN_*_VALUE values
     """
+
     BOOL = UNKNOWN_BOOL_VALUE
     NUMBER = UNKNOWN_NUMBER_VALUE
     ARRAY = UNKNOWN_ARRAY_VALUE
@@ -58,6 +59,7 @@ class DiffType(enum.Enum):
     """
     Enum for diff types
     """
+
     ADD = DIFF_ADD
     ADD_REPLACE = DIFF_ADD_REPLACE
     DELETE = DIFF_DELETE
