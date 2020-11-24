@@ -21,7 +21,7 @@ try:
         DIFF_UPDATE,
         DIFF_UPDATE_REPLACE,
         DiffKind,
-        UnknownValue
+        UnknownValue,
     )
 
 except ImportError:
@@ -47,7 +47,6 @@ except ImportError:
     DIFF_UPDATE = None
     DIFF_UPDATE_REPLACE = None
 
-
     class UnknownValue(enum.Enum):
         """
         Enum for the UNKNOWN_*_VALUE values
@@ -61,7 +60,6 @@ except ImportError:
         ARCHIVE = UNKNOWN_ARCHIVE_VALUE
         OBJECT = UNKNOWN_OBJECT_VALUE
         NULL_ = UNKNOWN_NULL_VALUE
-
 
     class DiffKind(enum.Enum):
         """
