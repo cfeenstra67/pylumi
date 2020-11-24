@@ -203,7 +203,7 @@ def json_dumps(input):
     def default(x):
         if isinstance(x, UnknownValue):
             return {UNKNOWN_KEY: x.value}
-        return x
+        raise TypeError
 
     return json.dumps(input, default=default)
 
