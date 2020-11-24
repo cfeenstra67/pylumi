@@ -1,3 +1,4 @@
+import enum as _enum
 import json
 
 from cpython.string cimport PyString_AsString
@@ -126,6 +127,7 @@ cdef extern from "libpylumigo.h":
         char* AssetValue
         char* ArchiveValue
         char* ObjectValue
+        char* NullValue
 
     Unknowns GetUnknowns() nogil
 
@@ -181,6 +183,31 @@ cdef char ** to_cstring_array(list_str):
         ret[i] = as_bytes
     return ret
 
+
+def json_loads(input):
+    """
+    json.loads() with support for unknown values
+    """
+    def object_hook(x):
+        if isinstance(x, dict) and UNKNOWN_KEY in x:
+            return UnknownValue(x[UNKNOWN_KEY])
+        return x
+
+    return json.loads(input, object_hook=object_hook)
+
+
+def json_dumps(input):
+    """
+    json.dumps() with support for unknown values
+    """
+    def default(x):
+        if isinstance(x, UnknownValue):
+            return {UNKNOWN_KEY: x.value}
+        return x
+
+    return json.dumps(input, default=default)
+
+
 # Globals
 
 cdef Unknowns UNKNOWNS_C = GetUnknowns()
@@ -201,6 +228,21 @@ UNKNOWN_ARCHIVE_VALUE = _str(UNKNOWNS_C.ArchiveValue)
 
 UNKNOWN_OBJECT_VALUE = _str(UNKNOWNS_C.ObjectValue)
 
+UNKNOWN_NULL_VALUE = _str(UNKNOWNS_C.NullValue)
+
+class UnknownValue(_enum.Enum):
+    """
+    Enum of UNKNOWN_*_VALUE values
+    """
+    BOOL = UNKNOWN_BOOL_VALUE
+    NUMBER = UNKNOWN_NUMBER_VALUE
+    STRING = UNKNOWN_STRING_VALUE
+    ARRAY = UNKNOWN_ARRAY_VALUE
+    ASSET = UNKNOWN_ASSET_VALUE
+    ARCHIVE = UNKNOWN_ARCHIVE_VALUE
+    OBJECT = UNKNOWN_OBJECT_VALUE
+    NULL_ = UNKNOWN_NULL_VALUE
+
 cdef DiffKinds DIFF_KINDS_C = GetDiffKinds()
 
 DIFF_ADD = DIFF_KINDS_C.DiffAdd
@@ -214,6 +256,17 @@ DIFF_DELETE_REPLACE = DIFF_KINDS_C.DiffDeleteReplace
 DIFF_UPDATE = DIFF_KINDS_C.DiffUpdate
 
 DIFF_UPDATE_REPLACE = DIFF_KINDS_C.DiffUpdateReplace
+
+class DiffKind(_enum.Enum):
+    """
+    Enum of DIFF_* values
+    """
+    ADD = DIFF_ADD
+    ADD_REPLACE = DIFF_ADD_REPLACE
+    DELETE = DIFF_DELETE
+    DELETE_REPLACE = DIFF_DELETE_REPLACE
+    UPDATE = DIFF_UPDATE
+    UPDATE_REPLACE = DIFF_UPDATE_REPLACE
 
 # Context methods
 
@@ -276,8 +329,8 @@ def provider_get_schema(str ctxName, str name, int version=0):
 
 
 def provider_check_config(str ctx, str provider, str urn, olds, news, bint allow_unknowns=False):
-    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
-    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* olds_encoded = _cstr(json_dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
     cdef char* urn_c = _cstr(urn)
@@ -292,15 +345,15 @@ def provider_check_config(str ctx, str provider, str urn, olds, news, bint allow
     free(news_encoded)
     free(urn_c)
     if res.r0 == 0:
-        props_decoded = json.loads(_bytes(res.r1))
-        failures_decoded = json.loads(_bytes(res.r2))
+        props_decoded = json_loads(_bytes(res.r1))
+        failures_decoded = json_loads(_bytes(res.r2))
         return props_decoded, failures_decoded
     raise ProviderError(res.r0, _str(res.r3))
 
 
 def provider_diff_config(str ctx, str provider, str urn, olds, news, bint allow_unknowns=False, ignore_changes=()):
-    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
-    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* olds_encoded = _cstr(json_dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
     cdef char* urn_c = _cstr(urn)
@@ -319,7 +372,7 @@ def provider_diff_config(str ctx, str provider, str urn, olds, news, bint allow_
     free(urn_c)
     free(ignore_changes_c)
     if res.r0 == 0:
-        out_decoded = json.loads(_bytes(res.r1))
+        out_decoded = json_loads(_bytes(res.r1))
         return out_decoded
     raise ProviderError(res.r0, _str(res.r2))
 
@@ -327,7 +380,7 @@ def provider_diff_config(str ctx, str provider, str urn, olds, news, bint allow_
 def provider_configure(str ctx, str provider, inputs):
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
-    cdef char* inputs_encoded = _cstr(json.dumps(inputs).encode())
+    cdef char* inputs_encoded = _cstr(json_dumps(inputs).encode())
     with nogil:
         res = ProviderConfigure(ctx_c, provider_c, inputs_encoded)
     free(ctx_c)
@@ -339,8 +392,8 @@ def provider_configure(str ctx, str provider, inputs):
 
 
 def provider_check(str ctx, str provider, str urn, olds, news, bint allow_unknowns=False):
-    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
-    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* olds_encoded = _cstr(json_dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
     cdef char* urn_c = _cstr(urn)
@@ -357,15 +410,15 @@ def provider_check(str ctx, str provider, str urn, olds, news, bint allow_unknow
     free(urn_c)
 
     if res.r0 == 0:
-        props = json.loads(_bytes(res.r1))
-        failures = json.loads(_bytes(res.r2))
+        props = json_loads(_bytes(res.r1))
+        failures = json_loads(_bytes(res.r2))
         return props, failures
     raise ProviderError(res.r0, _str(res.r3))
 
 
 def provider_diff(str ctx, str provider, str urn, str id, olds, news, bint allow_unknowns=False, ignore_changes=()):
-    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
-    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* olds_encoded = _cstr(json_dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
     cdef char* urn_c = _cstr(urn)
@@ -388,13 +441,13 @@ def provider_diff(str ctx, str provider, str urn, str id, olds, news, bint allow
     free(ignore_changes_c)
 
     if res.r0 == 0:
-        out_decoded = json.loads(_bytes(res.r1))
+        out_decoded = json_loads(_bytes(res.r1))
         return out_decoded
     raise ProviderError(res.r0, _str(res.r2))
 
 
 def provider_create(str ctx, str provider, str urn, news, int timeout=60, bint preview=False):
-    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
     cdef char* urn_c = _cstr(urn)
@@ -410,14 +463,14 @@ def provider_create(str ctx, str provider, str urn, news, int timeout=60, bint p
     free(urn_c)
 
     if res.r0 == 0:
-        out_decoded = json.loads(_bytes(res.r1))
+        out_decoded = json_loads(_bytes(res.r1))
         return out_decoded
     raise ProviderError(res.r0, _str(res.r2))
 
 
 def provider_read(str ctx, str provider, str urn, str id, inputs, state):
-    cdef char* input_encoded = _cstr(json.dumps(inputs).encode())
-    cdef char* state_encoded = _cstr(json.dumps(state).encode())
+    cdef char* input_encoded = _cstr(json_dumps(inputs).encode())
+    cdef char* state_encoded = _cstr(json_dumps(state).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
     cdef char* urn_c = _cstr(urn)
@@ -437,14 +490,14 @@ def provider_read(str ctx, str provider, str urn, str id, inputs, state):
     free(id_c)
 
     if res.r0 == 0:
-        out_decoded = json.loads(_bytes(res.r1))
+        out_decoded = json_loads(_bytes(res.r1))
         return out_decoded
     raise ProviderError(res.r0, _str(res.r2))
 
 
 def provider_update(str ctx, str provider, str urn, str id, olds, news, int timeout=60, ignore_changes=(), bint preview=False):
-    cdef char* olds_encoded = _cstr(json.dumps(olds).encode())
-    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* olds_encoded = _cstr(json_dumps(olds).encode())
+    cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
     cdef char* urn_c = _cstr(urn)
@@ -468,13 +521,13 @@ def provider_update(str ctx, str provider, str urn, str id, olds, news, int time
     free(ignore_changes_c)
 
     if res.r0 == 0:
-        out_decoded = json.loads(_bytes(res.r1))
+        out_decoded = json_loads(_bytes(res.r1))
         return out_decoded
     raise ProviderError(res.r0, _str(res.r2))
 
 
 def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60):
-    cdef char* news_encoded = _cstr(json.dumps(news).encode())
+    cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
     cdef char* urn_c = _cstr(urn)

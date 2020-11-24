@@ -10,6 +10,7 @@ typedef struct tagUnknowns {
     char* AssetValue;
     char* ArchiveValue;
     char* ObjectValue;
+    char* NullValue;
 } Unknowns;
 
 typedef struct tagDiffKinds {
@@ -558,6 +559,7 @@ func GetUnknowns() C.Unknowns {
         AssetValue: C.CString(plugin.UnknownAssetValue),
         ArchiveValue: C.CString(plugin.UnknownArchiveValue),
         ObjectValue: C.CString(plugin.UnknownObjectValue),
+        NullValue: C.CString(""),
     }
 }
 

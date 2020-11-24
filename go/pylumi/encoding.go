@@ -90,6 +90,10 @@ func PropertyMapToJSON(data resource.PropertyMap) ([]byte, error) {
                 }
             }
             return out, true
+        case resource.Computed:
+            out := make(map[string]interface{})
+            out[UnknownKey], _ = mapper(v.Element)
+            return out, true
         }
         return value.V, true
     }

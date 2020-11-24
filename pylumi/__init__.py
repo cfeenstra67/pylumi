@@ -9,6 +9,7 @@ from pylumi.ext import (
     UNKNOWN_ASSET_VALUE,
     UNKNOWN_ARCHIVE_VALUE,
     UNKNOWN_OBJECT_VALUE,
+    UNKNOWN_NULL_VALUE,
     DIFF_ADD,
     DIFF_ADD_REPLACE,
     DIFF_DELETE,
@@ -16,7 +17,7 @@ from pylumi.ext import (
     DIFF_UPDATE,
     DIFF_UPDATE_REPLACE,
     UnknownValue,
-    DiffType,
+    DiffKind,
 )
 from pylumi.provider import Provider
 from pylumi.urn import URN

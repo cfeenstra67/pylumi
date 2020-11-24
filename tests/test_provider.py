@@ -79,6 +79,31 @@ def test_provider_check_valid(aws):
     assert errs is None
 
 
+def test_provider_check_unknowns(aws):
+    new_props = {
+        'bucket': pylumi.UnknownValue.STRING,
+        'key': TEST_KEY,
+        'content': 'Hello, world! 2'
+    }
+    props, errs = aws.check(
+        pylumi.URN('aws:s3/bucketObject:BucketObject'),
+        {'bucket': TEST_BUCKET, 'key': 'pulumi-test-1', 'content': 'Hello, world!'},
+        new_props,
+        allow_unknowns=True
+    )
+
+    assert props == {
+        '__defaults': ['acl', 'forceDestroy'],
+        'acl': 'private',
+        'forceDestroy': False,
+        'bucket': pylumi.UnknownValue.NULL_,
+        'content': new_props['content'],
+        'key': new_props['key']
+    }
+
+    assert errs is None
+
+
 def test_provider_diff_changes(aws):
     new_props = {'bucket': TEST_BUCKET, 'key': TEST_KEY, 'content': 'Hello, world! 2'}
     resp = aws.diff(
