@@ -96,7 +96,7 @@ def test_provider_check_unknowns(aws):
         '__defaults': ['acl', 'forceDestroy'],
         'acl': 'private',
         'forceDestroy': False,
-        'bucket': pylumi.UnknownValue.NULL_,
+        'bucket': pylumi.UnknownValue.STRING,
         'content': new_props['content'],
         'key': new_props['key']
     }

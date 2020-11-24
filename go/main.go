@@ -559,7 +559,7 @@ func GetUnknowns() C.Unknowns {
         AssetValue: C.CString(plugin.UnknownAssetValue),
         ArchiveValue: C.CString(plugin.UnknownArchiveValue),
         ObjectValue: C.CString(plugin.UnknownObjectValue),
-        NullValue: C.CString(""),
+        NullValue: C.CString(pylumi.UnknownNullValue),
     }
 }
 

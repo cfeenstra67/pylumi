@@ -11,6 +11,7 @@ import (
 
 const (
     UnknownKey = "$unknown"
+    UnknownNullValue = ""
 )
 
 
@@ -39,6 +40,38 @@ func unmarshalUnknownPropertyValue(s string) (resource.PropertyValue, bool) {
         return resource.NewComputedProperty(comp), true
     }
     return resource.PropertyValue{}, false
+}
+
+
+// Copied from the `plugin` module (modified)
+// marshalUnknownProperty marshals an unknown property in a way that lets us recover its type on the other end.
+func marshalUnknownProperty(elem resource.PropertyValue) string {
+    // Normal cases, these get sentinels.
+    if elem.IsBool() {
+        return plugin.UnknownBoolValue
+    } else if elem.IsNumber() {
+        return plugin.UnknownNumberValue
+    } else if elem.IsString() {
+        return plugin.UnknownStringValue
+    } else if elem.IsArray() {
+        return plugin.UnknownArrayValue
+    } else if elem.IsAsset() {
+        return plugin.UnknownAssetValue
+    } else if elem.IsArchive() {
+        return plugin.UnknownArchiveValue
+    } else if elem.IsObject() {
+        return plugin.UnknownObjectValue
+    }
+
+    // If for some reason we end up with a recursive computed/output, just keep digging.
+    if elem.IsComputed() {
+        return marshalUnknownProperty(elem.Input().Element)
+    } else if elem.IsOutput() {
+        return marshalUnknownProperty(elem.OutputValue().Element)
+    }
+
+    // Finally, if a null, we can guess its value!  (the one and only...)
+    return UnknownNullValue
 }
 
 
@@ -92,7 +125,7 @@ func PropertyMapToJSON(data resource.PropertyMap) ([]byte, error) {
             return out, true
         case resource.Computed:
             out := make(map[string]interface{})
-            out[UnknownKey], _ = mapper(v.Element)
+            out[UnknownKey] = marshalUnknownProperty(v.Element)
             return out, true
         }
         return value.V, true
