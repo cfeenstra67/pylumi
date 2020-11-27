@@ -32,7 +32,7 @@ with open(os.path.join(CURRENT_DIR, 'requirements-dev.txt')) as f:
 
 setup(
     name='pylumi',
-    version='1.2.0',
+    version='1.2.1',
     description='Python API for interacting with Pulumi resource plugins.',
     long_description=long_description,
     long_description_content_type='text/x-rst',
