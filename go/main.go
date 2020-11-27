@@ -55,15 +55,6 @@ func ContextSetup(name *C.char, cwd *C.char) (statusCode int, errString *C.char)
         return -1, C.CString(fmt.Sprintf("error setting up context: %v", err))
     }
 
-    // ctx, err := pylumi.GetContext(goName)
-    // if err != nil {
-    //  return -1, C.CString(fmt.Sprintf("error getting context: %v", err))
-    // }
-
-    // if err := ctx.InstallPlugins(); err != nil {
-    //  return -1, C.CString(fmt.Sprintf("error installing plugins: %v", err))
-    // }
-
     return 0, nil
 }
 
