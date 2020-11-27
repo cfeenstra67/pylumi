@@ -13,7 +13,11 @@ class Provider:
     """
 
     def __init__(
-        self, ctx: "Context", name: str, config: Optional[Dict[str, Any]] = None
+        self,
+        ctx: "Context",
+        name: str,
+        config: Optional[Dict[str, Any]] = None,
+        version: Optional[str] = None,
     ) -> None:
         if config is None:
             config = {}
@@ -21,6 +25,7 @@ class Provider:
         self.name = name
         self.ctx = ctx
         self.config = config
+        self.version = version
 
     def configure(self, inputs: Optional[Dict[str, Any]] = None) -> None:
         """
@@ -43,7 +48,7 @@ class Provider:
         """
         if inputs is None:
             inputs = self.config
-        _pylumi.provider_configure(self.ctx.name, self.name, inputs)
+        _pylumi.provider_configure(self.ctx.name, self.name, self.version, inputs)
 
     def teardown(self) -> None:
         """
@@ -106,7 +111,7 @@ class Provider:
         Reference: `CheckConfig <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_check_config(
-            self.ctx.name, self.name, str(urn), olds, news, allow_unknowns
+            self.ctx.name, self.name, self.version, str(urn), olds, news, allow_unknowns
         )
 
     def diff_config(
@@ -140,6 +145,7 @@ class Provider:
         return _pylumi.provider_diff_config(
             self.ctx.name,
             self.name,
+            self.version,
             str(urn),
             olds,
             news,

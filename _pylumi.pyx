@@ -41,6 +41,12 @@ cdef extern from "libpylumigo.h":
 
     ContextListPlugins_return ContextListPlugins(char* name) nogil
 
+    struct ContextInstallPlugin_return:
+        GoInt r0
+        char* r1
+
+    ContextInstallPlugin_return ContextInstallPlugin(char* name, char* kind, char* pluginName, char* version, GoUint8 reinstall, GoUint8 exact) nogil
+
     struct ProviderTeardown_return:
         GoInt r0
         char* r1
@@ -60,20 +66,20 @@ cdef extern from "libpylumigo.h":
         char* r2
         char* r3
 
-    ProviderCheckConfig_return ProviderCheckConfig(char* ctx, char* provider, char* urn, char* olds, char* news, GoUint8 allowUnknowns) nogil
+    ProviderCheckConfig_return ProviderCheckConfig(char* ctx, char* provider, char* version, char* urn, char* olds, char* news, GoUint8 allowUnknowns) nogil
 
     struct ProviderDiffConfig_return:
         GoInt r0
         char* r1
         char* r2
 
-    ProviderDiffConfig_return ProviderDiffConfig(char* ctx, char* provider, char* urn, char* olds, char* news, GoUint8 allowUnknowns, char** ignoreChanges, GoInt nIgnoreChanges) nogil
+    ProviderDiffConfig_return ProviderDiffConfig(char* ctx, char* provider, char* version, char* urn, char* olds, char* news, GoUint8 allowUnknowns, char** ignoreChanges, GoInt nIgnoreChanges) nogil
 
     struct ProviderConfigure_return:
         GoInt r0
         char* r1
 
-    ProviderConfigure_return ProviderConfigure(char* ctx, char* provider, char* inputs) nogil
+    ProviderConfigure_return ProviderConfigure(char* ctx, char* provider, char* version, char* inputs) nogil
 
     struct ProviderCheck_return:
         GoInt r0
@@ -302,6 +308,22 @@ def context_list_plugins(str ctxName):
     raise ContextError(res.r0, _str(res.r3))
 
 
+def context_install_plugin(str ctx, str plugin_kind, str plugin_name, str plugin_version, bint reinstall=False, bint exact=False):
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* plugin_kind_c = _cstr(plugin_kind)
+    cdef char* plugin_name_c = _cstr(plugin_name)
+    cdef char* plugin_version_c = _cstr(plugin_version)
+    with nogil:
+        res = ContextInstallPlugin(ctx_c, plugin_kind_c, plugin_name_c, plugin_version_c, reinstall, exact)
+    free(ctx_c)
+    free(plugin_kind_c)
+    free(plugin_name_c)
+    free(plugin_version_c)
+    if res.r0 == 0:
+        return
+    raise ContextError(res.r0, _str(res.r1))
+
+
 # Provider methods
 
 def provider_teardown(str ctx, str provider):
@@ -328,15 +350,16 @@ def provider_get_schema(str ctxName, str name, int version=0):
     raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_check_config(str ctx, str provider, str urn, olds, news, bint allow_unknowns=False):
+def provider_check_config(str ctx, str provider, version, str urn, olds, news, bint allow_unknowns=False):
     cdef char* olds_encoded = _cstr(json_dumps(olds).encode())
     cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
+    cdef char* version_c = _cstr(version) if version is not None else NULL
     cdef char* urn_c = _cstr(urn)
     with nogil:
         res = ProviderCheckConfig(
-            ctx_c, provider_c,  urn_c,
+            ctx_c, provider_c, version_c,  urn_c,
             olds_encoded, news_encoded, allow_unknowns
         )
     free(ctx_c)
@@ -344,6 +367,7 @@ def provider_check_config(str ctx, str provider, str urn, olds, news, bint allow
     free(olds_encoded)
     free(news_encoded)
     free(urn_c)
+    free(version_c)
     if res.r0 == 0:
         props_decoded = json_loads(_bytes(res.r1))
         failures_decoded = json_loads(_bytes(res.r2))
@@ -351,17 +375,18 @@ def provider_check_config(str ctx, str provider, str urn, olds, news, bint allow
     raise ProviderError(res.r0, _str(res.r3))
 
 
-def provider_diff_config(str ctx, str provider, str urn, olds, news, bint allow_unknowns=False, ignore_changes=()):
+def provider_diff_config(str ctx, str provider, version, str urn, olds, news, bint allow_unknowns=False, ignore_changes=()):
     cdef char* olds_encoded = _cstr(json_dumps(olds).encode())
     cdef char* news_encoded = _cstr(json_dumps(news).encode())
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
+    cdef char* version_c = _cstr(version) if version is not None else NULL
     cdef char* urn_c = _cstr(urn)
     cdef char** ignore_changes_c = to_cstring_array(ignore_changes)
     cdef int ignore_changes_len_c = len(ignore_changes)
     with nogil:
         res = ProviderDiffConfig(
-            ctx_c, provider_c, urn_c,
+            ctx_c, provider_c, version_c, urn_c,
             olds_encoded, news_encoded,
             allow_unknowns, ignore_changes_c, ignore_changes_len_c
         )
@@ -371,21 +396,24 @@ def provider_diff_config(str ctx, str provider, str urn, olds, news, bint allow_
     free(news_encoded)
     free(urn_c)
     free(ignore_changes_c)
+    free(version_c)
     if res.r0 == 0:
         out_decoded = json_loads(_bytes(res.r1))
         return out_decoded
     raise ProviderError(res.r0, _str(res.r2))
 
 
-def provider_configure(str ctx, str provider, inputs):
+def provider_configure(str ctx, str provider, version, inputs):
     cdef char* ctx_c = _cstr(ctx)
     cdef char* provider_c = _cstr(provider)
+    cdef char* version_c = _cstr(version) if version is not None else NULL
     cdef char* inputs_encoded = _cstr(json_dumps(inputs).encode())
     with nogil:
-        res = ProviderConfigure(ctx_c, provider_c, inputs_encoded)
+        res = ProviderConfigure(ctx_c, provider_c, version_c, inputs_encoded)
     free(ctx_c)
     free(provider_c)
     free(inputs_encoded)
+    free(version_c)
     if res.r0 == 0:
         return None
     raise ProviderError(res.r0, _str(res.r1))

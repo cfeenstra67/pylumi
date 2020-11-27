@@ -1,7 +1,10 @@
+import os
 import subprocess
 
 import psutil
 import pylumi
+import pytest
+import shutil
 
 
 def run_pgrep(pattern):
@@ -52,3 +55,36 @@ def test_list_plugins_create_provider():
         assert plugins == ['aws']
 
     assert not run_pgrep('pulumi')
+
+
+@pytest.mark.parametrize("kind, name, version, config", [
+    ('resource', 'aws', '2.1.0', {"region": "us-east-2"})
+])
+def test_install_plugin(kind, name, version, config):
+
+    plugin_kind = kind
+    plugin_name = name
+    plugin_version = version
+    plugin_config = config
+
+    plugins_home = os.path.abspath(os.path.expanduser("~/.pulumi/plugins"))
+
+    plugin_dir = os.path.join(plugins_home, f'{plugin_kind}-{plugin_name}-v{plugin_version}')
+
+    def rmifexists():
+        if os.path.isdir(plugin_dir):
+            shutil.rmtree(plugin_dir)
+
+    rmifexists()
+
+    try:
+        with pylumi.Context() as ctx:
+            ctx.install_plugin(plugin_kind, plugin_name, plugin_version)
+
+            assert os.path.isdir(plugin_dir)
+
+            with ctx.provider(plugin_name, plugin_config, plugin_version) as provider:
+                schema = provider.get_schema()
+                assert schema["version"] == 'v' + plugin_version
+    finally:
+        rmifexists()

@@ -2,6 +2,7 @@ package pylumi
 
 import (
     "fmt"
+    "io"
     // "path/filepath"
 
     "github.com/blang/semver"
@@ -10,6 +11,7 @@ import (
     "github.com/pulumi/pulumi/sdk/v2/go/common/diag"
     "github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
     "github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+    "github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
     "github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -24,22 +26,6 @@ type Context struct {
 }
 
 func NewContextFromPath(cwd string, sink, statusSink diag.Sink) (*Context, error) {
-    // projectPath, err := workspace.DetectProjectPathFrom(path)
-    // if err != nil {
-    //  return nil, fmt.Errorf("error detecting project: %v", err)
-    // }
-
-    // proj, err := workspace.LoadProject(path)
-    // if err != nil {
-    //  return nil, fmt.Errorf("error loading project: %v", err)
-    // }
-
-    // root := filepath.Dir(path)
-
-    // projInfo := engine.Projinfo{Proj: proj, Root: root}
-
-    // pwd, main, ctx, err := engine.ProjectInfoContext(&projInfo, nil, nil, sink, statusSink, false, nil)
-
     ctx, err := plugin.NewContext(sink, statusSink, nil, nil, cwd, nil, false, nil)
     if err != nil {
         return nil, fmt.Errorf("error obtaining context: %v", err)
@@ -59,6 +45,53 @@ func NewContextFromPath(cwd string, sink, statusSink diag.Sink) (*Context, error
 
 func (c *Context) Close() {
     c.PluginCtx.Close()
+}
+
+func (c *Context) InstallPlugin(kind string, name string, version string, reinstall bool, exact bool, sink diag.Sink) error {
+    versionInfo, err := semver.ParseTolerant(version)
+    if err != nil {
+        return fmt.Errorf("error parsing plugin version: %v", err)
+    }
+
+    plug := workspace.PluginInfo{
+        Name: name,
+        Version: &versionInfo,
+        Kind: workspace.PluginKind(kind),
+    }
+
+    label := fmt.Sprintf("[%s plugin %s]", plug.Kind, plug)
+
+    sink.Infoerrf(diag.Message("", "%s installing"), label)
+
+    if !reinstall {
+        if exact {
+            if workspace.HasPlugin(plug) {
+                sink.Infoerrf(diag.Message("", "%s skipping install (existing == match)"), label)
+                return nil
+            }
+        } else {
+            if has, _ := workspace.HasPluginGTE(plug); has {
+                sink.Infoerrf(diag.Message("", "%s skipping install (existing >= match)"), label)
+                return nil
+            }
+        }
+    }
+
+    var tarball io.ReadCloser
+    var size int64
+
+    if tarball, size, err = plug.Download(); err != nil {
+        return fmt.Errorf("error downloading %v: %v", label, err)
+    }
+
+    colors := cmdutil.GetGlobalColorization()
+    tarball = workspace.ReadCloserProgressBar(tarball, size, "Downloading plugin", colors)
+
+    if err = plug.Install(tarball); err != nil {
+        return fmt.Errorf("error installing %v: %v", label, err)
+    }
+
+    return nil
 }
 
 // func (c *Context) InstallPlugins() error {

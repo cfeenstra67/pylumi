@@ -4,6 +4,8 @@ import (
     "fmt"
     "sync"
 
+    "github.com/blang/semver"
+
     "github.com/pulumi/pulumi/sdk/v2/go/common/diag"
     "github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
     "github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -57,12 +59,12 @@ func GetContext(name string) (*Context, error) {
 //  return new(resource.PropertyMap)
 // }
 
-func Provider(ctxName string, name tokens.Package) (*plugin.Provider, error) {
+func Provider(ctxName string, name tokens.Package, version *semver.Version) (*plugin.Provider, error) {
     ctx, err := GetContext(ctxName)
     if err != nil {
         return nil, err
     }
-    return ctx.Provider(name, nil)
+    return ctx.Provider(name, version)
 }
 
 func CloseContext(name string) error {

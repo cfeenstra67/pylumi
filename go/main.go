@@ -29,6 +29,8 @@ import (
     "fmt"
     "unsafe"
 
+    "github.com/blang/semver"
+
     "github.com/cfeenstra67/pylumi/go/pylumi"
     "github.com/pulumi/pulumi/sdk/v2/go/common/resource"
     "github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
@@ -37,7 +39,14 @@ import (
 )
 
 //export ContextSetup
-func ContextSetup(name *C.char, cwd *C.char) (int, *C.char) {
+func ContextSetup(name *C.char, cwd *C.char) (statusCode int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ContextSetup: %v", err))
+        }
+    }()
+
     sink := cmdutil.Diag()
 
     goName := C.GoString(name)
@@ -60,7 +69,14 @@ func ContextSetup(name *C.char, cwd *C.char) (int, *C.char) {
 
 
 //export ContextTeardown
-func ContextTeardown(name *C.char) (int, *C.char) {
+func ContextTeardown(name *C.char) (statusCode int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ContextTeardown: %v", err))
+        }
+    }()
+
     goName := C.GoString(name)
     if err := pylumi.CloseContext(goName); err != nil {
         return -1, C.CString(fmt.Sprintf("error closing context: %v", err))
@@ -69,7 +85,14 @@ func ContextTeardown(name *C.char) (int, *C.char) {
 }
 
 //export ContextListPlugins
-func ContextListPlugins(name *C.char) (int, **C.char, int, *C.char) {
+func ContextListPlugins(name *C.char) (statusCode int, resultList **C.char, resultLength int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ContextListPlugins: %v", err))
+        }
+    }()
+
     ctx, err := pylumi.GetContext(C.GoString(name))
     if err != nil {
         return -1, nil, -1, C.CString(fmt.Sprintf("error getting context: %v", err))
@@ -88,8 +111,42 @@ func ContextListPlugins(name *C.char) (int, **C.char, int, *C.char) {
     return 0, (**C.char)(cArray), len(plugins), nil
 }
 
+//export ContextInstallPlugin
+func ContextInstallPlugin(name *C.char, kind *C.char, pluginName *C.char, version *C.char, reinstall bool, exact bool) (statusCode int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ContextInstallPlugin: %v", err))
+        }
+    }()
+
+    goName := C.GoString(name)
+    goKind := C.GoString(kind)
+    goVersion := C.GoString(version)
+    goPluginName := C.GoString(pluginName)
+
+    ctx, err := pylumi.GetContext(goName)
+    if err != nil {
+        return -1, C.CString(fmt.Sprintf("error getting context: %v", err))
+    }
+
+    sink := cmdutil.Diag()
+    if err = ctx.InstallPlugin(goKind, goPluginName, goVersion, reinstall, exact, sink); err != nil {
+        return -1, C.CString(fmt.Sprintf("error installing plugin: %v", err))
+    }
+
+    return 0, nil
+}
+
 //export ProviderTeardown
-func ProviderTeardown(ctx *C.char, provider *C.char) (int, *C.char) {
+func ProviderTeardown(ctx *C.char, provider *C.char) (statusCode int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderTeardown: %v", err))
+        }
+    }()
+
     goCtx := C.GoString(ctx)
     ctxObj, err := pylumi.GetContext(goCtx)
     if err != nil {
@@ -105,9 +162,16 @@ func ProviderTeardown(ctx *C.char, provider *C.char) (int, *C.char) {
 }
 
 //export ProviderGetSchema
-func ProviderGetSchema(ctxName *C.char, name *C.char, version int) (int, *C.char, *C.char) {
+func ProviderGetSchema(ctxName *C.char, name *C.char, version int) (statusCode int, result *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderGetSchema: %v", err))
+        }
+    }()
+
     goCtxName := C.GoString(ctxName)
-    provider, err := pylumi.Provider(goCtxName, tokens.Package(C.GoString(name)))
+    provider, err := pylumi.Provider(goCtxName, tokens.Package(C.GoString(name)), nil)
     if err != nil {
         return -1, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -124,12 +188,29 @@ func ProviderGetSchema(ctxName *C.char, name *C.char, version int) (int, *C.char
 func ProviderCheckConfig(
     ctx *C.char,
     provider *C.char,
+    version *C.char,
     urn *C.char,
     olds *C.char,
     news *C.char,
     allowUnknowns bool,
-) (int, *C.char, *C.char, *C.char) {
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+) (statusCode int, propsResult *C.char, failuresResult *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderCheckConfig: %v", err))
+        }
+    }()
+
+    var versionObj *semver.Version
+    if version != nil {
+        output, err := semver.ParseTolerant(C.GoString(version))
+        if err != nil {
+            return -1, nil, nil, C.CString(fmt.Sprintf("error parsing version: %v", err))
+        }
+        versionObj = &output
+    }
+
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), versionObj)
     if err != nil {
         return -1, nil, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -168,15 +249,31 @@ func ProviderCheckConfig(
 func ProviderDiffConfig(
     ctx *C.char,
     provider *C.char,
+    version *C.char,
     urn *C.char,
     olds *C.char,
     news *C.char,
     allowUnknowns bool,
     ignoreChanges **C.char,
     nIgnoreChanges int,
-) (int, *C.char, *C.char) {
+) (statusCode int, resultString *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderDiffConfig: %v", err))
+        }
+    }()
 
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+    var versionObj *semver.Version
+    if version != nil {
+        output, err := semver.ParseTolerant(C.GoString(version))
+        if err != nil {
+            return -1, nil, C.CString(fmt.Sprintf("error parsing version: %v", err))
+        }
+        versionObj = &output
+    }
+
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), versionObj)
     if err != nil {
         return -1, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -214,8 +311,24 @@ func ProviderDiffConfig(
 }
 
 //export ProviderConfigure
-func ProviderConfigure(ctx *C.char, provider *C.char, inputs *C.char) (int, *C.char) {
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+func ProviderConfigure(ctx *C.char, provider *C.char, version *C.char, inputs *C.char) (statusCode int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderConfigure: %v", err))
+        }
+    }()
+
+    var versionObj *semver.Version
+    if version != nil {
+        output, err := semver.ParseTolerant(C.GoString(version))
+        if err != nil {
+            return -1, C.CString(fmt.Sprintf("error parsing version: %v", err))
+        }
+        versionObj = &output
+    }
+
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), versionObj)
     if err != nil {
         return -1, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -240,8 +353,15 @@ func ProviderCheck(
     olds *C.char,
     news *C.char,
     allowUnknowns bool,
-) (int, *C.char, *C.char, *C.char) {
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+) (statusCode int, propsResult *C.char, failuresResult *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderCheck: %v", err))
+        }
+    }()
+
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
     if err != nil {
         return -1, nil, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -287,9 +407,15 @@ func ProviderDiff(
     allowUnknowns bool,
     ignoreChanges **C.char,
     nIgnoreChanges int,
-) (int, *C.char, *C.char) {
+) (statusCode int, resultString *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderDiff: %v", err))
+        }
+    }()
 
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
     if err != nil {
         return -1, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -345,9 +471,15 @@ func ProviderCreate(
     news *C.char,
     timeout float64,
     preview bool,
-) (int, *C.char, *C.char) {
+) (statusCode int, result *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderCreate: %v", err))
+        }
+    }()
 
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
     if err != nil {
         return -1, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -399,9 +531,15 @@ func ProviderRead(
     id *C.char,
     inputs *C.char,
     state *C.char,
-) (int, *C.char, *C.char) {
+) (statusCode int, resultString *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderRead: %v", err))
+        }
+    }()
 
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
     if err != nil {
         return -1, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -461,9 +599,15 @@ func ProviderUpdate(
     ignoreChanges **C.char,
     nIgnoreChanges int,
     preview bool,
-) (int, *C.char, *C.char) {
+) (statusCode int, result *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderUpdate: %v", err))
+        }
+    }()
 
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
     if err != nil {
         return -1, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }
@@ -524,9 +668,15 @@ func ProviderDelete(
     id *C.char,
     news *C.char,
     timeout float64,
-) (int, int, *C.char) {
+) (statusCode int, resultStatus int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderDelete: %v", err))
+        }
+    }()
 
-    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)))
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
     if err != nil {
         return -1, -1, C.CString(fmt.Sprintf("error getting provider: %v", err))
     }

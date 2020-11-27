@@ -33,7 +33,10 @@ class Context:
         self.cwd = cwd
 
     def provider(
-        self, name: str, config: Optional[Dict[str, Any]] = None
+        self,
+        name: str,
+        config: Optional[Dict[str, Any]] = None,
+        version: Optional[str] = None,
     ) -> provider.Provider:
         """
         Get a Provider object with the given name. This just creates the provider object,
@@ -58,7 +61,7 @@ class Context:
         """
         if config is None:
             config = {}
-        return provider.Provider(self, name, config)
+        return provider.Provider(self, name, config, version)
 
     def setup(self) -> None:
         """
@@ -96,6 +99,27 @@ class Context:
         Reference: `ListPlugins <github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin/host.go>`_
         """
         return _pylumi.context_list_plugins(self.name)
+
+    def install_plugin(
+        self,
+        plugin_kind: str,
+        plugin_name: str,
+        version: str,
+        reinstall: bool = False,
+        exact: bool = False,
+    ) -> None:
+        """
+        Install the given plugin into the current pulumi workspace.
+
+        **Returns:**
+        None
+
+        **Pulumi docs**:
+        Reference: `plugins.go https://github.com/pulumi/pulumi/blob/master/sdk/go/common/workspace/plugins.go`_
+        """
+        return _pylumi.context_install_plugin(
+            self.name, plugin_kind, plugin_name, version, reinstall, exact
+        )
 
     def __enter__(self) -> Any:
         self.setup()
