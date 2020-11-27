@@ -104,12 +104,22 @@ class Context:
         self,
         plugin_kind: str,
         plugin_name: str,
-        version: str,
+        version: Optional[str] = None,
         reinstall: bool = False,
         exact: bool = False,
     ) -> None:
         """
         Install the given plugin into the current pulumi workspace.
+
+        **Parameters:**
+
+        * **plugin_kind** - The kind of the plugin e.g. "resource"
+        * **plugin_name** - The name of the plugin e.g. "AWS"
+        * **version** - (optional) The version of the plugin to install. If None, the default, the latest
+        version of the plugin will be installed.
+        * **reinstall** - (optional) Reinstall the plugin even if it is already installed, default False.
+        * **exact** - (optional) Require that the installed plugin's version match `version` exactly, by
+        default greater version numbers are also considered acceptable. Not relevant if reinstall=True.
 
         **Returns:**
         None
