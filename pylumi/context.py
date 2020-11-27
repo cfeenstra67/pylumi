@@ -114,7 +114,7 @@ class Context:
         **Parameters:**
 
         * **plugin_kind** - The kind of the plugin e.g. "resource"
-        * **plugin_name** - The name of the plugin e.g. "AWS"
+        * **plugin_name** - The name of the plugin e.g. "aws"
         * **version** - (optional) The version of the plugin to install. If None, the default, the latest version of the plugin will be installed.
         * **reinstall** - (optional) Reinstall the plugin even if it is already installed, default False.
         * **exact** - (optional) Require that the installed plugin's version match `version` exactly, by default greater version numbers are also considered acceptable. Not relevant if reinstall=True.
