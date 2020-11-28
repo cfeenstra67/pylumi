@@ -4,7 +4,7 @@ import platform
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
 
-from setup_helper import _get_build_ext_cls
+from pylumi_setup_helper import _get_build_ext_cls
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
