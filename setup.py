@@ -1,70 +1,57 @@
 import os
-import platform
 
-from setuptools import setup, Extension
-from setuptools.command.build_ext import build_ext as _build_ext
-
-from pylumi_setup_helper import _get_build_ext_cls
+from setuptools import Extension, setup
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
-extensions = [Extension('libpylumigo', ['go/main.go'])]
-
 try:
     from Cython.Build import cythonize
-except ImportError:
-    extensions.append(Extension('_pylumi', ['_pylumi.c']))
+except ImportError as err:
+    c_file_path = os.path.join(CURRENT_DIR, "go/main.c")
+    if not os.path.exists(c_file_path):
+        raise RuntimeError(
+            "Unable to find main.c file for _pylumi extension, "
+            "and Cython is not installed to compile it. If you "
+            "are an end-user receiving this error please contact "
+            "the maintainers for assistance."
+        ) from err
 else:
-    extensions.append(Extension('_pylumi', ['_pylumi.pyx']))
-    extensions = cythonize(extensions, language_level='3str')
+    cythonize(Extension("_pylumi", ["go/main.pyx"]), language_level="3str")
 
-with open(os.path.join(CURRENT_DIR, 'README.rst')) as f:
+with open(os.path.join(CURRENT_DIR, "README.rst")) as f:
     long_description = f.read().strip()
 
-with open(os.path.join(CURRENT_DIR, 'requirements.txt')) as f:
+with open(os.path.join(CURRENT_DIR, "requirements.txt")) as f:
     install_requires = list(filter(None, map(str.strip, f)))
 
-with open(os.path.join(CURRENT_DIR, 'requirements-tests.txt')) as f:
+with open(os.path.join(CURRENT_DIR, "requirements-tests.txt")) as f:
     install_requires_tests = list(filter(None, map(str.strip, f)))
 
-with open(os.path.join(CURRENT_DIR, 'requirements-dev.txt')) as f:
+with open(os.path.join(CURRENT_DIR, "requirements-dev.txt")) as f:
     install_requires_dev = list(filter(None, map(str.strip, f)))
 
 setup(
-    name='pylumi',
-    version='1.2.2',
-    description='Python API for interacting with Pulumi resource plugins.',
+    name="pylumi",
+    version="1.2.2",
+    description="Python API for interacting with Pulumi resource plugins.",
     long_description=long_description,
-    long_description_content_type='text/x-rst',
+    long_description_content_type="text/x-rst",
     classifiers=[
-        'Development Status :: 1 - Planning',
-        'Programming Language :: Cython',
+        "Development Status :: 1 - Planning",
+        "Programming Language :: Cython",
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License"
+        "License :: OSI Approved :: MIT License",
     ],
-    keywords='go cython terraform pulumi infra-as-code cloudformation',
-    url='https://github.com/cfeenstra67/pylumi',
-    author='Cam Feenstra',
-    author_email='cameron.l.feenstra@gmail.com',
+    keywords="go cython terraform pulumi infra-as-code cloudformation",
+    url="https://github.com/cfeenstra67/pylumi",
+    author="Cam Feenstra",
+    author_email="cameron.l.feenstra@gmail.com",
     install_requires=install_requires,
-    license='MIT',
+    license="MIT",
     # Actual package data
-    cmdclass={'build_ext': _get_build_ext_cls(_build_ext, 'github.com/cfeenstra67/pylumi')},
-    packages=['pylumi'],
-    py_modules=['pylumi_setup_helper'],
-    ext_modules=extensions,
-    extras_require={
-        'tests': install_requires_tests,
-        'dev': install_requires_dev
-    },
-    package_data={
-        '': [
-            'requirements.txt',
-            'requirements-dev.txt',
-            'requirements-tests.txt',
-            'README.rst',
-            'go/*'
-        ],
-    },
-    include_package_data=True
+    build_golang={"root": "github.com/cfeenstra67/pylumi/go"},
+    ext_modules=[Extension("_pylumi", ["go/main.go"])],
+    setup_requires=["setuptools-golang"],
+    packages=["pylumi"],
+    extras_require={"tests": install_requires_tests, "dev": install_requires_dev},
 )

@@ -4,6 +4,7 @@ build/
 _build/
 dist/
 *.egg-info/
+.eggs/
 venv/
 _pylumi.c
 *.so

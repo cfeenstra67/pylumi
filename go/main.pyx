@@ -6,7 +6,7 @@ from libc.stdlib cimport malloc, free
 from libc.string cimport strcpy
 
 
-cdef extern from "libpylumigo.h":
+cdef extern:
 
     ctypedef signed char GoInt8
     ctypedef unsigned char GoUint8
