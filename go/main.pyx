@@ -138,6 +138,12 @@ cdef extern:
 
     ProviderInvoke_return ProviderInvoke(char* ctx, char* provider, char* member, char* args) nogil
 
+    struct ProviderSignalCancellation_return:
+        GoInt r0
+        char* r1
+
+    ProviderSignalCancellation_return ProviderSignalCancellation(char* ctx, char* provider) nogil
+
     ctypedef struct Unknowns:
         char* Key
         char* BoolValue
@@ -626,6 +632,21 @@ def provider_invoke(str ctx, str provider, str member, args):
         failures = json_loads(_bytes(res.r2))
         return result, failures
     raise ProviderError(res.r0, _str(res.r3))
+
+
+def provider_signal_cancellation(str ctx, str provider):
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+
+    with nogil:
+        res = ProviderSignalCancellation(ctx_c, provider_c)
+
+    free(ctx_c)
+    free(provider_c)
+
+    if res.r0 == 0:
+        return None
+    raise ProviderError(res.r0, _str(res.r1))
 
 
 class PylumiError(Exception):

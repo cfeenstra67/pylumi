@@ -398,6 +398,26 @@ class Provider:
             raise InvocationValidationError(member, errors)
         return result
 
+    def signal_cancellation(self) -> None:
+        """
+        Signal cancellation to the provider.
+
+        **Returns:**
+
+        None
+
+        **Pulumi Docs:**
+
+        SignalCancellation asks all resource providers to gracefully shut down and abort any ongoing
+        operations. Operation aborted in this way will return an error (e.g., `Update` and `Create`
+        will either a creation error or an initialization error. SignalCancellation is advisory and
+        non-blocking; it is up to the host to decide how long to wait after SignalCancellation is
+        called before (e.g.) hard-closing any gRPC connection.
+
+        Reference: `SignalCancellation <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
+        """
+        return _pylumi.provider_signal_cancellation(self.ctx.name, self.name)
+
     def __enter__(self) -> Any:
         self.configure()
         return self

@@ -761,6 +761,30 @@ func ProviderInvoke(
     return 0, C.CString(string(resultOut)), C.CString(string(failuresOut)), nil
 }
 
+//export ProviderSignalCancellation
+func ProviderSignalCancellation(
+    ctx *C.char,
+    provider *C.char,
+) (statusCode int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderSignalCancellation: %v", err))
+        }
+    }()
+
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
+    if err != nil {
+        return -1, C.CString(fmt.Sprintf("error getting provider: %v", err))
+    }
+
+    if err := (*providerObj).SignalCancellation(); err != nil {
+        return -1, C.CString(fmt.Sprintf("error signalling cancellation: %v", err))
+    }
+
+    return 0, nil
+}
+
 //export GetUnknowns
 func GetUnknowns() C.Unknowns {
     return C.Unknowns{

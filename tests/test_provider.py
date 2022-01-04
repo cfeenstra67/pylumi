@@ -1,3 +1,4 @@
+import asyncio
 import os
 
 import botocore
@@ -355,22 +356,23 @@ def test_provider_delete(aws, s3_client, s3_key):
         s3_client.get_object(Bucket=TEST_BUCKET, Key=s3_key)
 
 
-def test_provider_invoke_validation_error(aws, s3_client, s3_key):
+def test_provider_invoke_validation_error(aws):
     with pytest.raises(pylumi.exc.InvocationValidationError):
         resp = aws.invoke("aws:s3/getBucket:getBucket", {})
 
 
-def test_provider_invoke(aws, s3_client, s3_key):
-    new_props = {"bucket": TEST_BUCKET, "key": s3_key, "content": "Hello, world! 2"}
-    create_resp = aws.create(pylumi.URN("aws:s3/bucketObject:BucketObject"), new_props)
-
+def test_provider_invoke(aws):
     resp = aws.invoke("aws:s3/getBucket:getBucket", {"bucket": TEST_BUCKET})
-
     assert resp["bucket"] == TEST_BUCKET
 
 
-def test_provider_invoke_fail(aws, s3_client, s3_key):
+def test_provider_invoke_fail(aws):
     with pytest.raises(pylumi.exc.ProviderError):
         resp = aws.invoke(
             "aws:s3/getBucket:getBucket", {"bucket": f"{TEST_BUCKET}-blah123"}
         )
+
+
+# Doesn't really test anything other than that the function runs, can't figure out a better way right now
+def test_provider_signal_cancellation(aws):
+    aws.signal_cancellation()
