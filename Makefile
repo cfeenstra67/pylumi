@@ -1,6 +1,6 @@
 
 
-PULUMI_VERSION:=2.12.0
+PULUMI_VERSION:=3.21.0
 
 PART:=patch
 

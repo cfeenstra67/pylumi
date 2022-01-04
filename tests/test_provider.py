@@ -14,7 +14,8 @@ def test_provider_get_plugin_info(aws):
 
     assert isinstance(info.pop("InstallTime"), str)
     assert isinstance(info.pop("LastUsedTime"), str)
-    assert isinstance(info.pop("ServerURL"), str)
+    assert isinstance(info.pop("PluginDir"), str)
+    assert isinstance(info.pop("PluginDownloadURL"), str)
     assert info == {
         "Name": "aws",
         "Path": os.path.expanduser(
