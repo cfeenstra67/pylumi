@@ -1,7 +1,8 @@
 import json
 from functools import partial
-from typing import Any, Sequence, Dict, Optional
+from typing import Any, Sequence, Dict, Optional, Tuple
 
+from pylumi.exc import InvocationValidationError
 from pylumi.ext import _pylumi
 
 
@@ -70,6 +71,8 @@ class Provider:
 
         **Pulumi Docs:**
 
+        GetPluginInfo returns this plugin's information.
+
         Reference: `GetProviderInfo <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
         return _pylumi.provider_get_plugin_info(self.ctx.name, self.name)
@@ -90,6 +93,8 @@ class Provider:
         a bytes object that can be decoded via `json.loads()`.
 
         **Pulumi Docs:**
+
+        GetSchema returns the schema for the provider.
 
         Reference: `GetSchema <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
         """
@@ -173,7 +178,7 @@ class Provider:
         olds: Dict[str, Any],
         news: Dict[str, Any],
         allow_unknowns: bool = False,
-    ) -> Dict[str, Any]:
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
         """
         Validate the given resource configuration.
 
@@ -368,6 +373,30 @@ class Provider:
         return _pylumi.provider_delete(
             self.ctx.name, self.name, str(urn), id, news, timeout
         )
+
+    def invoke(self, member: str, args: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Invoke a function in the provider.
+
+        **Parameters:**
+
+        * **member** - function name
+        * **args** - function arguments, as a dictionary
+
+        **Returns:**
+
+        A dictionary with the result of the function invocation.
+
+        **Pulumi Docs:**
+
+        Invoke dynamically executes a built-in function in the provider.
+
+        Reference: `Invoke <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
+        """
+        result, errors = _pylumi.provider_invoke(self.ctx.name, self.name, member, args)
+        if errors:
+            raise InvocationValidationError(member, errors)
+        return result
 
     def __enter__(self) -> Any:
         self.configure()

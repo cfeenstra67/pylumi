@@ -130,6 +130,14 @@ cdef extern:
 
     ProviderGetPluginInfo_return ProviderGetPluginInfo(char* ctx, char* provider) nogil
 
+    struct ProviderInvoke_return:
+        GoInt r0
+        char* r1
+        char* r2
+        char* r3
+
+    ProviderInvoke_return ProviderInvoke(char* ctx, char* provider, char* member, char* args) nogil
+
     ctypedef struct Unknowns:
         char* Key
         char* BoolValue
@@ -599,7 +607,34 @@ def provider_get_plugin_info(str ctx, str provider):
     raise ProviderError(res.r0, _str(res.r1))
 
 
-class PylumiGoError(Exception):
+def provider_invoke(str ctx, str provider, str member, args):
+    cdef char* args_c = _cstr(json_dumps(args).encode())
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+    cdef char* member_c = _cstr(member)
+
+    with nogil:
+        res = ProviderInvoke(ctx_c, provider_c, member_c, args_c)
+
+    free(ctx_c)
+    free(provider_c)
+    free(member_c)
+    free(args_c)
+
+    if res.r0 == 0:
+        result = json_loads(_bytes(res.r1))
+        failures = json_loads(_bytes(res.r2))
+        return result, failures
+    raise ProviderError(res.r0, _str(res.r3))
+
+
+class PylumiError(Exception):
+    """
+    Base class for pylumi errors
+    """
+
+
+class PylumiGoError(PylumiError):
     """
     Errors originating from go within Pylumi
     """

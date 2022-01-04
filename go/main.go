@@ -719,6 +719,48 @@ func ProviderGetPluginInfo(
     return 0, C.CString(string(encodedPluginInfo))
 }
 
+//export ProviderInvoke
+func ProviderInvoke(
+    ctx *C.char,
+    provider *C.char,
+    member *C.char,
+    args *C.char,
+) (statusCode int, result *C.char, failuresResult *C.char, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderInvoke: %v", err))
+        }
+    }()
+
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
+    if err != nil {
+        return -1, nil, nil, C.CString(fmt.Sprintf("error getting provider: %v", err))
+    }
+
+    argsMap, err := pylumi.JSONToPropertyMap([]byte(C.GoString(args)))
+    if err != nil {
+        return -1, nil, nil, C.CString(fmt.Sprintf("error unmarshalling args: %v", err))
+    }
+
+    resultObj, failures, err := (*providerObj).Invoke(tokens.ModuleMember(C.GoString(member)), argsMap)
+    if err != nil {
+        return -1, nil, nil, C.CString(fmt.Sprintf("error invoking function: %v", err))
+    }
+
+    failuresOut, err := json.Marshal(failures)
+    if err != nil {
+        return -1, nil, nil, C.CString(fmt.Sprintf("error marshalling failures: %v", err))
+    }
+
+    resultOut, err := pylumi.PropertyMapToJSON(resultObj)
+    if err != nil {
+        return -1, nil, nil, C.CString(fmt.Sprintf("error marshalling result: %v", err))
+    }
+
+    return 0, C.CString(string(resultOut)), C.CString(string(failuresOut)), nil
+}
+
 //export GetUnknowns
 func GetUnknowns() C.Unknowns {
     return C.Unknowns{

@@ -22,6 +22,10 @@ try:
         DIFF_UPDATE_REPLACE,
         DiffKind,
         UnknownValue,
+        PylumiError,
+        PylumiGoError,
+        ContextError,
+        ProviderError,
     )
 
 except ImportError:
@@ -72,3 +76,23 @@ except ImportError:
         DELETE_REPLACE = DIFF_DELETE_REPLACE
         UPDATE = DIFF_UPDATE
         UPDATE_REPLACE = DIFF_UPDATE_REPLACE
+
+    class PylumiError(Exception):
+        """
+        Base class for pylumi errors
+        """
+
+    class PylumiGoError(PylumiError):
+        """
+        Pylumi error originating from go
+        """
+
+    class ContextError(PylumiGoError):
+        """
+        Error relating to a pylumi context
+        """
+
+    class ProviderError(PylumiGoError):
+        """
+        Error relating to a pylumi provider
+        """
