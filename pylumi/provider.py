@@ -60,6 +60,20 @@ class Provider:
         """
         _pylumi.provider_teardown(self.ctx.name, self.name)
 
+    def get_plugin_info(self) -> Dict[str, Any]:
+        """
+        Get plugin information for this provider.
+
+        **Returns:**
+
+        A Python dictionary with the plugin information for this provider.
+
+        **Pulumi Docs:**
+
+        Reference: `GetProviderInfo <https://github.com/pulumi/pulumi/sdk/v2/go/common/resource/provider.go>`_
+        """
+        return _pylumi.provider_get_plugin_info(self.ctx.name, self.name)
+
     def get_schema(self, version: int = 0, decode: bool = True) -> Dict[str, Any]:
         """
         Get the schema information about this provider.

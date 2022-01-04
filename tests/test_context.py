@@ -9,15 +9,13 @@ import shutil
 
 def run_pgrep(pattern):
     proc = subprocess.Popen(
-        ['pgrep', '-i', 'pulumi'],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
+        ["pgrep", "-i", "pulumi"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     stdout, stderr = proc.communicate()
 
     assert not stderr
 
-    pids = list(map(int, filter(None, stdout.decode().strip().split('\n'))))
+    pids = list(map(int, filter(None, stdout.decode().strip().split("\n"))))
 
     out = []
 
@@ -37,29 +35,30 @@ def test_list_plugins():
 
 
 def test_list_plugins_create_provider():
-    
-    assert not run_pgrep('pulumi')
+
+    assert not run_pgrep("pulumi")
 
     with pylumi.Context() as ctx:
-        provider = ctx.provider('aws', {'region': 'us-east-2'})
+        provider = ctx.provider("aws", {"region": "us-east-2"})
 
         # Processes dont' get created until the configure() call.
-        assert not run_pgrep('pulumi')
+        assert not run_pgrep("pulumi")
 
         provider.configure()
 
-        proc_nums = run_pgrep('pulumi')
+        proc_nums = run_pgrep("pulumi")
         assert len(proc_nums) == 1
 
         plugins = ctx.list_plugins()
-        assert plugins == ['aws']
+        assert plugins == ["aws"]
 
-    assert not run_pgrep('pulumi')
+    assert not run_pgrep("pulumi")
 
 
-@pytest.mark.parametrize("kind, name, version, config", [
-    ('resource', 'aws', '2.1.0', {"region": "us-east-2"})
-])
+@pytest.mark.parametrize(
+    "kind, name, version, config",
+    [("resource", "aws", "2.1.0", {"region": "us-east-2"})],
+)
 def test_install_plugin(kind, name, version, config):
 
     plugin_kind = kind
@@ -69,7 +68,9 @@ def test_install_plugin(kind, name, version, config):
 
     plugins_home = os.path.abspath(os.path.expanduser("~/.pulumi/plugins"))
 
-    plugin_dir = os.path.join(plugins_home, f'{plugin_kind}-{plugin_name}-v{plugin_version}')
+    plugin_dir = os.path.join(
+        plugins_home, f"{plugin_kind}-{plugin_name}-v{plugin_version}"
+    )
 
     def rmifexists():
         if os.path.isdir(plugin_dir):
@@ -85,6 +86,6 @@ def test_install_plugin(kind, name, version, config):
 
             with ctx.provider(plugin_name, plugin_config, plugin_version) as provider:
                 schema = provider.get_schema()
-                assert schema["version"] == 'v' + plugin_version
+                assert schema["version"] == "v" + plugin_version
     finally:
         rmifexists()

@@ -51,14 +51,6 @@ func GetContext(name string) (*Context, error) {
     return ctx, nil
 }
 
-// func GetConfig(name tokens.Package) *resource.PropertyMap {
-//  switch name {
-//  case "aws":
-//      return &resource.PropertyMap{"region": resource.NewStringProperty("us-east-2")}
-//  }
-//  return new(resource.PropertyMap)
-// }
-
 func Provider(ctxName string, name tokens.Package, version *semver.Version) (*plugin.Provider, error) {
     ctx, err := GetContext(ctxName)
     if err != nil {

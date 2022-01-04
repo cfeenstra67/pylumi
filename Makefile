@@ -45,7 +45,7 @@ test:
 	py.test -vv tests
 
 fmt:
-	black pylumi setup.py docs/conf.py
+	black pylumi setup.py docs/conf.py tests
 
 check-fmt:
-	black pylumi setup.py docs/conf.py --check
+	black pylumi setup.py docs/conf.py tests --check

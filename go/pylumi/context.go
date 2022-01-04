@@ -94,12 +94,6 @@ func (c *Context) InstallPlugin(kind string, name string, version string, reinst
     return nil
 }
 
-// func (c *Context) InstallPlugins() error {
-//  return engine.RunInstallPlugins(
-//      c.Info.Proj, c.WorkingDirectory, c.Main, nil, c.PluginCtx,
-//  )
-// }
-
 func (c *Context) Provider(name tokens.Package, version *semver.Version) (*plugin.Provider, error) {
     if c.providers == nil {
         c.providers = make(map[tokens.Package]*plugin.Provider)

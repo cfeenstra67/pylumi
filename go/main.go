@@ -689,6 +689,36 @@ func ProviderDelete(
 
 }
 
+//export ProviderGetPluginInfo
+func ProviderGetPluginInfo(
+    ctx *C.char,
+    provider *C.char,
+) (statusCode int, errString *C.char) {
+    defer func() {
+        if err := recover(); err != nil {
+            statusCode = -1
+            errString = C.CString(fmt.Sprintf("unhandled error in ProviderGetPluginInfo: %v", err))
+        }
+    }()
+
+    providerObj, err := pylumi.Provider(C.GoString(ctx), tokens.Package(C.GoString(provider)), nil)
+    if err != nil {
+        return -1, C.CString(fmt.Sprintf("error getting provider: %v", err))
+    }
+
+    pluginInfo, err := (*providerObj).GetPluginInfo()
+    if err != nil {
+        return -1, C.CString(fmt.Sprintf("error getting plugin info: %v", err))
+    }
+
+    encodedPluginInfo, err := json.Marshal(pluginInfo)
+    if err != nil {
+        return -1, C.CString(fmt.Sprintf("error marshalling plugin info: %v", err))
+    }
+
+    return 0, C.CString(string(encodedPluginInfo))
+}
+
 //export GetUnknowns
 func GetUnknowns() C.Unknowns {
     return C.Unknowns{

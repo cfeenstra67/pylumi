@@ -124,6 +124,12 @@ cdef extern:
 
     ProviderDelete_return ProviderDelete(char* ctx, char* provider, char* urn, char* id, char* news, GoFloat64 timeout) nogil
 
+    struct ProviderGetPluginInfo_return:
+        GoInt r0
+        char* r1
+
+    ProviderGetPluginInfo_return ProviderGetPluginInfo(char* ctx, char* provider) nogil
+
     ctypedef struct Unknowns:
         char* Key
         char* BoolValue
@@ -576,6 +582,21 @@ def provider_delete(str ctx, str provider, str urn, str id, news, int timeout=60
     if res.r0 == 0:
         return res.r1
     raise ProviderError(res.r0, _str(res.r2))
+
+
+def provider_get_plugin_info(str ctx, str provider):
+    cdef char* ctx_c = _cstr(ctx)
+    cdef char* provider_c = _cstr(provider)
+
+    with nogil:
+        res = ProviderGetPluginInfo(ctx_c, provider_c)
+
+    free(ctx_c)
+    free(provider_c)
+
+    if res.r0 == 0:
+        return json_loads(_bytes(res.r1))
+    raise ProviderError(res.r0, _str(res.r1))
 
 
 class PylumiGoError(Exception):
