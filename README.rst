@@ -36,6 +36,8 @@ Once that is done, install this package using:
    
    $ pip install pylumi
 
+_NOTE_: There are only wheels available for Mac OS X. If you are trying to download on Linux, you'll have to have Go 1.16+ installed.
+
 Compatibility
 ###############
 
@@ -45,6 +47,21 @@ Documentation
 ##############
 
 Documentation for Pylumi is hosted on Read the Docs: https://pylumi.readthedocs.io/.
+
+Development
+##############
+
+In order to build for development, you'll want to install all of the Python requirements first:
+
+.. code-block:: bash
+
+   $ pip install -r requirements.txt -r requirements-tests.txt -r requirements-dev.txt
+
+Then build the extension modules. You will need Go 1.16+ installed on your system:
+
+.. code-block:: bash
+
+   $ python setup.py build_ext --inplace
 
 Contact
 #########
