@@ -7,7 +7,7 @@ Pylumi
 Purpose
 ########
 
-**Pylumi** is a Python API providing the ability to manage `pulumi <https://github.com/pulumi/pulumi>`_ resource plugin contexts and interact with the resource `Provider <https://github.com/pulumi/pulumi/blob/89c956d18942c1fcbf687da3052dd26089d8f486/sdk/go/common/resource/plugin/provider.go#L37>`_ interface.
+**Pylumi** is a Python API providing the ability to manage `pulumi <https://github.com/pulumi/pulumi>`_ resource plugin contexts and interact with the resource `Provider <https://github.com/pulumi/pulumi/blob/89c956d18942c1fcbf687da3052dd26089d8f486/sdk/go/common/resource/plugin/provider.go#L37>`_ interface. It was originally created to allow `statey <https://github.com/cfeenstra67/statey>`_ to re-use Pulumi resource providers, however the implementation is generic and could be reused for anything as desired.
 
 Usage Example
 ##############
