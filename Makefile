@@ -6,7 +6,6 @@ PART:=patch
 
 build: clean
 	python setup.py sdist bdist_wheel
-	setuptools-golang-build-manylinux-wheels
 
 install: clean
 	python setup.py install
