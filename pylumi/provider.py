@@ -1,5 +1,4 @@
 import json
-from functools import partial
 from typing import Any, Sequence, Dict, Optional, Tuple
 
 from pylumi.exc import InvocationValidationError
@@ -418,7 +417,7 @@ class Provider:
         """
         return _pylumi.provider_signal_cancellation(self.ctx.name, self.name)
 
-    def __enter__(self) -> Any:
+    def __enter__(self) -> "Provider":
         self.configure()
         return self
 

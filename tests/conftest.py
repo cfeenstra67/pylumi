@@ -14,6 +14,12 @@ TEST_REGION = os.getenv("PYLUMI_TEST_REGION", "us-east-2")
 TEST_KEY = os.getenv("PYLUMI_TEST_KEY", f"pylumi-test-{uuid.uuid4().hex}.txt")
 
 
+async def resolve_value(async_, value):
+    if async_:
+        return await value
+    return value
+
+
 @pytest.fixture(scope="session")
 def ctx():
     with pylumi.Context() as ctx:

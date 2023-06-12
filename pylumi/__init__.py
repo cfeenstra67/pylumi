@@ -1,4 +1,6 @@
 from pylumi import exc
+from pylumi.async_context import AsyncContext
+from pylumi.async_provider import AsyncProvider
 from pylumi.context import Context
 from pylumi.ext import (
     UNKNOWN_KEY,

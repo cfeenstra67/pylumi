@@ -12,10 +12,23 @@ Context Reference
 .. autoclass:: pylumi.Context
    :inherited-members:
 
+
+AsyncContext Reference
+########################
+
+.. autoclass:: pylumi.AsyncContext
+   :inherited-members:
+
 Provider Reference
 ###################
 
 .. autoclass:: pylumi.Provider
+   :inherited-members:
+
+AsyncProvider Reference
+#########################
+
+.. autoclass:: pylumi.AsyncProvider
    :inherited-members:
 
 URN Reference

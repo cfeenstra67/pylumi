@@ -6,6 +6,8 @@ import pylumi
 import pytest
 import shutil
 
+from .conftest import resolve_value
+
 
 def run_pgrep(pattern):
     proc = subprocess.Popen(
@@ -34,8 +36,8 @@ def test_list_plugins():
         assert plugins == []
 
 
-def test_list_plugins_create_provider():
-
+@pytest.mark.parametrize("async_", [True, False])
+def test_list_plugins_create_provider(async_):
     assert not run_pgrep("pulumi")
 
     with pylumi.Context() as ctx:
@@ -60,7 +62,6 @@ def test_list_plugins_create_provider():
     [("resource", "aws", "2.1.0", {"region": "us-east-2"})],
 )
 def test_install_plugin(kind, name, version, config):
-
     plugin_kind = kind
     plugin_name = name
     plugin_version = version

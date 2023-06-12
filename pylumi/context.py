@@ -1,10 +1,9 @@
 import os
 import uuid
-from functools import partial, wraps
 from typing import Any, Sequence, Optional, Dict
 
-from pylumi import provider
 from pylumi.ext import _pylumi
+from pylumi.provider import Provider
 
 
 class Context:
@@ -37,7 +36,7 @@ class Context:
         name: str,
         config: Optional[Dict[str, Any]] = None,
         version: Optional[str] = None,
-    ) -> provider.Provider:
+    ) -> Provider:
         """
         Get a Provider object with the given name. This just creates the provider object,
         no interaction is done with the Pulumi engine until configure() if called (or
@@ -61,7 +60,7 @@ class Context:
         """
         if config is None:
             config = {}
-        return provider.Provider(self, name, config, version)
+        return Provider(self, name, config, version)
 
     def setup(self) -> None:
         """
@@ -129,7 +128,7 @@ class Context:
             self.name, plugin_kind, plugin_name, version, reinstall, exact
         )
 
-    def __enter__(self) -> Any:
+    def __enter__(self) -> "Context":
         self.setup()
         return self
 
